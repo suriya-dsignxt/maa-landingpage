@@ -1,0 +1,2241 @@
+<!doctype html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="web_standard" name="shell-type" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+      rel="stylesheet"
+    />
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&amp;family=Noto+Serif:ital,wght@0,100..900;1,100..900&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      href="assets/images/mahatma_alumni_logo.png"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="js/tailwind-config.js"></script>
+    <script
+      src="https://mahatmaalumni.linkpc.net/widget/mahatma-alumni.js"
+      async
+    ></script>
+    <!-- GSAP & ScrollTrigger CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="js/main.js" defer></script>
+  </head>
+  <body class="bg-surface font-body-md text-on-surface antialiased">
+    <!-- Top Scroll Progress Indicator -->
+    <div
+      id="scroll-progress"
+      class="fixed top-0 left-0 h-1 bg-gradient-to-r from-[#C6A75E] via-[#dfc47e] to-[#C6A75E] z-[999] transition-all duration-75 w-0 pointer-events-none"
+    ></div>
+    <header
+      id="header-nav"
+      class="fixed top-0 left-0 w-full z-50 bg-primary-container border-b border-[#C6A75E]/20 shadow-[0_1px_8px_rgba(0,0,0,0.04)]"
+    >
+      <div
+        class="h-20 w-full max-w-7xl mx-auto px-gutter-mobile lg:px-gutter flex items-center justify-between gap-space-md"
+      >
+        <div class="flex items-center gap-space-md shrink-0">
+          <img
+            alt="Mahatma Alumni Association Logo"
+            class="h-10 w-auto object-contain shrink-0"
+            src="assets/images/mahatma_alumni_logo.png"
+          /><span
+            class="hidden xl:block font-headline-sm text-headline-sm text-on-primary tracking-normal border-l border-[#C6A75E]/20 pl-space-md"
+            >Mahatma Alumni Association</span
+          >
+        </div>
+        <nav
+          class="hidden xl:flex items-center gap-space-md h-full"
+          data-active-classes="text-secondary-fixed border-b-2 border-secondary-fixed font-bold"
+        >
+          <a
+            aria-current="page"
+            class="h-full inline-flex items-center px-space-xs uppercase tracking-wider transition-colors text-secondary-fixed border-b-2 border-secondary-fixed font-bold"
+            data-path="home"
+            href="#"
+            >Home</a
+          ><a
+            class="h-full inline-flex items-center px-space-xs font-label-md text-label-md uppercase tracking-wider text-on-primary-container hover:text-on-primary hover:border-b-2 hover:border-[#C6A75E] transition-colors"
+            data-path="about-us"
+            href="#about-us"
+            >About Us</a
+          ><a
+            class="h-full inline-flex items-center px-space-xs font-label-md text-label-md uppercase tracking-wider text-on-primary-container hover:text-on-primary hover:border-b-2 hover:border-[#C6A75E] transition-colors"
+            data-path="alumni-app"
+            href="#alumni-app"
+            >Alumni App</a
+          ><a
+            class="h-full inline-flex items-center px-space-xs font-label-md text-label-md uppercase tracking-wider text-on-primary-container hover:text-on-primary hover:border-b-2 hover:border-[#C6A75E] transition-colors"
+            data-path="homecoming-2026"
+            href="#homecoming-2026"
+            >Homecoming 2026</a
+          ><a
+            class="h-full inline-flex items-center px-space-xs font-label-md text-label-md uppercase tracking-wider text-on-primary-container hover:text-on-primary hover:border-b-2 hover:border-[#C6A75E] transition-colors"
+            data-path="community"
+            href="#community"
+            >Community</a
+          ><a
+            class="h-full inline-flex items-center px-space-xs font-label-md text-label-md uppercase tracking-wider text-on-primary-container hover:text-on-primary hover:border-b-2 hover:border-[#C6A75E] transition-colors"
+            data-path="get-involved"
+            href="#get-involved"
+            >Get Involved</a
+          ><a
+            class="h-full inline-flex items-center px-space-xs font-label-md text-label-md uppercase tracking-wider text-on-primary-container hover:text-on-primary hover:border-b-2 hover:border-[#C6A75E] transition-colors"
+            data-path="partners"
+            href="#partners"
+            >Partners</a
+          ><a
+            class="h-full inline-flex items-center px-space-xs font-label-md text-label-md uppercase tracking-wider text-on-primary-container hover:text-on-primary hover:border-b-2 hover:border-[#C6A75E] transition-colors"
+            data-path="contact"
+            href="#contact"
+            >Contact</a
+          >
+        </nav>
+        <div class="flex items-center gap-space-md shrink-0">
+          <a
+            class="hidden sm:inline-flex items-center justify-center px-space-md py-space-sm rounded-[10px] bg-secondary-fixed text-primary font-label-md text-label-md uppercase font-bold tracking-wider hover:bg-secondary-fixed-dim transition-colors"
+            data-path="join"
+            href="#about-us"
+            >Join Our Community</a
+          >
+          <div
+            class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"
+          >
+            <span class="material-symbols-outlined text-on-primary text-[18px]"
+              >person</span
+            >
+          </div>
+          <button
+            id="mobile-menu-toggle"
+            aria-label="Toggle Navigation Menu"
+            class="xl:hidden inline-flex items-center justify-center p-space-xs text-on-primary hover:text-secondary-fixed focus:outline-none"
+            type="button"
+          >
+            <span class="material-symbols-outlined text-[28px]">menu</span>
+          </button>
+        </div>
+      </div>
+      <!-- Mobile Navigation Drawer -->
+      <div
+        id="mobile-menu"
+        class="hidden xl:hidden bg-primary-container border-t border-[#C6A75E]/20 px-gutter-mobile py-4 flex flex-col gap-3 shadow-lg"
+      >
+        <a
+          class="py-2 text-secondary-fixed font-bold uppercase tracking-wider"
+          href="#home"
+          >Home</a
+        >
+        <a
+          class="py-2 text-on-primary-container hover:text-on-primary uppercase tracking-wider font-label-md"
+          href="#about-us"
+          >About Us</a
+        >
+        <a
+          class="py-2 text-on-primary-container hover:text-on-primary uppercase tracking-wider font-label-md"
+          href="#alumni-app"
+          >Alumni App</a
+        >
+        <a
+          class="py-2 text-on-primary-container hover:text-on-primary uppercase tracking-wider font-label-md"
+          href="#homecoming-2026"
+          >Homecoming 2026</a
+        >
+        <a
+          class="py-2 text-on-primary-container hover:text-on-primary uppercase tracking-wider font-label-md"
+          href="#community"
+          >Community</a
+        >
+        <a
+          class="py-2 text-on-primary-container hover:text-on-primary uppercase tracking-wider font-label-md"
+          href="#get-involved"
+          >Get Involved</a
+        >
+        <a
+          class="py-2 text-on-primary-container hover:text-on-primary uppercase tracking-wider font-label-md"
+          href="#contact"
+          >Contact</a
+        >
+        <a
+          class="inline-flex items-center justify-center px-4 py-2.5 rounded-lg bg-secondary-fixed text-primary font-label-md uppercase font-bold tracking-wider hover:bg-secondary-fixed-dim transition-colors mt-2"
+          href="#about-us"
+          >Join Our Community</a
+        >
+      </div>
+    </header>
+    <main class="w-full pt-20 bg-surface min-h-screen">
+      <div class="flex flex-col w-full">
+        <!-- Link for handwritten accent font Caveat -->
+        <link href="https://fonts.googleapis.com" rel="preconnect" />
+        <link
+          crossorigin=""
+          href="https://fonts.gstatic.com"
+          rel="preconnect"
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&amp;display=swap"
+          rel="stylesheet"
+        />
+        <!-- 1. HERO SECTION -->
+        <section
+          class="relative w-full min-h-[680px] lg:h-[720px] flex items-center overflow-hidden bg-primary -mt-20 pt-20"
+          id="home"
+        >
+          <div class="absolute inset-0 z-0">
+            <img
+              id="hero-bg-img"
+              alt="Mahatma Alumni Historic Campus Gateway"
+              class="w-full h-full object-cover object-center filter brightness-[0.78]"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuDgLkXeTCWKwVwUpU3H-5yYGyJPZYkFf0Q07I6C8xCP0ixVeMXfRRO4UCdmymZ1YXwmzzNbnmXTWWjZUZJLdTL9i9oyc8BZtCYzmMNyJHBlfD8S_4Js3gtCssWEepJrjnu7Cm8xs3Ne0eRhYRdk99B5ccenzTEUATTKp-zM42jSBgWKl9abm7NxRSB8rN5mQubUBXsW6daNdWcPTL9JFSSPqGfKY_gkdqaYZJt-StYBdWcZ1yB2Bxs"
+            />
+            <div
+              class="absolute inset-0 bg-gradient-to-r from-primary via-primary/85 to-primary/40 mix-blend-multiply"
+            ></div>
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-primary via-transparent to-primary/50"
+            ></div>
+          </div>
+          <!-- Editorial Accent Ribbon -->
+          <div
+            id="hero-ribbon"
+            class="absolute top-28 right-8 lg:right-24 z-10 hidden md:flex items-center gap-3 floating-badge"
+          >
+            <span class="w-8 h-[1px] bg-secondary-fixed"></span>
+            <span
+              class="font-['Caveat'] text-2xl lg:text-3xl text-secondary-fixed tracking-wide select-none drop-shadow-sm"
+              >Same Roots. Brighter Tomorrows.</span
+            >
+          </div>
+          <div
+            class="relative z-10 w-full max-w-7xl mx-auto px-gutter-mobile lg:px-gutter py-16 lg:py-24"
+          >
+            <div class="max-w-3xl flex flex-col items-start gap-6">
+              <div id="hero-kicker" class="flex items-center gap-3">
+                <span class="h-[2px] w-8 bg-secondary-fixed"></span>
+                <span
+                  class="font-label-md text-label-md uppercase tracking-[0.2em] text-secondary-fixed font-bold"
+                  >Mahatma Alumni Association</span
+                >
+              </div>
+              <h1
+                id="hero-title"
+                class="font-display-lg text-display-lg text-on-primary font-normal leading-[1.08] tracking-tight"
+              >
+                One School. Many Generations. <br />
+                <span class="text-secondary-fixed italic font-normal"
+                  >Forever Connected.</span
+                >
+              </h1>
+              <p
+                id="hero-desc"
+                class="font-body-lg text-body-lg text-on-primary-container max-w-2xl leading-relaxed"
+              >
+                A global community of Mahatmites — reconnecting across campuses,
+                batches, cities and generations. From classrooms and corridors
+                to cities and countries around the world, Mahatmites remain
+                connected through shared memories, friendships and a common
+                journey.
+              </p>
+              <div id="hero-cta" class="flex flex-wrap items-center gap-4 pt-4">
+                <a
+                  class="btn-shimmer inline-flex items-center justify-center gap-3 px-8 py-3.5 rounded-lg bg-secondary-fixed text-primary font-label-md text-label-md uppercase tracking-wider font-bold shadow-md hover:bg-secondary-fixed-dim transition-all duration-300 transform hover:-translate-y-0.5"
+                  href="#about-us"
+                >
+                  <span>Join Our Community</span>
+                  <span class="material-symbols-outlined text-lg"
+                    >arrow_forward</span
+                  >
+                </a>
+                <a
+                  class="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-lg bg-primary-container/80 backdrop-blur-sm text-on-primary font-label-md text-label-md uppercase tracking-wider hover:bg-primary-container transition-all duration-300 border border-[#C6A75E]/20 transform hover:-translate-y-0.5"
+                  href="#alumni-app"
+                >
+                  <span>Explore the Alumni App</span>
+                  <span
+                    class="material-symbols-outlined text-base text-secondary-fixed"
+                    >north_east</span
+                  >
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- 2. ANNOUNCEMENT STRIP & STATS COUNTER -->
+        <aside
+          class="w-full bg-primary-container text-on-primary py-4 px-gutter-mobile lg:px-gutter shadow-sm relative z-20 border-y border-[#C6A75E]/15"
+        >
+          <div
+            class="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-4 text-center md:text-left"
+          >
+            <div class="flex items-center gap-3">
+              <div
+                class="w-9 h-9 rounded-full bg-primary flex items-center justify-center text-secondary-fixed shrink-0 shadow-inner"
+              >
+                <span class="material-symbols-outlined text-base"
+                  >calendar_month</span
+                >
+              </div>
+              <div class="flex flex-col sm:flex-row sm:items-center sm:gap-2">
+                <span
+                  class="font-label-md text-label-md uppercase tracking-widest text-on-primary font-bold"
+                  >Mahatma Alumni Homecoming 2026</span
+                >
+                <span
+                  class="hidden sm:inline-block text-xs text-secondary-fixed font-semibold"
+                  >• Dec 27, 2026</span
+                >
+              </div>
+            </div>
+            <!-- Live Animated Stat Counter -->
+            <div class="flex items-center gap-5 sm:gap-8 text-center py-1">
+              <div class="flex flex-col items-center">
+                <span
+                  class="font-headline-sm text-lg text-secondary-fixed font-bold stat-counter"
+                  data-target="40"
+                  data-suffix="+"
+                  >40+</span
+                >
+                <span
+                  class="font-caption text-[11px] uppercase tracking-wider text-on-primary-container"
+                  >Years Legacy</span
+                >
+              </div>
+              <div class="h-6 w-[1px] bg-[#C6A75E]/25"></div>
+              <div class="flex flex-col items-center">
+                <span
+                  class="font-headline-sm text-lg text-secondary-fixed font-bold stat-counter"
+                  data-target="15000"
+                  data-suffix="+"
+                  >15,000+</span
+                >
+                <span
+                  class="font-caption text-[11px] uppercase tracking-wider text-on-primary-container"
+                  >Global Alumni</span
+                >
+              </div>
+              <div class="h-6 w-[1px] bg-[#C6A75E]/25"></div>
+              <div class="flex flex-col items-center">
+                <span
+                  class="font-headline-sm text-lg text-secondary-fixed font-bold stat-counter"
+                  data-target="8"
+                  data-suffix=" Hubs"
+                  >8 Hubs</span
+                >
+                <span
+                  class="font-caption text-[11px] uppercase tracking-wider text-on-primary-container"
+                  >City Chapters</span
+                >
+              </div>
+            </div>
+            <a
+              class="inline-flex items-center gap-2 font-label-md text-label-md uppercase tracking-wider text-secondary-fixed hover:text-on-primary transition-colors group"
+              href="#homecoming-2026"
+            >
+              <span>Registrations Opening Soon</span>
+              <span
+                class="material-symbols-outlined text-sm group-hover:translate-x-1.5 transition-transform"
+                >arrow_forward</span
+              >
+            </a>
+          </div>
+        </aside>
+        <!-- 3. ABOUT US -->
+        <section
+          class="w-full bg-surface-container-low text-on-surface py-24 lg:py-28 relative"
+          id="about-us"
+        >
+          <div class="max-w-7xl mx-auto px-gutter-mobile lg:px-gutter">
+            <div
+              class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start"
+            >
+              <!-- Left Archival Photographic Plate -->
+              <div class="lg:col-span-4 flex flex-col gap-4 gsap-about-photo">
+                <div
+                  class="relative p-3 bg-surface-container-lowest shadow-xl rounded-lg transform -rotate-1 card-hover-effect cursor-pointer"
+                >
+                  <div class="overflow-hidden rounded">
+                    <img
+                      alt="Mahatma institution alumni walking historic colonnade"
+                      class="w-full h-80 lg:h-96 object-cover filter contrast-[1.05]"
+                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuDyaRbKxFW2M3u5g_0rErD32nkPeXbemQrL0PHV5L1JdvOF6tkrSKjtDv1m3pGtOrKoA9P1sCtrPV0Mdw2vQ0YtCeo6gvECdyVyQdze098aX6Fgd4r0a4tYzvfvRTHvyU3wYb-q1ARX6kUnakVyrVB3TiMoIOYJnlzH-9r9LjqLVio90GwFSVKhMsI89kZ4-27pcznxYlllTX8l7nKfryJTSVP4NhaOT0w_hcAuAhu-1hRTDEM4hcc"
+                    />
+                  </div>
+                  <div
+                    class="pt-3 pb-1 px-1 flex items-center justify-between font-caption text-caption text-on-surface-variant"
+                  >
+                    <span
+                      class="uppercase tracking-widest text-[10px] font-semibold text-secondary"
+                      >Archival Fellowship Series</span
+                    >
+                    <span>Heritage Archways</span>
+                  </div>
+                </div>
+                <div
+                  class="bg-surface-container-lowest p-5 rounded-lg shadow-sm flex items-center gap-4 card-hover-effect"
+                >
+                  <span
+                    class="material-symbols-outlined text-secondary text-2xl"
+                    >history_edu</span
+                  >
+                  <div>
+                    <p
+                      class="font-label-md text-label-md font-bold text-primary"
+                    >
+                      Over 4 Decades of Fellowship
+                    </p>
+                    <p
+                      class="font-caption text-caption text-on-surface-variant"
+                    >
+                      Continuous cross-cohort fraternity since foundational
+                      year.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <!-- Center Narrative & Principles -->
+              <div class="lg:col-span-5 flex flex-col gap-6 gsap-reveal-title">
+                <div class="flex items-center gap-2">
+                  <span class="w-6 h-[1.5px] bg-secondary"></span>
+                  <span
+                    class="font-label-md text-label-md uppercase tracking-widest text-secondary font-bold"
+                    >About Us</span
+                  >
+                </div>
+                <h2
+                  class="font-headline-lg text-headline-lg text-primary leading-tight"
+                >
+                  More Than an Alumni Network. A Lifelong Community.
+                </h2>
+                <p
+                  class="font-body-md text-body-md text-on-surface-variant leading-relaxed"
+                >
+                  The Mahatma Alumni Association brings together former students
+                  across every campus and batch — to stay connected, mentor the
+                  next generation and give back to the institution that shaped
+                  us. This community helps Mahatmites reconnect with one
+                  another, build meaningful relationships and continue a shared
+                  journey beyond school.
+                </p>
+                <div class="flex flex-col gap-4 pt-2">
+                  <!-- Connect -->
+                  <div
+                    class="gsap-about-card card-hover-effect flex items-start gap-4 p-4 rounded-lg bg-surface-container-lowest shadow-sm cursor-pointer"
+                  >
+                    <div
+                      class="w-10 h-10 rounded-full bg-secondary-fixed flex items-center justify-center text-primary shrink-0 shadow-sm"
+                    >
+                      <span class="material-symbols-outlined text-xl"
+                        >groups</span
+                      >
+                    </div>
+                    <div class="flex flex-col">
+                      <h3
+                        class="font-headline-sm text-headline-sm text-primary"
+                      >
+                        CONNECT
+                      </h3>
+                      <p
+                        class="font-body-sm text-body-sm text-on-surface-variant"
+                      >
+                        Reconnect and build lasting relationships across
+                        geographies and sectors.
+                      </p>
+                    </div>
+                  </div>
+                  <!-- Contribute -->
+                  <div
+                    class="gsap-about-card card-hover-effect flex items-start gap-4 p-4 rounded-lg bg-surface-container-lowest shadow-sm cursor-pointer"
+                  >
+                    <div
+                      class="w-10 h-10 rounded-full bg-secondary-fixed flex items-center justify-center text-primary shrink-0 shadow-sm"
+                    >
+                      <span class="material-symbols-outlined text-xl"
+                        >handshake</span
+                      >
+                    </div>
+                    <div class="flex flex-col">
+                      <h3
+                        class="font-headline-sm text-headline-sm text-primary"
+                      >
+                        CONTRIBUTE
+                      </h3>
+                      <p
+                        class="font-body-sm text-body-sm text-on-surface-variant"
+                      >
+                        Share your time, skills, knowledge and resources to
+                        uplift rising cohorts.
+                      </p>
+                    </div>
+                  </div>
+                  <!-- Celebrate -->
+                  <div
+                    class="gsap-about-card card-hover-effect flex items-start gap-4 p-4 rounded-lg bg-surface-container-lowest shadow-sm cursor-pointer"
+                  >
+                    <div
+                      class="w-10 h-10 rounded-full bg-secondary-fixed flex items-center justify-center text-primary shrink-0 shadow-sm"
+                    >
+                      <span class="material-symbols-outlined text-xl"
+                        >celebration</span
+                      >
+                    </div>
+                    <div class="flex flex-col">
+                      <h3
+                        class="font-headline-sm text-headline-sm text-primary"
+                      >
+                        CELEBRATE
+                      </h3>
+                      <p
+                        class="font-body-sm text-body-sm text-on-surface-variant"
+                      >
+                        Cherish our collective memories, people and
+                        institutional achievements.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Right Vision & Mission Plaque -->
+              <div
+                class="lg:col-span-3 flex flex-col gap-6 bg-primary-container text-on-primary p-7 rounded-xl shadow-lg relative overflow-hidden card-hover-effect"
+              >
+                <div
+                  class="pulse-aura absolute -top-10 -right-10 w-32 h-32 bg-secondary/25 rounded-full blur-2xl pointer-events-none"
+                ></div>
+                <div class="flex flex-col gap-2">
+                  <span
+                    class="font-label-md text-label-md uppercase tracking-widest text-secondary-fixed font-semibold"
+                    >Our Vision</span
+                  >
+                  <p
+                    class="font-headline-sm text-headline-sm text-on-primary leading-snug"
+                  >
+                    A global Mahatma alumni community — connected for life.
+                  </p>
+                </div>
+                <div class="w-full h-[1px] bg-secondary-fixed/20 my-2"></div>
+                <div class="flex flex-col gap-2">
+                  <span
+                    class="font-label-md text-label-md uppercase tracking-widest text-secondary-fixed font-semibold"
+                    >Our Mission</span
+                  >
+                  <p
+                    class="font-body-md text-body-md text-on-primary-container leading-relaxed"
+                  >
+                    To create opportunities and meaningful connections across
+                    generations, places and professions.
+                  </p>
+                </div>
+                <div class="pt-6 mt-auto">
+                  <div
+                    class="p-4 rounded-lg bg-primary text-secondary-fixed flex flex-col gap-1"
+                  >
+                    <span
+                      class="font-caption text-caption tracking-widest uppercase text-on-primary-container"
+                      >Charter Founded</span
+                    >
+                    <span
+                      class="font-headline-sm text-headline-sm text-secondary-fixed"
+                      >Batch Fellowship 1980</span
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- 4. WHAT KEEPS OUR COMMUNITY CONNECTED -->
+        <section
+          id="pillars"
+          class="w-full bg-surface-container-lowest text-on-surface py-24"
+        >
+          <div class="max-w-7xl mx-auto px-gutter-mobile lg:px-gutter">
+            <div
+              class="text-center max-w-2xl mx-auto flex flex-col items-center gap-3 mb-16 gsap-reveal-title"
+            >
+              <span
+                class="font-label-md text-label-md uppercase tracking-[0.2em] text-secondary font-bold"
+                >Pillars of Engagement</span
+              >
+              <h2 class="font-display-sm text-display-sm text-primary">
+                What Keeps Our Community Connected
+              </h2>
+              <p class="font-body-md text-body-md text-on-surface-variant">
+                Thoughtful channels and structured programs curated to sustain
+                lifelong kinship.
+              </p>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+              <!-- Pillar 1 -->
+              <div
+                class="gsap-pillar-card card-hover-effect bg-surface p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between h-full group cursor-pointer border border-[#C6A75E]/10"
+              >
+                <div>
+                  <div
+                    class="w-12 h-12 rounded-lg bg-surface-container-high flex items-center justify-center text-primary group-hover:bg-secondary-fixed transition-colors mb-5"
+                  >
+                    <span class="material-symbols-outlined text-2xl"
+                      >event_available</span
+                    >
+                  </div>
+                  <h3
+                    class="font-headline-sm text-headline-sm text-primary mb-2"
+                  >
+                    Reunions &amp; Meetups
+                  </h3>
+                  <p
+                    class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed"
+                  >
+                    Annual campus gatherings, batch silver jubilees, and
+                    intimate city mixers across seasons.
+                  </p>
+                </div>
+                <span
+                  class="font-caption text-caption text-secondary font-semibold uppercase tracking-wider pt-6 inline-flex items-center gap-1"
+                >
+                  Annual &amp; Regional
+                </span>
+              </div>
+              <!-- Pillar 2 -->
+              <div
+                class="gsap-pillar-card card-hover-effect bg-surface p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between h-full group cursor-pointer border border-[#C6A75E]/10"
+              >
+                <div>
+                  <div
+                    class="w-12 h-12 rounded-lg bg-surface-container-high flex items-center justify-center text-primary group-hover:bg-secondary-fixed transition-colors mb-5"
+                  >
+                    <span class="material-symbols-outlined text-2xl">hub</span>
+                  </div>
+                  <h3
+                    class="font-headline-sm text-headline-sm text-primary mb-2"
+                  >
+                    Professional Networking
+                  </h3>
+                  <p
+                    class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed"
+                  >
+                    Direct channels connecting leaders in medicine, law, civil
+                    services, technology, and entrepreneurship.
+                  </p>
+                </div>
+                <span
+                  class="font-caption text-caption text-secondary font-semibold uppercase tracking-wider pt-6 inline-flex items-center gap-1"
+                >
+                  Sector Circles
+                </span>
+              </div>
+              <!-- Pillar 3 -->
+              <div
+                class="gsap-pillar-card card-hover-effect bg-surface p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between h-full group cursor-pointer border border-[#C6A75E]/10"
+              >
+                <div>
+                  <div
+                    class="w-12 h-12 rounded-lg bg-surface-container-high flex items-center justify-center text-primary group-hover:bg-secondary-fixed transition-colors mb-5"
+                  >
+                    <span class="material-symbols-outlined text-2xl"
+                      >school</span
+                    >
+                  </div>
+                  <h3
+                    class="font-headline-sm text-headline-sm text-primary mb-2"
+                  >
+                    Mentorship &amp; Guidance
+                  </h3>
+                  <p
+                    class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed"
+                  >
+                    Advising young graduates on higher studies, campus
+                    selections, and early career navigation.
+                  </p>
+                </div>
+                <span
+                  class="font-caption text-caption text-secondary font-semibold uppercase tracking-wider pt-6 inline-flex items-center gap-1"
+                >
+                  Cohort Pairing
+                </span>
+              </div>
+              <!-- Pillar 4 -->
+              <div
+                class="gsap-pillar-card card-hover-effect bg-surface p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between h-full group cursor-pointer border border-[#C6A75E]/10"
+              >
+                <div>
+                  <div
+                    class="w-12 h-12 rounded-lg bg-surface-container-high flex items-center justify-center text-primary group-hover:bg-secondary-fixed transition-colors mb-5"
+                  >
+                    <span class="material-symbols-outlined text-2xl"
+                      >volunteer_activism</span
+                    >
+                  </div>
+                  <h3
+                    class="font-headline-sm text-headline-sm text-primary mb-2"
+                  >
+                    Community Initiatives
+                  </h3>
+                  <p
+                    class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed"
+                  >
+                    Endowed student scholarships, campus sports infrastructure
+                    grants, and social welfare drives.
+                  </p>
+                </div>
+                <span
+                  class="font-caption text-caption text-secondary font-semibold uppercase tracking-wider pt-6 inline-flex items-center gap-1"
+                >
+                  Giving Back
+                </span>
+              </div>
+              <!-- Pillar 5 -->
+              <div
+                class="gsap-pillar-card card-hover-effect bg-surface p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between h-full group cursor-pointer border border-[#C6A75E]/10"
+              >
+                <div>
+                  <div
+                    class="w-12 h-12 rounded-lg bg-surface-container-high flex items-center justify-center text-primary group-hover:bg-secondary-fixed transition-colors mb-5"
+                  >
+                    <span class="material-symbols-outlined text-2xl"
+                      >public</span
+                    >
+                  </div>
+                  <h3
+                    class="font-headline-sm text-headline-sm text-primary mb-2"
+                  >
+                    Chapters &amp; Guilds
+                  </h3>
+                  <p
+                    class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed"
+                  >
+                    Active city assemblies from Chennai and Bengaluru to
+                    Singapore, London, and the San Francisco Bay Area.
+                  </p>
+                </div>
+                <span
+                  class="font-caption text-caption text-secondary font-semibold uppercase tracking-wider pt-6 inline-flex items-center gap-1"
+                >
+                  Worldwide Hubs
+                </span>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- 5. THE MAHATMA ALUMNI APP -->
+        <section
+          class="w-full bg-surface-container-low py-24 relative overflow-hidden"
+          id="alumni-app"
+        >
+          <div class="max-w-7xl mx-auto px-gutter-mobile lg:px-gutter">
+            <div
+              class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center"
+            >
+              <!-- Mobile Mockup Presentation -->
+              <div class="lg:col-span-5 flex justify-center order-2 lg:order-1">
+                <div
+                  class="gsap-app-phone floating-mockup w-full max-w-sm bg-primary-container p-4 rounded-[40px] shadow-2xl relative"
+                >
+                  <div
+                    class="w-full bg-surface rounded-[32px] overflow-hidden p-4 flex flex-col gap-4 text-on-surface shadow-inner"
+                  >
+                    <!-- Mockup App Header -->
+                    <div
+                      class="flex items-center justify-between pb-3 bg-surface-container px-2 rounded-xl"
+                    >
+                      <div class="flex items-center gap-2">
+                        <div
+                          class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-secondary-fixed"
+                        >
+                          <span class="material-symbols-outlined text-sm"
+                            >shield</span
+                          >
+                        </div>
+                        <div>
+                          <p
+                            class="font-label-md text-[11px] font-bold text-primary leading-tight"
+                          >
+                            Mahatma Connect
+                          </p>
+                          <p
+                            class="font-caption text-[10px] text-on-surface-variant"
+                          >
+                            Class of '96 • Global
+                          </p>
+                        </div>
+                      </div>
+                      <span
+                        class="material-symbols-outlined text-primary text-xl"
+                        >notifications</span
+                      >
+                    </div>
+                    <!-- Mockup Digital Alumni Pass -->
+                    <div
+                      class="p-4 rounded-xl bg-gradient-to-br from-primary to-primary-container text-on-primary flex flex-col gap-3 shadow-md"
+                    >
+                      <div class="flex justify-between items-start">
+                        <div>
+                          <span
+                            class="font-caption text-[10px] text-secondary-fixed uppercase tracking-wider"
+                            >Official Alumni Pass</span
+                          >
+                          <h4 class="font-headline-sm text-sm text-on-primary">
+                            Dr. S. R. Ramanathan
+                          </h4>
+                        </div>
+                        <span
+                          class="font-label-md text-[10px] bg-secondary-fixed text-primary px-2 py-0.5 rounded font-bold"
+                          >VERIFIED</span
+                        >
+                      </div>
+                      <div
+                        class="flex justify-between items-end pt-2 text-[11px] text-on-primary-container font-caption"
+                      >
+                        <span>Batch of 1994 • Science Guild</span>
+                        <span>ID: #MH-94-208</span>
+                      </div>
+                    </div>
+                    <!-- Quick Search & Directory Tile -->
+                    <div
+                      class="flex items-center gap-2 px-3 py-2 bg-surface-container rounded-lg"
+                    >
+                      <span
+                        class="material-symbols-outlined text-secondary text-base"
+                        >search</span
+                      >
+                      <span
+                        class="font-body-sm text-[12px] text-on-surface-variant"
+                        >Find alumni by city, company, batch...</span
+                      >
+                    </div>
+                    <!-- Batch Bulletin Item -->
+                    <div
+                      class="p-3 rounded-lg bg-surface-container-lowest shadow-sm flex flex-col gap-1"
+                    >
+                      <div class="flex items-center justify-between">
+                        <span
+                          class="font-label-md text-[10px] text-secondary font-bold uppercase"
+                          >Upcoming Reunion</span
+                        >
+                        <span
+                          class="font-caption text-[10px] text-on-surface-variant"
+                          >Dec 27, 2026</span
+                        >
+                      </div>
+                      <p
+                        class="font-headline-sm text-xs text-primary font-semibold"
+                      >
+                        Homecoming &amp; Founders Assembly
+                      </p>
+                      <p
+                        class="font-body-sm text-[11px] text-on-surface-variant"
+                      >
+                        Main Quadrangle • 1,420 registered
+                      </p>
+                    </div>
+                    <div
+                      class="grid grid-cols-4 gap-2 pt-1 text-center font-caption text-[10px] text-on-surface-variant"
+                    >
+                      <div
+                        class="flex flex-col items-center gap-1 p-1 bg-surface-container rounded"
+                      >
+                        <span
+                          class="material-symbols-outlined text-sm text-primary"
+                          >contacts</span
+                        >
+                        <span>Directory</span>
+                      </div>
+                      <div
+                        class="flex flex-col items-center gap-1 p-1 bg-surface-container rounded"
+                      >
+                        <span
+                          class="material-symbols-outlined text-sm text-primary"
+                          >forum</span
+                        >
+                        <span>Batches</span>
+                      </div>
+                      <div
+                        class="flex flex-col items-center gap-1 p-1 bg-surface-container rounded"
+                      >
+                        <span
+                          class="material-symbols-outlined text-sm text-primary"
+                          >event</span
+                        >
+                        <span>Events</span>
+                      </div>
+                      <div
+                        class="flex flex-col items-center gap-1 p-1 bg-surface-container rounded"
+                      >
+                        <span
+                          class="material-symbols-outlined text-sm text-primary"
+                          >campaign</span
+                        >
+                        <span>Notices</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Copy & Feature Grid -->
+              <div
+                class="lg:col-span-7 flex flex-col gap-6 order-1 lg:order-2 gsap-reveal-title"
+              >
+                <div class="flex items-center gap-2">
+                  <span class="w-6 h-[1.5px] bg-secondary"></span>
+                  <span
+                    class="font-label-md text-label-md uppercase tracking-widest text-secondary font-bold"
+                    >The Mahatma Alumni App</span
+                  >
+                </div>
+                <h2
+                  class="font-headline-lg text-headline-lg text-primary leading-tight"
+                >
+                  Your Mahatma Community. In Your Pocket.
+                </h2>
+                <p
+                  class="font-body-md text-body-md text-on-surface-variant leading-relaxed"
+                >
+                  The Mahatma Alumni App brings our global community closer
+                  together. Discover fellow alumni, reconnect with your batch,
+                  explore events and stay updated with everything happening
+                  across the Mahatma alumni community.
+                </p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                  <div
+                    class="gsap-app-feature card-hover-effect cursor-pointer p-4 bg-surface-container-lowest rounded-lg shadow-sm flex items-start gap-3"
+                  >
+                    <span
+                      class="material-symbols-outlined text-secondary text-xl"
+                      >folder_shared</span
+                    >
+                    <div>
+                      <p
+                        class="font-label-md text-label-md font-bold text-primary"
+                      >
+                        Alumni Directory
+                      </p>
+                      <p
+                        class="font-body-sm text-body-sm text-on-surface-variant"
+                      >
+                        Search by year, department, profession, or city of
+                        residence.
+                      </p>
+                    </div>
+                  </div>
+                  <div
+                    class="gsap-app-feature card-hover-effect cursor-pointer p-4 bg-surface-container-lowest rounded-lg shadow-sm flex items-start gap-3"
+                  >
+                    <span
+                      class="material-symbols-outlined text-secondary text-xl"
+                      >celebration</span
+                    >
+                    <div>
+                      <p
+                        class="font-label-md text-label-md font-bold text-primary"
+                      >
+                        Events &amp; Reunions
+                      </p>
+                      <p
+                        class="font-body-sm text-body-sm text-on-surface-variant"
+                      >
+                        Instant RSVP, pass verification, and live reunion
+                        schedules.
+                      </p>
+                    </div>
+                  </div>
+                  <div
+                    class="gsap-app-feature card-hover-effect cursor-pointer p-4 bg-surface-container-lowest rounded-lg shadow-sm flex items-start gap-3"
+                  >
+                    <span
+                      class="material-symbols-outlined text-secondary text-xl"
+                      >connect_without_contact</span
+                    >
+                    <div>
+                      <p
+                        class="font-label-md text-label-md font-bold text-primary"
+                      >
+                        Career &amp; Mentorship
+                      </p>
+                      <p
+                        class="font-body-sm text-body-sm text-on-surface-variant"
+                      >
+                        Direct career consultation channels between seniors and
+                        newcomers.
+                      </p>
+                    </div>
+                  </div>
+                  <div
+                    class="gsap-app-feature card-hover-effect cursor-pointer p-4 bg-surface-container-lowest rounded-lg shadow-sm flex items-start gap-3"
+                  >
+                    <span
+                      class="material-symbols-outlined text-secondary text-xl"
+                      >pin_drop</span
+                    >
+                    <div>
+                      <p
+                        class="font-label-md text-label-md font-bold text-primary"
+                      >
+                        Chapters &amp; Guilds
+                      </p>
+                      <p
+                        class="font-body-sm text-body-sm text-on-surface-variant"
+                      >
+                        Join localized city assemblies wherever your career
+                        takes you.
+                      </p>
+                    </div>
+                  </div>
+                  <div
+                    class="gsap-app-feature card-hover-effect cursor-pointer p-4 bg-surface-container-lowest rounded-lg shadow-sm flex items-start gap-3"
+                  >
+                    <span
+                      class="material-symbols-outlined text-secondary text-xl"
+                      >volunteer_activism</span
+                    >
+                    <div>
+                      <p
+                        class="font-label-md text-label-md font-bold text-primary"
+                      >
+                        Volunteer &amp; Contribute
+                      </p>
+                      <p
+                        class="font-body-sm text-body-sm text-on-surface-variant"
+                      >
+                        Participate in student scholarships and institutional
+                        giving.
+                      </p>
+                    </div>
+                  </div>
+                  <div
+                    class="gsap-app-feature card-hover-effect cursor-pointer p-4 bg-surface-container-lowest rounded-lg shadow-sm flex items-start gap-3"
+                  >
+                    <span
+                      class="material-symbols-outlined text-secondary text-xl"
+                      >notifications_active</span
+                    >
+                    <div>
+                      <p
+                        class="font-label-md text-label-md font-bold text-primary"
+                      >
+                        Direct Announcements
+                      </p>
+                      <p
+                        class="font-body-sm text-body-sm text-on-surface-variant"
+                      >
+                        Curated school achievements, archive reels, and official
+                        notices.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="pt-4 flex items-center gap-4">
+                  <a
+                    class="inline-flex items-center gap-3 px-8 py-3.5 rounded-lg bg-primary text-on-primary font-label-md text-label-md uppercase tracking-wider font-bold shadow-md hover:bg-primary-container transition-all"
+                    href="#contact"
+                  >
+                    <span>Request App Invitation</span>
+                    <span
+                      class="material-symbols-outlined text-sm text-secondary-fixed"
+                      >arrow_forward</span
+                    >
+                  </a>
+                  <span
+                    class="font-caption text-caption text-on-surface-variant"
+                    >Available for iOS &amp; Android verified alumni</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- 6. HOMECOMING 2026 BANNER -->
+        <section
+          class="relative w-full py-24 bg-primary text-on-primary overflow-hidden"
+          id="homecoming-2026"
+        >
+          <div class="absolute inset-0 z-0">
+            <img
+              alt="Mahatma Alumni Grand Evening Reunion Gathering"
+              class="w-full h-full object-cover object-center filter brightness-[0.4] saturate-[0.85]"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuCnnSv_siFBCYYQAXoJC0zjzI-_1vDjyX4OFNTqpc6z1q3YrvJyJAknCJHpcPFFOjZDp-fU_LQdNtknmIXsQgjggU0dhtVB4k5ZVB8JYcAFwOhRySxrFTBoTQ2pxUrXXjd5yZg9S-fwcis85anXFMq4-a6Yultql_4LAzqpk8nBRPTNCkykuFfoWgJDrzl0CH__MLttWo2fDXjvIYmN6TMEYF2iLZD8iocVhVu0U4FWB-Fqyy0swgs"
+            />
+            <div
+              class="absolute inset-0 bg-primary/75 mix-blend-multiply"
+            ></div>
+            <div
+              class="absolute inset-0 bg-gradient-to-r from-primary via-primary/80 to-transparent"
+            ></div>
+          </div>
+          <div
+            class="relative z-10 max-w-7xl mx-auto px-gutter-mobile lg:px-gutter"
+          >
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+              <div class="lg:col-span-7 flex flex-col gap-4 gsap-reveal-title">
+                <div
+                  class="inline-flex items-center gap-2 px-3 py-1 rounded bg-secondary-fixed/20 text-secondary-fixed w-fit"
+                >
+                  <span class="material-symbols-outlined text-sm">event</span>
+                  <span
+                    class="font-label-md text-[11px] uppercase tracking-widest font-bold"
+                    >Annual Institutional Gathering</span
+                  >
+                </div>
+                <h2
+                  class="font-display-sm text-display-sm text-on-primary font-normal"
+                >
+                  Mahatma Alumni Homecoming 2026
+                </h2>
+                <p
+                  class="font-headline-sm text-headline-sm text-secondary-fixed font-normal"
+                >
+                  Memories. People. Journeys. One Mahatma Family.
+                </p>
+                <p
+                  class="font-body-md text-body-md text-on-primary-container max-w-xl"
+                >
+                  A grand evening under the campus skies. Reconnect with retired
+                  faculty, reminisce across the historic quadrangles, and
+                  celebrate four decades of excellence together.
+                </p>
+              </div>
+              <div
+                class="lg:col-span-5 flex flex-col items-start lg:items-end justify-center"
+              >
+                <div
+                  class="p-8 rounded-2xl bg-primary-container/90 backdrop-blur-md shadow-2xl flex flex-col gap-5 w-full max-w-md card-hover-effect"
+                >
+                  <div class="flex items-center justify-between">
+                    <span
+                      class="font-label-md text-label-md uppercase tracking-wider text-secondary-fixed font-bold"
+                      >Save the Date</span
+                    >
+                    <span
+                      class="px-2.5 py-0.5 rounded bg-secondary-fixed text-primary font-label-md text-[11px] font-bold"
+                      >CAMPUS QUAD</span
+                    >
+                  </div>
+                  <div class="flex items-baseline gap-2">
+                    <span
+                      class="font-display-sm text-display-sm text-on-primary font-normal"
+                      >DEC 27</span
+                    >
+                    <span
+                      class="font-headline-md text-headline-md text-secondary-fixed"
+                      >2026</span
+                    >
+                  </div>
+                  <p
+                    class="font-caption text-caption text-on-primary-container"
+                  >
+                    Registrations provide access to the presidential assembly,
+                    campus heritage walk, networking banquet, and anniversary
+                    commemorative folio.
+                  </p>
+                  <a
+                    class="btn-shimmer inline-flex items-center justify-center gap-3 w-full py-4 rounded-lg bg-secondary-fixed text-primary font-label-md text-label-md uppercase tracking-wider font-bold shadow-lg hover:bg-secondary-fixed-dim transition-all text-center"
+                    href="#contact"
+                  >
+                    <span>Register Your Interest</span>
+                    <span class="material-symbols-outlined text-lg"
+                      >arrow_forward</span
+                    >
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- 7. HOW WE ARE ORGANISED (ORGANISATION STRUCTURE) -->
+        <section class="w-full bg-surface-container-low text-on-surface py-24">
+          <div
+            class="max-w-7xl mx-auto px-gutter-mobile lg:px-gutter flex flex-col gap-14"
+          >
+            <div class="max-w-3xl flex flex-col gap-3 gsap-reveal-title">
+              <div class="flex items-center gap-2">
+                <span class="w-6 h-[1.5px] bg-secondary"></span>
+                <span
+                  class="font-label-md text-label-md uppercase tracking-widest text-secondary font-bold"
+                  >How We Are Organised</span
+                >
+              </div>
+              <h2 class="font-headline-lg text-headline-lg text-primary">
+                Built by Alumni. For Alumni.
+              </h2>
+              <p class="font-body-md text-body-md text-on-surface-variant">
+                The Association is powered by alumni volunteers and a
+                collaborative community structure that keeps our members
+                connected and our community actively vibrant worldwide.
+              </p>
+            </div>
+            <!-- Horizontal Flow Diagram -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 relative">
+              <!-- Step 1 -->
+              <div
+                class="gsap-tier-card card-hover-effect bg-surface-container-lowest p-6 rounded-xl shadow-sm flex flex-col gap-3 relative group cursor-pointer"
+              >
+                <div
+                  class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-secondary-fixed"
+                >
+                  <span class="material-symbols-outlined text-xl"
+                    >account_balance</span
+                  >
+                </div>
+                <span
+                  class="font-caption text-[11px] uppercase tracking-wider text-secondary font-bold"
+                  >Tier 01</span
+                >
+                <h3 class="font-headline-sm text-headline-sm text-primary">
+                  Alumni Council &amp; Exec Team
+                </h3>
+                <p class="font-body-sm text-body-sm text-on-surface-variant">
+                  Guiding long-term institutional stewardship, endowments, and
+                  annual agendas.
+                </p>
+              </div>
+              <!-- Step 2 -->
+              <div
+                class="gsap-tier-card card-hover-effect bg-surface-container-lowest p-6 rounded-xl shadow-sm flex flex-col gap-3 relative group cursor-pointer"
+              >
+                <div
+                  class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-secondary-fixed"
+                >
+                  <span class="material-symbols-outlined text-xl"
+                    >location_city</span
+                  >
+                </div>
+                <span
+                  class="font-caption text-[11px] uppercase tracking-wider text-secondary font-bold"
+                  >Tier 02</span
+                >
+                <h3 class="font-headline-sm text-headline-sm text-primary">
+                  Regional City Chapters
+                </h3>
+                <p class="font-body-sm text-body-sm text-on-surface-variant">
+                  Organizing localized meets, community dinners, and
+                  professional circles in each city.
+                </p>
+              </div>
+              <!-- Step 3 -->
+              <div
+                class="gsap-tier-card card-hover-effect bg-surface-container-lowest p-6 rounded-xl shadow-sm flex flex-col gap-3 relative group cursor-pointer"
+              >
+                <div
+                  class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-secondary-fixed"
+                >
+                  <span class="material-symbols-outlined text-xl">badge</span>
+                </div>
+                <span
+                  class="font-caption text-[11px] uppercase tracking-wider text-secondary font-bold"
+                  >Tier 03</span
+                >
+                <h3 class="font-headline-sm text-headline-sm text-primary">
+                  Batch Representatives
+                </h3>
+                <p class="font-body-sm text-body-sm text-on-surface-variant">
+                  Designated point of contact for each graduating class to
+                  verify and coordinate peers.
+                </p>
+              </div>
+              <!-- Step 4 -->
+              <div
+                class="gsap-tier-card card-hover-effect bg-surface-container-lowest p-6 rounded-xl shadow-sm flex flex-col gap-3 relative group cursor-pointer"
+              >
+                <div
+                  class="w-10 h-10 rounded-full bg-secondary-fixed flex items-center justify-center text-primary"
+                >
+                  <span class="material-symbols-outlined text-xl"
+                    >diversity_3</span
+                  >
+                </div>
+                <span
+                  class="font-caption text-[11px] uppercase tracking-wider text-secondary font-bold"
+                  >Tier 04</span
+                >
+                <h3 class="font-headline-sm text-headline-sm text-primary">
+                  Volunteers &amp; Members
+                </h3>
+                <p class="font-body-sm text-body-sm text-on-surface-variant">
+                  Over 15,000 Mahatmites globally driving mentorship, bursaries,
+                  and events.
+                </p>
+              </div>
+            </div>
+            <!-- Expandable Council Info Card -->
+            <div
+              class="bg-surface-container-lowest p-8 rounded-xl shadow-sm flex flex-col md:flex-row items-center justify-between gap-6"
+            >
+              <div class="flex items-center gap-4">
+                <div
+                  class="w-12 h-12 rounded-full bg-surface-container-high flex items-center justify-center text-secondary shrink-0"
+                >
+                  <span class="material-symbols-outlined text-2xl"
+                    >supervisor_account</span
+                  >
+                </div>
+                <div>
+                  <h4 class="font-headline-sm text-headline-sm text-primary">
+                    Want to inspect the complete leadership roster?
+                  </h4>
+                  <p class="font-body-sm text-body-sm text-on-surface-variant">
+                    Review the verified alumni trustees, batch coordinators, and
+                    global chapter leads.
+                  </p>
+                </div>
+              </div>
+              <button
+                class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-primary text-on-primary font-label-md text-label-md uppercase tracking-wider font-semibold hover:bg-primary-container transition-colors shrink-0"
+                id="toggle-council-btn"
+                type="button"
+              >
+                <span>Meet Our Council &amp; Team</span>
+                <span
+                  class="material-symbols-outlined text-sm transition-transform"
+                  id="council-chevron"
+                  >expand_more</span
+                >
+              </button>
+            </div>
+            <!-- Collapsible Drawer -->
+            <div
+              class="hidden grid-cols-1 md:grid-cols-3 gap-6 transition-all duration-300"
+              id="council-drawer"
+            >
+              <div
+                class="p-6 rounded-xl bg-surface-container-lowest shadow-sm flex flex-col gap-2"
+              >
+                <span
+                  class="font-caption text-caption text-secondary font-bold uppercase"
+                  >President</span
+                >
+                <h5 class="font-headline-sm text-headline-sm text-primary">
+                  Rajesh V. Krishnan
+                </h5>
+                <p class="font-body-sm text-body-sm text-on-surface-variant">
+                  Batch of 1986 • Managing Trustee, Apex Healthcare
+                </p>
+              </div>
+              <div
+                class="p-6 rounded-xl bg-surface-container-lowest shadow-sm flex flex-col gap-2"
+              >
+                <span
+                  class="font-caption text-caption text-secondary font-bold uppercase"
+                  >Secretary General</span
+                >
+                <h5 class="font-headline-sm text-headline-sm text-primary">
+                  Ananya Deshmukh
+                </h5>
+                <p class="font-body-sm text-body-sm text-on-surface-variant">
+                  Batch of 1998 • Senior Counsel, Supreme Court Chamber
+                </p>
+              </div>
+              <div
+                class="p-6 rounded-xl bg-surface-container-lowest shadow-sm flex flex-col gap-2"
+              >
+                <span
+                  class="font-caption text-caption text-secondary font-bold uppercase"
+                  >Treasurer &amp; Bursary Lead</span
+                >
+                <h5 class="font-headline-sm text-headline-sm text-primary">
+                  K. Sundararajan
+                </h5>
+                <p class="font-body-sm text-body-sm text-on-surface-variant">
+                  Batch of 1991 • Partner, Deloitte Risk Advisory
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- 8. GLOBAL CHAPTERS & CONNECTIONS -->
+        <section
+          class="w-full bg-surface-container-lowest text-on-surface py-24"
+          id="community"
+        >
+          <div class="max-w-7xl mx-auto px-gutter-mobile lg:px-gutter">
+            <div
+              class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12"
+            >
+              <div class="max-w-2xl flex flex-col gap-3 gsap-reveal-title">
+                <div class="flex items-center gap-2">
+                  <span class="w-6 h-[1.5px] bg-secondary"></span>
+                  <span
+                    class="font-label-md text-label-md uppercase tracking-widest text-secondary font-bold"
+                    >Global Presence</span
+                  >
+                </div>
+                <h2 class="font-display-sm text-display-sm text-primary">
+                  Across Batches. Across Cities. Still Mahatmites.
+                </h2>
+                <p class="font-body-md text-body-md text-on-surface-variant">
+                  Whether in our foundational city or established worldwide
+                  hubs, our official chapter ambassadors organize quarterly
+                  gatherings, mentorship dinners, and emergency alumni support
+                  networks.
+                </p>
+              </div>
+              <div
+                class="flex items-center gap-2 font-caption text-caption text-on-surface-variant bg-surface-container px-4 py-2 rounded-lg"
+              >
+                <span
+                  class="w-2.5 h-2.5 rounded-full bg-secondary-fixed-dim animate-pulse"
+                ></span>
+                <span>8 Active Official Chapters</span>
+              </div>
+            </div>
+            <!-- City Chapters Grid -->
+            <div
+              class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-10"
+            >
+              <div
+                class="gsap-chapter-card card-hover-effect cursor-pointer p-5 rounded-xl bg-surface shadow-sm hover:shadow-md transition-shadow flex flex-col gap-2"
+              >
+                <div class="flex justify-between items-start">
+                  <span class="font-headline-sm text-headline-sm text-primary"
+                    >Chennai</span
+                  >
+                  <span
+                    class="font-caption text-[11px] px-2 py-0.5 rounded bg-surface-container-high text-primary font-semibold"
+                    >Home Base</span
+                  >
+                </div>
+                <p class="font-body-sm text-body-sm text-on-surface-variant">
+                  Lead: Arvind Sundaram ('92)
+                </p>
+                <span
+                  class="font-label-md text-label-md text-secondary font-bold mt-2"
+                  >4,200+ Members</span
+                >
+              </div>
+              <div
+                class="gsap-chapter-card card-hover-effect cursor-pointer p-5 rounded-xl bg-surface shadow-sm hover:shadow-md transition-shadow flex flex-col gap-2"
+              >
+                <div class="flex justify-between items-start">
+                  <span class="font-headline-sm text-headline-sm text-primary"
+                    >Bengaluru</span
+                  >
+                  <span
+                    class="font-caption text-[11px] px-2 py-0.5 rounded bg-surface-container-high text-primary font-semibold"
+                    >Tech Guild</span
+                  >
+                </div>
+                <p class="font-body-sm text-body-sm text-on-surface-variant">
+                  Lead: Meera Nair ('01)
+                </p>
+                <span
+                  class="font-label-md text-label-md text-secondary font-bold mt-2"
+                  >2,850+ Members</span
+                >
+              </div>
+              <div
+                class="gsap-chapter-card card-hover-effect cursor-pointer p-5 rounded-xl bg-surface shadow-sm hover:shadow-md transition-shadow flex flex-col gap-2"
+              >
+                <div class="flex justify-between items-start">
+                  <span class="font-headline-sm text-headline-sm text-primary"
+                    >Mumbai</span
+                  >
+                  <span
+                    class="font-caption text-[11px] px-2 py-0.5 rounded bg-surface-container-high text-primary font-semibold"
+                    >Finance &amp; Media</span
+                  >
+                </div>
+                <p class="font-body-sm text-body-sm text-on-surface-variant">
+                  Lead: Rohit Sethi ('95)
+                </p>
+                <span
+                  class="font-label-md text-label-md text-secondary font-bold mt-2"
+                  >1,900+ Members</span
+                >
+              </div>
+              <div
+                class="gsap-chapter-card card-hover-effect cursor-pointer p-5 rounded-xl bg-surface shadow-sm hover:shadow-md transition-shadow flex flex-col gap-2"
+              >
+                <div class="flex justify-between items-start">
+                  <span class="font-headline-sm text-headline-sm text-primary"
+                    >Delhi NCR</span
+                  >
+                  <span
+                    class="font-caption text-[11px] px-2 py-0.5 rounded bg-surface-container-high text-primary font-semibold"
+                    >Civil &amp; Legal</span
+                  >
+                </div>
+                <p class="font-body-sm text-body-sm text-on-surface-variant">
+                  Lead: Vikramaditya Singh ('89)
+                </p>
+                <span
+                  class="font-label-md text-label-md text-secondary font-bold mt-2"
+                  >1,650+ Members</span
+                >
+              </div>
+              <div
+                class="gsap-chapter-card card-hover-effect cursor-pointer p-5 rounded-xl bg-surface shadow-sm hover:shadow-md transition-shadow flex flex-col gap-2"
+              >
+                <div class="flex justify-between items-start">
+                  <span class="font-headline-sm text-headline-sm text-primary"
+                    >Singapore</span
+                  >
+                  <span
+                    class="font-caption text-[11px] px-2 py-0.5 rounded bg-surface-container-high text-primary font-semibold"
+                    >ASEAN Hub</span
+                  >
+                </div>
+                <p class="font-body-sm text-body-sm text-on-surface-variant">
+                  Lead: Deepa Pillai ('04)
+                </p>
+                <span
+                  class="font-label-md text-label-md text-secondary font-bold mt-2"
+                  >780+ Members</span
+                >
+              </div>
+              <div
+                class="gsap-chapter-card card-hover-effect cursor-pointer p-5 rounded-xl bg-surface shadow-sm hover:shadow-md transition-shadow flex flex-col gap-2"
+              >
+                <div class="flex justify-between items-start">
+                  <span class="font-headline-sm text-headline-sm text-primary"
+                    >London (UK)</span
+                  >
+                  <span
+                    class="font-caption text-[11px] px-2 py-0.5 rounded bg-surface-container-high text-primary font-semibold"
+                    >Europe Chapter</span
+                  >
+                </div>
+                <p class="font-body-sm text-body-sm text-on-surface-variant">
+                  Lead: Dr. Julian Paul ('90)
+                </p>
+                <span
+                  class="font-label-md text-label-md text-secondary font-bold mt-2"
+                  >640+ Members</span
+                >
+              </div>
+              <div
+                class="gsap-chapter-card card-hover-effect cursor-pointer p-5 rounded-xl bg-surface shadow-sm hover:shadow-md transition-shadow flex flex-col gap-2"
+              >
+                <div class="flex justify-between items-start">
+                  <span class="font-headline-sm text-headline-sm text-primary"
+                    >Bay Area (US)</span
+                  >
+                  <span
+                    class="font-caption text-[11px] px-2 py-0.5 rounded bg-surface-container-high text-primary font-semibold"
+                    >Americas West</span
+                  >
+                </div>
+                <p class="font-body-sm text-body-sm text-on-surface-variant">
+                  Lead: Karthik Raghavan ('99)
+                </p>
+                <span
+                  class="font-label-md text-label-md text-secondary font-bold mt-2"
+                  >920+ Members</span
+                >
+              </div>
+              <div
+                class="gsap-chapter-card card-hover-effect cursor-pointer p-5 rounded-xl bg-surface shadow-sm hover:shadow-md transition-shadow flex flex-col gap-2"
+              >
+                <div class="flex justify-between items-start">
+                  <span class="font-headline-sm text-headline-sm text-primary"
+                    >Dubai (UAE)</span
+                  >
+                  <span
+                    class="font-caption text-[11px] px-2 py-0.5 rounded bg-surface-container-high text-primary font-semibold"
+                    >Middle East</span
+                  >
+                </div>
+                <p class="font-body-sm text-body-sm text-on-surface-variant">
+                  Lead: Tariq Mansoor ('02)
+                </p>
+                <span
+                  class="font-label-md text-label-md text-secondary font-bold mt-2"
+                  >1,120+ Members</span
+                >
+              </div>
+            </div>
+            <!-- Cohort Batch Timeline Filter Bar -->
+            <div
+              class="bg-surface-container p-6 rounded-2xl flex flex-col gap-4"
+            >
+              <div
+                class="flex flex-col sm:flex-row sm:items-center justify-between gap-2"
+              >
+                <span
+                  class="font-label-md text-label-md uppercase tracking-wider text-primary font-bold"
+                  >Cohorts Represented</span
+                >
+                <span class="font-caption text-caption text-on-surface-variant"
+                  >From 1975 to Present Day</span
+                >
+              </div>
+              <div class="flex flex-wrap gap-2">
+                <span
+                  class="batch-pill px-3.5 py-1.5 rounded-lg bg-primary text-on-primary font-caption text-caption font-semibold cursor-pointer transition-all duration-200 shadow-sm"
+                  >All Batches</span
+                >
+                <span
+                  class="batch-pill px-3.5 py-1.5 rounded-lg bg-surface-container-lowest text-on-surface font-caption text-caption hover:bg-secondary-fixed hover:text-primary transition-all duration-200 cursor-pointer shadow-sm"
+                  >1975 - 1984</span
+                >
+                <span
+                  class="batch-pill px-3.5 py-1.5 rounded-lg bg-surface-container-lowest text-on-surface font-caption text-caption hover:bg-secondary-fixed hover:text-primary transition-all duration-200 cursor-pointer shadow-sm"
+                  >1985 - 1994</span
+                >
+                <span
+                  class="batch-pill px-3.5 py-1.5 rounded-lg bg-surface-container-lowest text-on-surface font-caption text-caption hover:bg-secondary-fixed hover:text-primary transition-all duration-200 cursor-pointer shadow-sm"
+                  >1995 - 2004</span
+                >
+                <span
+                  class="batch-pill px-3.5 py-1.5 rounded-lg bg-surface-container-lowest text-on-surface font-caption text-caption hover:bg-secondary-fixed hover:text-primary transition-all duration-200 cursor-pointer shadow-sm"
+                  >2005 - 2014</span
+                >
+                <span
+                  class="batch-pill px-3.5 py-1.5 rounded-lg bg-surface-container-lowest text-on-surface font-caption text-caption hover:bg-secondary-fixed hover:text-primary transition-all duration-200 cursor-pointer shadow-sm"
+                  >2015 - 2024</span
+                >
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- 9. MEDIA & HIGHLIGHTS -->
+        <section class="w-full bg-surface-container-low text-on-surface py-24">
+          <div class="max-w-7xl mx-auto px-gutter-mobile lg:px-gutter">
+            <div
+              class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12"
+            >
+              <div class="flex flex-col gap-3 gsap-reveal-title">
+                <div class="flex items-center gap-2">
+                  <span class="w-6 h-[1.5px] bg-secondary"></span>
+                  <span
+                    class="font-label-md text-label-md uppercase tracking-widest text-secondary font-bold"
+                    >Media &amp; Highlights</span
+                  >
+                </div>
+                <h2 class="font-display-sm text-display-sm text-primary">
+                  From Memories to Milestones
+                </h2>
+                <p class="font-body-md text-body-md text-on-surface-variant">
+                  Stories, events and moments that keep the Mahatma spirit alive
+                  across eras.
+                </p>
+              </div>
+              <a
+                class="inline-flex items-center gap-2 font-label-md text-label-md uppercase tracking-wider text-primary hover:text-secondary font-bold group"
+                href="#contact"
+              >
+                <span>View All Highlights</span>
+                <span
+                  class="material-symbols-outlined text-base group-hover:translate-x-1 transition-transform"
+                  >arrow_forward</span
+                >
+              </a>
+            </div>
+            <!-- Asymmetric Editorial Photo Gallery -->
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+              <!-- Large Feature Plate -->
+              <div
+                class="md:col-span-7 bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm flex flex-col group card-hover-effect cursor-pointer"
+              >
+                <div class="relative overflow-hidden h-72 sm:h-96">
+                  <img
+                    alt="Mahatma evening alumni homecoming gathering"
+                    class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCnnSv_siFBCYYQAXoJC0zjzI-_1vDjyX4OFNTqpc6z1q3YrvJyJAknCJHpcPFFOjZDp-fU_LQdNtknmIXsQgjggU0dhtVB4k5ZVB8JYcAFwOhRySxrFTBoTQ2pxUrXXjd5yZg9S-fwcis85anXFMq4-a6Yultql_4LAzqpk8nBRPTNCkykuFfoWgJDrzl0CH__MLttWo2fDXjvIYmN6TMEYF2iLZD8iocVhVu0U4FWB-Fqyy0swgs"
+                  />
+                  <span
+                    class="absolute top-4 left-4 px-3 py-1 rounded bg-primary text-secondary-fixed font-label-md text-[11px] font-bold tracking-wider uppercase"
+                    >Annual Gala</span
+                  >
+                </div>
+                <div class="p-6 flex flex-col gap-2">
+                  <span
+                    class="font-caption text-caption text-secondary font-semibold uppercase"
+                    >December 2025 Retrospective</span
+                  >
+                  <h3 class="font-headline-md text-headline-md text-primary">
+                    The 45th Annual Reunion: An Unforgettable Night
+                  </h3>
+                  <p class="font-body-sm text-body-sm text-on-surface-variant">
+                    More than 850 alumni assembled across the illuminated
+                    central lawns to honor retiring faculty masters and launch
+                    the Class of '99 Memorial Scholarship.
+                  </p>
+                </div>
+              </div>
+              <!-- Right Side Stacking Cards -->
+              <div class="md:col-span-5 flex flex-col gap-6">
+                <div
+                  class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm flex flex-col group card-hover-effect cursor-pointer"
+                >
+                  <div class="relative overflow-hidden h-48">
+                    <img
+                      alt="Colonnade fellowship talk"
+                      class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500"
+                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuDyaRbKxFW2M3u5g_0rErD32nkPeXbemQrL0PHV5L1JdvOF6tkrSKjtDv1m3pGtOrKoA9P1sCtrPV0Mdw2vQ0YtCeo6gvECdyVyQdze098aX6Fgd4r0a4tYzvfvRTHvyU3wYb-q1ARX6kUnakVyrVB3TiMoIOYJnlzH-9r9LjqLVio90GwFSVKhMsI89kZ4-27pcznxYlllTX8l7nKfryJTSVP4NhaOT0w_hcAuAhu-1hRTDEM4hcc"
+                    />
+                    <span
+                      class="absolute top-4 left-4 px-3 py-1 rounded bg-primary text-secondary-fixed font-label-md text-[11px] font-bold tracking-wider uppercase"
+                      >Mentorship</span
+                    >
+                  </div>
+                  <div class="p-5 flex flex-col gap-2">
+                    <span
+                      class="font-caption text-caption text-secondary font-semibold uppercase"
+                      >Batch Mentorship Series</span
+                    >
+                    <h3 class="font-headline-sm text-headline-sm text-primary">
+                      Colonnade Talks: Career Guidance for Seniors
+                    </h3>
+                    <p
+                      class="font-body-sm text-body-sm text-on-surface-variant"
+                    >
+                      Alumni from civil services and surgical sciences returned
+                      to conduct interactive workshops in the school hall.
+                    </p>
+                  </div>
+                </div>
+                <div
+                  class="bg-surface-container-lowest p-6 rounded-xl shadow-sm flex flex-col gap-3 justify-between flex-grow card-hover-effect cursor-pointer"
+                >
+                  <div class="flex flex-col gap-2">
+                    <div class="flex items-center justify-between">
+                      <span
+                        class="font-caption text-caption text-secondary font-bold uppercase tracking-wider"
+                        >Archival Spotlight</span
+                      >
+                      <span
+                        class="material-symbols-outlined text-secondary text-lg"
+                        >auto_stories</span
+                      >
+                    </div>
+                    <h4 class="font-headline-sm text-headline-sm text-primary">
+                      Class of 1984 Silver Folio
+                    </h4>
+                    <p
+                      class="font-body-sm text-body-sm text-on-surface-variant"
+                    >
+                      The full scanned archive of the 1984 Golden Chronicle is
+                      now digitized and accessible on the member app.
+                    </p>
+                  </div>
+                  <a
+                    class="font-label-md text-label-md uppercase tracking-wider text-secondary font-bold inline-flex items-center gap-2 hover:underline"
+                    href="#alumni-app"
+                  >
+                    <span>Read in App Archives</span>
+                    <span class="material-symbols-outlined text-sm"
+                      >arrow_forward</span
+                    >
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- 10. PARTNERS & GET INVOLVED -->
+        <section
+          class="w-full bg-surface-container-lowest text-on-surface py-24"
+          id="get-involved"
+        >
+          <div class="max-w-7xl mx-auto px-gutter-mobile lg:px-gutter">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+              <!-- Left Column: Partners & Sponsors -->
+              <div
+                class="gsap-involved-card card-hover-effect lg:col-span-5 bg-surface-container-low p-8 lg:p-10 rounded-2xl flex flex-col justify-between shadow-sm"
+                id="partners"
+              >
+                <div class="flex flex-col gap-4">
+                  <div class="flex items-center gap-2">
+                    <span class="w-6 h-[1.5px] bg-secondary"></span>
+                    <span
+                      class="font-label-md text-label-md uppercase tracking-widest text-secondary font-bold"
+                      >Partners &amp; Sponsors</span
+                    >
+                  </div>
+                  <h2 class="font-headline-lg text-headline-lg text-primary">
+                    Partner With the Mahatma Alumni Community.
+                  </h2>
+                  <p
+                    class="font-body-md text-body-md text-on-surface-variant leading-relaxed"
+                  >
+                    We collaborate with distinguished organizations,
+                    alumni-founded enterprises, and philanthropic institutions
+                    to sponsor reunions, student stipends, and research
+                    symposiums.
+                  </p>
+                  <div class="grid grid-cols-2 gap-3 pt-3">
+                    <div
+                      class="p-3 bg-surface-container-lowest rounded-lg text-center card-hover-effect cursor-pointer"
+                    >
+                      <span class="font-headline-sm text-sm text-primary"
+                        >Heritage Foundations</span
+                      >
+                    </div>
+                    <div
+                      class="p-3 bg-surface-container-lowest rounded-lg text-center card-hover-effect cursor-pointer"
+                    >
+                      <span class="font-headline-sm text-sm text-primary"
+                        >Alumni Enterprises</span
+                      >
+                    </div>
+                    <div
+                      class="p-3 bg-surface-container-lowest rounded-lg text-center card-hover-effect cursor-pointer"
+                    >
+                      <span class="font-headline-sm text-sm text-primary"
+                        >Academic Fellowships</span
+                      >
+                    </div>
+                    <div
+                      class="p-3 bg-surface-container-lowest rounded-lg text-center card-hover-effect cursor-pointer"
+                    >
+                      <span class="font-headline-sm text-sm text-primary"
+                        >Sports Endowments</span
+                      >
+                    </div>
+                  </div>
+                </div>
+                <div class="pt-8">
+                  <a
+                    class="btn-shimmer inline-flex items-center gap-2 px-6 py-3.5 rounded-lg bg-primary text-on-primary font-label-md text-label-md uppercase tracking-wider font-bold hover:bg-primary-container transition-colors"
+                    href="#contact"
+                  >
+                    <span>Become a Partner</span>
+                    <span
+                      class="material-symbols-outlined text-base text-secondary-fixed"
+                      >arrow_forward</span
+                    >
+                  </a>
+                </div>
+              </div>
+              <!-- Right Column: Get Involved -->
+              <div
+                class="gsap-involved-card card-hover-effect lg:col-span-7 bg-primary-container text-on-primary p-8 lg:p-10 rounded-2xl shadow-xl flex flex-col justify-between relative overflow-hidden"
+              >
+                <!-- Handwritten Artistic Accent Accentuate -->
+                <div class="absolute top-6 right-6 select-none opacity-85">
+                  <span
+                    class="font-['Caveat'] text-2xl lg:text-3xl text-secondary-fixed rotate-3 inline-block"
+                    >Stronger Together.</span
+                  >
+                </div>
+                <div class="flex flex-col gap-4 max-w-lg">
+                  <div class="flex items-center gap-2">
+                    <span class="w-6 h-[1.5px] bg-secondary-fixed"></span>
+                    <span
+                      class="font-label-md text-label-md uppercase tracking-widest text-secondary-fixed font-bold"
+                      >Get Involved</span
+                    >
+                  </div>
+                  <h2 class="font-headline-lg text-headline-lg text-on-primary">
+                    There's a Place for Every Mahatmite.
+                  </h2>
+                  <p
+                    class="font-body-md text-body-md text-on-primary-container leading-relaxed"
+                  >
+                    Every generation holds unique experience and wisdom. Whether
+                    you can commit an hour a month to mentor a senior or
+                    organize a cohort meet, your participation strengthens our
+                    legacy.
+                  </p>
+                  <ul class="flex flex-col gap-3 pt-2">
+                    <li class="flex items-center gap-3">
+                      <span
+                        class="material-symbols-outlined text-secondary-fixed text-lg"
+                        >check_circle</span
+                      >
+                      <span class="font-body-sm text-body-sm text-on-primary"
+                        >Volunteer as an Event Steward or Chapter Host</span
+                      >
+                    </li>
+                    <li class="flex items-center gap-3">
+                      <span
+                        class="material-symbols-outlined text-secondary-fixed text-lg"
+                        >check_circle</span
+                      >
+                      <span class="font-body-sm text-body-sm text-on-primary"
+                        >Mentor High-School Students in Higher Studies</span
+                      >
+                    </li>
+                    <li class="flex items-center gap-3">
+                      <span
+                        class="material-symbols-outlined text-secondary-fixed text-lg"
+                        >check_circle</span
+                      >
+                      <span class="font-body-sm text-body-sm text-on-primary"
+                        >Step forward as your Class Batch Representative</span
+                      >
+                    </li>
+                    <li class="flex items-center gap-3">
+                      <span
+                        class="material-symbols-outlined text-secondary-fixed text-lg"
+                        >check_circle</span
+                      >
+                      <span class="font-body-sm text-body-sm text-on-primary"
+                        >Propose a new regional city chapter or community
+                        project</span
+                      >
+                    </li>
+                  </ul>
+                </div>
+                <div class="pt-8">
+                  <a
+                    class="btn-shimmer inline-flex items-center gap-3 px-8 py-3.5 rounded-lg bg-secondary-fixed text-primary font-label-md text-label-md uppercase tracking-wider font-bold shadow-md hover:bg-secondary-fixed-dim transition-colors"
+                    href="#contact"
+                  >
+                    <span>Get Involved Today</span>
+                    <span class="material-symbols-outlined text-base"
+                      >arrow_forward</span
+                    >
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- 11. CONTACT US -->
+        <section
+          class="w-full bg-surface-container-low text-on-surface py-24"
+          id="contact"
+        >
+          <div class="max-w-7xl mx-auto px-gutter-mobile lg:px-gutter">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+              <!-- Left: Direct Channels -->
+              <div class="lg:col-span-5 flex flex-col gap-6 gsap-reveal-title">
+                <div class="flex items-center gap-2">
+                  <span class="w-6 h-[1.5px] bg-secondary"></span>
+                  <span
+                    class="font-label-md text-label-md uppercase tracking-widest text-secondary font-bold"
+                    >Contact Us</span
+                  >
+                </div>
+                <h2 class="font-display-sm text-display-sm text-primary">
+                  Let's Stay Connected.
+                </h2>
+                <p
+                  class="font-body-md text-body-md text-on-surface-variant leading-relaxed"
+                >
+                  Have questions regarding homecoming registrations, batch
+                  lists, or chapter activities? Reach out directly to the Alumni
+                  Secretariat.
+                </p>
+                <div class="flex flex-col gap-4 pt-2">
+                  <a
+                    class="card-hover-effect cursor-pointer flex items-center gap-4 p-4 rounded-xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-shadow group"
+                    href="mailto:secretariat@mahatmaalumni.org"
+                  >
+                    <div
+                      class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-primary group-hover:bg-secondary-fixed transition-colors"
+                    >
+                      <span class="material-symbols-outlined text-xl"
+                        >mail</span
+                      >
+                    </div>
+                    <div class="flex flex-col">
+                      <span
+                        class="font-caption text-caption text-secondary font-semibold uppercase"
+                        >Email Correspondence</span
+                      >
+                      <span
+                        class="font-label-md text-label-md text-primary font-bold"
+                        >secretariat@mahatmaalumni.org</span
+                      >
+                    </div>
+                  </a>
+                  <a
+                    class="card-hover-effect cursor-pointer flex items-center gap-4 p-4 rounded-xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-shadow group"
+                    href="tel:+914428190000"
+                  >
+                    <div
+                      class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-primary group-hover:bg-secondary-fixed transition-colors"
+                    >
+                      <span class="material-symbols-outlined text-xl"
+                        >call</span
+                      >
+                    </div>
+                    <div class="flex flex-col">
+                      <span
+                        class="font-caption text-caption text-secondary font-semibold uppercase"
+                        >Alumni Office Helpline</span
+                      >
+                      <span
+                        class="font-label-md text-label-md text-primary font-bold"
+                        >+91 (44) 2819 0000</span
+                      >
+                    </div>
+                  </a>
+                  <div
+                    class="card-hover-effect p-4 rounded-xl bg-surface-container-lowest shadow-sm flex flex-col gap-2"
+                  >
+                    <span
+                      class="font-caption text-caption text-secondary font-semibold uppercase"
+                      >Institutional Office</span
+                    >
+                    <p
+                      class="font-body-sm text-body-sm text-on-surface-variant"
+                    >
+                      Mahatma Alumni Secretariat, Heritage Quadrangle Building,
+                      Campus Gate 2, Chennai 600018
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <!-- Right: Inquiry Form -->
+              <div
+                class="card-hover-effect lg:col-span-7 bg-surface-container-lowest p-8 lg:p-10 rounded-2xl shadow-md"
+              >
+                <h3 class="font-headline-md text-headline-md text-primary mb-2">
+                  Send an Alumni Inquiry
+                </h3>
+                <p
+                  class="font-body-sm text-body-sm text-on-surface-variant mb-6"
+                >
+                  Our batch correspondence officers respond within two business
+                  days.
+                </p>
+                <form
+                  class="flex flex-col gap-4"
+                  id="alumni-contact-form"
+                  onsubmit="
+                    event.preventDefault();
+                    document
+                      .getElementById('form-feedback')
+                      .classList.remove('hidden');
+                    this.reset();
+                  "
+                >
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="flex flex-col gap-1.5">
+                      <label
+                        class="font-label-md text-label-md text-primary font-semibold"
+                        for="contact-name"
+                        >Full Name *</label
+                      >
+                      <input
+                        class="w-full px-4 py-3 rounded-lg bg-surface text-on-surface border-0 focus:outline-none focus:ring-2 focus:ring-secondary font-body-sm text-body-sm placeholder:text-on-surface-variant/50"
+                        id="contact-name"
+                        placeholder="e.g. S. Ramanathan"
+                        required=""
+                        type="text"
+                      />
+                    </div>
+                    <div class="flex flex-col gap-1.5">
+                      <label
+                        class="font-label-md text-label-md text-primary font-semibold"
+                        for="contact-batch"
+                        >Graduating Batch / Year *</label
+                      >
+                      <input
+                        class="w-full px-4 py-3 rounded-lg bg-surface text-on-surface border-0 focus:outline-none focus:ring-2 focus:ring-secondary font-body-sm text-body-sm placeholder:text-on-surface-variant/50"
+                        id="contact-batch"
+                        placeholder="e.g. Class of 1994"
+                        required=""
+                        type="text"
+                      />
+                    </div>
+                  </div>
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="flex flex-col gap-1.5">
+                      <label
+                        class="font-label-md text-label-md text-primary font-semibold"
+                        for="contact-email"
+                        >Email Address *</label
+                      >
+                      <input
+                        class="w-full px-4 py-3 rounded-lg bg-surface text-on-surface border-0 focus:outline-none focus:ring-2 focus:ring-secondary font-body-sm text-body-sm placeholder:text-on-surface-variant/50"
+                        id="contact-email"
+                        placeholder="name@domain.com"
+                        required=""
+                        type="email"
+                      />
+                    </div>
+                    <div class="flex flex-col gap-1.5">
+                      <label
+                        class="font-label-md text-label-md text-primary font-semibold"
+                        for="contact-city"
+                        >Current City of Residence</label
+                      >
+                      <input
+                        class="w-full px-4 py-3 rounded-lg bg-surface text-on-surface border-0 focus:outline-none focus:ring-2 focus:ring-secondary font-body-sm text-body-sm placeholder:text-on-surface-variant/50"
+                        id="contact-city"
+                        placeholder="e.g. Bengaluru, Singapore"
+                        type="text"
+                      />
+                    </div>
+                  </div>
+                  <div class="flex flex-col gap-1.5">
+                    <label
+                      class="font-label-md text-label-md text-primary font-semibold"
+                      for="contact-interest"
+                      >How would you like to connect?</label
+                    >
+                    <select
+                      class="w-full px-4 py-3 rounded-lg bg-surface text-on-surface border-0 focus:outline-none focus:ring-2 focus:ring-secondary font-body-sm text-body-sm"
+                      id="contact-interest"
+                    >
+                      <option value="homecoming">
+                        Homecoming 2026 Registration Inquiry
+                      </option>
+                      <option value="batch-rep">
+                        Volunteer as Batch Representative
+                      </option>
+                      <option value="chapter">
+                        Join / Start a Regional City Chapter
+                      </option>
+                      <option value="mentorship">
+                        Offer Student Mentorship &amp; Internships
+                      </option>
+                      <option value="partner">
+                        Corporate Sponsorship &amp; Giving
+                      </option>
+                      <option value="general">
+                        General Archive / Verification Inquiry
+                      </option>
+                    </select>
+                  </div>
+                  <div class="flex flex-col gap-1.5">
+                    <label
+                      class="font-label-md text-label-md text-primary font-semibold"
+                      for="contact-message"
+                      >Message</label
+                    >
+                    <textarea
+                      class="w-full px-4 py-3 rounded-lg bg-surface text-on-surface border-0 focus:outline-none focus:ring-2 focus:ring-secondary font-body-sm text-body-sm placeholder:text-on-surface-variant/50 resize-none"
+                      id="contact-message"
+                      placeholder="Tell us how you would like to participate or reminisce..."
+                      rows="3"
+                    ></textarea>
+                  </div>
+                  <div
+                    class="hidden p-3 rounded-lg bg-secondary-fixed text-primary font-body-sm text-body-sm font-semibold"
+                    id="form-feedback"
+                  >
+                    Thank you! Your dispatch has reached the Mahatma Alumni
+                    Secretariat. We look forward to connecting.
+                  </div>
+                  <button
+                    class="btn-shimmer mt-2 inline-flex items-center justify-center gap-3 px-8 py-3.5 rounded-lg bg-primary text-on-primary font-label-md text-label-md uppercase tracking-wider font-bold shadow-md hover:bg-primary-container transition-all"
+                    type="submit"
+                  >
+                    <span>Send Message</span>
+                    <span
+                      class="material-symbols-outlined text-base text-secondary-fixed"
+                      >send</span
+                    >
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+    <footer
+      class="w-full bg-primary-container text-on-primary border-t border-[#C6A75E]/30"
+    >
+      <div class="max-w-7xl mx-auto px-gutter-mobile lg:px-gutter py-space-xl">
+        <div
+          class="grid grid-cols-1 md:grid-cols-12 gap-gutter items-start pb-space-lg border-b border-[#C6A75E]/15"
+        >
+          <div class="md:col-span-4 flex flex-col items-start gap-space-md">
+            <img
+              alt="Mahatma Alumni Association Logo"
+              class="h-12 w-auto object-contain shrink-0"
+              src="assets/images/mahatma_alumni_logo.png"
+            />
+            <p
+              class="font-body-sm text-body-sm text-on-primary-container max-w-sm"
+            >
+              Preserving institutional prestige, lifelong brotherhood, and
+              intergenerational fellowship across cohorts worldwide.
+            </p>
+          </div>
+          <div
+            class="md:col-span-4 flex flex-col items-start md:items-center text-left md:text-center gap-space-xs"
+          >
+            <p class="font-headline-sm text-headline-sm text-on-primary">
+              One School. Many Generations. Forever Connected.
+            </p>
+            <p
+              class="font-label-md text-label-md tracking-widest uppercase text-secondary-fixed"
+            >
+              CONNECT • CONTRIBUTE • CELEBRATE
+            </p>
+          </div>
+          <div
+            class="md:col-span-4 flex flex-col items-start md:items-end gap-space-md"
+          >
+            <div class="flex flex-wrap gap-space-md text-right">
+              <a
+                class="font-label-md text-label-md text-on-primary-container hover:text-secondary-fixed transition-colors"
+                data-path="about-us"
+                href="#"
+                >About</a
+              ><a
+                class="font-label-md text-label-md text-on-primary-container hover:text-secondary-fixed transition-colors"
+                data-path="community"
+                href="#"
+                >Community</a
+              ><a
+                class="font-label-md text-label-md text-on-primary-container hover:text-secondary-fixed transition-colors"
+                data-path="homecoming-2026"
+                href="#"
+                >Homecoming</a
+              ><a
+                class="font-label-md text-label-md text-on-primary-container hover:text-secondary-fixed transition-colors"
+                data-path="contact"
+                href="#"
+                >Contact</a
+              >
+            </div>
+            <div class="flex items-center gap-space-md pt-space-xs">
+              <a
+                aria-label="Institutional Directory"
+                class="w-9 h-9 rounded-full bg-primary flex items-center justify-center text-on-primary hover:text-secondary-fixed border border-[#C6A75E]/20 transition-colors"
+                href="#"
+                ><span class="material-symbols-outlined text-[18px]"
+                  >share</span
+                ></a
+              ><a
+                aria-label="Global Network"
+                class="w-9 h-9 rounded-full bg-primary flex items-center justify-center text-on-primary hover:text-secondary-fixed border border-[#C6A75E]/20 transition-colors"
+                href="#"
+                ><span class="material-symbols-outlined text-[18px]"
+                  >public</span
+                ></a
+              ><a
+                aria-label="Media Archive"
+                class="w-9 h-9 rounded-full bg-primary flex items-center justify-center text-on-primary hover:text-secondary-fixed border border-[#C6A75E]/20 transition-colors"
+                href="#"
+                ><span class="material-symbols-outlined text-[18px]"
+                  >play_circle</span
+                ></a
+              >
+            </div>
+          </div>
+        </div>
+        <div
+          class="pt-space-md flex flex-col sm:flex-row items-center justify-between gap-space-sm font-caption text-caption text-on-primary-container"
+        >
+          <p>© 2026 Mahatma Alumni Association. All rights reserved.</p>
+          <p class="text-right">
+            Established in honor of educational excellence and enduring
+            fellowship.
+          </p>
+        </div>
+      </div>
+    </footer>
+    <!-- Floating Back to Top Button -->
+    <button
+      id="back-to-top"
+      aria-label="Back to Top"
+      class="fixed bottom-6 right-6 z-50 w-12 h-12 rounded-full bg-secondary-fixed text-primary shadow-2xl flex items-center justify-center hover:bg-secondary-fixed-dim transition-all duration-300 opacity-0 pointer-events-none transform scale-75 group border border-primary/20 cursor-pointer"
+      type="button"
+    >
+      <span
+        class="material-symbols-outlined text-2xl group-hover:-translate-y-0.5 transition-transform font-bold"
+        >arrow_upward</span
+      >
+    </button>
+  </body>
+</html>
