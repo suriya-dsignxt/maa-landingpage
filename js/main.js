@@ -1,4 +1,39 @@
 document.addEventListener("DOMContentLoaded", () => {
+  // Initialize Lenis Smooth Scroll
+  let lenis = null;
+  if (typeof Lenis !== "undefined") {
+    lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      orientation: "vertical",
+      gestureOrientation: "vertical",
+      smoothWheel: true,
+      wheelMultiplier: 1,
+      touchMultiplier: 1.5,
+      infinite: false,
+    });
+    window.lenis = lenis;
+
+    // Sync Lenis scroll with GSAP ScrollTrigger
+    if (typeof ScrollTrigger !== "undefined") {
+      lenis.on("scroll", ScrollTrigger.update);
+    }
+
+    // Drive Lenis smoothly via GSAP ticker
+    if (typeof gsap !== "undefined") {
+      gsap.ticker.add((time) => {
+        lenis.raf(time * 1000);
+      });
+      gsap.ticker.lagSmoothing(0);
+    } else {
+      function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+      }
+      requestAnimationFrame(raf);
+    }
+  }
+
   // Register GSAP Plugins if available
   if (typeof gsap !== "undefined") {
     if (typeof ScrollTrigger !== "undefined") {
@@ -8,13 +43,19 @@ document.addEventListener("DOMContentLoaded", () => {
     // 1. Scroll Progress Indicator in Header
     const progressBar = document.getElementById("scroll-progress");
     if (progressBar) {
-      window.addEventListener("scroll", () => {
-        const scrollTop = window.scrollY;
-        const docHeight =
-          document.documentElement.scrollHeight - window.innerHeight;
-        const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-        progressBar.style.width = `${progress}%`;
-      });
+      if (lenis) {
+        lenis.on("scroll", ({ progress }) => {
+          progressBar.style.width = `${progress * 100}%`;
+        });
+      } else {
+        window.addEventListener("scroll", () => {
+          const scrollTop = window.scrollY;
+          const docHeight =
+            document.documentElement.scrollHeight - window.innerHeight;
+          const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+          progressBar.style.width = `${progress}%`;
+        });
+      }
     }
 
     // 2. Hero Entrance Animation
@@ -437,38 +478,51 @@ document.addEventListener("DOMContentLoaded", () => {
     // 13. Floating Back to Top Button
     const backToTopBtn = document.getElementById("back-to-top");
     if (backToTopBtn) {
-      window.addEventListener("scroll", () => {
-        if (window.scrollY > 450) {
-          gsap.to(backToTopBtn, {
-            opacity: 1,
-            pointerEvents: "auto",
-            scale: 1,
-            duration: 0.3,
-          });
+      const updateBackToTop = (scrollYVal) => {
+        const currentY =
+          typeof scrollYVal === "number"
+            ? scrollYVal
+            : window.lenis
+              ? window.lenis.scroll
+              : window.scrollY;
+
+        if (currentY > 280) {
+          backToTopBtn.classList.add("visible");
         } else {
-          gsap.to(backToTopBtn, {
-            opacity: 0,
-            pointerEvents: "none",
-            scale: 0.8,
-            duration: 0.3,
-          });
+          backToTopBtn.classList.remove("visible");
         }
-      });
+      };
+
+      if (lenis) {
+        lenis.on("scroll", (e) => {
+          const scrollPos = e && typeof e.scroll === "number" ? e.scroll : window.scrollY;
+          updateBackToTop(scrollPos);
+        });
+      }
+      window.addEventListener("scroll", () => updateBackToTop(window.scrollY), { passive: true });
+
+      // Run on initial page load / after refresh
+      updateBackToTop(window.scrollY);
 
       backToTopBtn.addEventListener("click", () => {
-        window.scrollTo({ top: 0, behavior: "smooth" });
+        if (window.lenis) {
+          window.lenis.scrollTo(0, { duration: 1.2 });
+        } else {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }
       });
     }
 
-    // Recalculate ScrollTrigger offsets once images and fonts settle
-    window.addEventListener("load", () => {
+    // Recalculate ScrollTrigger and Lenis offsets once images and fonts settle
+    const refreshScrollBounds = () => {
       ScrollTrigger.refresh();
-    });
+      if (lenis) lenis.resize();
+    };
+    window.addEventListener("load", refreshScrollBounds);
     if (document.fonts && document.fonts.ready) {
-      document.fonts.ready.then(() => {
-        ScrollTrigger.refresh();
-      });
+      document.fonts.ready.then(refreshScrollBounds);
     }
+    setTimeout(refreshScrollBounds, 1200);
 
     // ScrollSpy to highlight active navigation link
     const navLinks = document.querySelectorAll("#header-nav nav a");
@@ -485,9 +539,9 @@ document.addEventListener("DOMContentLoaded", () => {
       "contact",
     ];
 
-    window.addEventListener("scroll", () => {
+    const updateScrollSpy = (scrollYVal) => {
       let currentSection = "home";
-      const scrollPos = window.scrollY + 140;
+      const scrollPos = scrollYVal + 140;
 
       for (const sectionId of sections) {
         const el = document.getElementById(sectionId);
@@ -520,7 +574,39 @@ document.addEventListener("DOMContentLoaded", () => {
           link.classList.add("text-on-primary-container");
         }
       });
-    });
+
+      // Also highlight parent dropdown button if an inner section is active
+      const dropdowns = document.querySelectorAll("#header-nav .nav-dropdown");
+      dropdowns.forEach((dd) => {
+        const btn = dd.querySelector(".nav-dropdown-btn");
+        const hasActive = dd.querySelector(`a[href="#${currentSection}"]`);
+        if (btn) {
+          if (hasActive) {
+            btn.classList.add(
+              "text-secondary-fixed",
+              "border-b-2",
+              "border-secondary-fixed",
+              "font-bold",
+            );
+            btn.classList.remove("text-on-primary-container");
+          } else {
+            btn.classList.remove(
+              "text-secondary-fixed",
+              "border-b-2",
+              "border-secondary-fixed",
+              "font-bold",
+            );
+            btn.classList.add("text-on-primary-container");
+          }
+        }
+      });
+    };
+
+    if (lenis) {
+      lenis.on("scroll", (e) => updateScrollSpy(e.scroll));
+    } else {
+      window.addEventListener("scroll", () => updateScrollSpy(window.scrollY));
+    }
   }
 
   // ==========================================
@@ -706,6 +792,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (modal) {
       modal.classList.add("active");
       document.body.style.overflow = "hidden";
+      if (lenis) lenis.stop();
     }
   }
 
@@ -713,6 +800,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (modal) {
       modal.classList.remove("active");
       document.body.style.overflow = "";
+      if (lenis) lenis.start();
     }
   }
 
@@ -808,7 +896,11 @@ document.addEventListener("DOMContentLoaded", () => {
       const targetElement = document.getElementById(targetId);
       if (targetElement) {
         e.preventDefault();
-        targetElement.scrollIntoView({ behavior: "smooth" });
+        if (lenis) {
+          lenis.scrollTo(targetElement, { offset: -88, duration: 1.2 });
+        } else {
+          targetElement.scrollIntoView({ behavior: "smooth" });
+        }
 
         // Close any active nav dropdowns
         navDropdowns.forEach((d) => d.classList.remove("active"));

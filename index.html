@@ -22,6 +22,8 @@
       href="assets/images/mahatma_alumni_logo.png"
     />
     <link rel="stylesheet" href="css/style.css" />
+    <!-- Lenis Smooth Scroll CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/lenis@1.1.18/dist/lenis.css" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="js/tailwind-config.js"></script>
     <script
@@ -29,8 +31,10 @@
       async
     ></script>
     <!-- GSAP & ScrollTrigger CDN -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15/dist/ScrollTrigger.min.js"></script>
+    <!-- Lenis Smooth Scroll CDN -->
+    <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
     <script src="js/main.js" defer></script>
   </head>
   <body class="bg-surface font-body-md text-on-surface antialiased">
@@ -247,6 +251,24 @@
             </div>
           </div>
 
+          <!-- Alumni App Direct Link (Section 4) -->
+          <a
+            class="h-full inline-flex items-center px-3 text-sm uppercase tracking-wider text-on-primary-container hover:text-on-primary hover:border-b-2 hover:border-[#fbcb62] transition-colors"
+            data-path="alumni-app"
+            href="#alumni-app"
+            >Alumni App</a
+          >
+
+          <!-- Homecoming 2026 Direct Link (Section 5) -->
+          <a
+            class="h-full inline-flex items-center px-3 text-sm uppercase tracking-wider text-on-primary-container hover:text-on-primary hover:border-b-2 hover:border-[#fbcb62] transition-colors gap-1.5"
+            data-path="homecoming-2026"
+            href="#homecoming-2026"
+          >
+            <span>Homecoming 2026</span>
+            <span class="px-1.5 py-0.5 text-[9px] font-extrabold rounded bg-[#fbcb62]/20 text-secondary-fixed border border-[#fbcb62]/30">NEW</span>
+          </a>
+
           <!-- Community Dropdown (Community, Social Impact, Get Involved) -->
           <div class="nav-dropdown relative group h-full inline-flex items-center">
             <button
@@ -295,22 +317,6 @@
               </div>
             </div>
           </div>
-
-          <a
-            class="h-full inline-flex items-center px-3 text-sm uppercase tracking-wider text-on-primary-container hover:text-on-primary hover:border-b-2 hover:border-[#fbcb62] transition-colors gap-1.5"
-            data-path="homecoming-2026"
-            href="#homecoming-2026"
-          >
-            <span>Homecoming 2026</span>
-            <span class="px-1.5 py-0.5 text-[9px] font-extrabold rounded bg-[#fbcb62]/20 text-secondary-fixed border border-[#fbcb62]/30">NEW</span>
-          </a>
-
-          <a
-            class="h-full inline-flex items-center px-3 text-sm uppercase tracking-wider text-on-primary-container hover:text-on-primary hover:border-b-2 hover:border-[#fbcb62] transition-colors"
-            data-path="alumni-app"
-            href="#alumni-app"
-            >Alumni App</a
-          >
 
           <a
             class="h-full inline-flex items-center px-3 text-sm uppercase tracking-wider text-on-primary-container hover:text-on-primary hover:border-b-2 hover:border-[#fbcb62] transition-colors"
@@ -371,7 +377,23 @@
           </div>
         </div>
 
-        <!-- Mobile Community Group -->
+        <!-- Mobile Direct Link: Alumni App (Section 4) -->
+        <div class="border-t border-[#fbcb62]/10 pt-2 flex flex-col gap-1">
+          <a class="py-2 text-on-primary-container hover:text-on-primary text-sm uppercase tracking-wider flex items-center justify-between" href="#alumni-app">
+            <span>Alumni App</span>
+            <span class="material-symbols-outlined text-sm">phone_iphone</span>
+          </a>
+        </div>
+
+        <!-- Mobile Direct Link: Homecoming 2026 (Section 5) -->
+        <div class="border-t border-[#fbcb62]/10 pt-2 flex flex-col gap-1">
+          <a class="py-2 text-on-primary-container hover:text-on-primary text-sm uppercase tracking-wider flex items-center justify-between" href="#homecoming-2026">
+            <span class="font-bold text-secondary-fixed">Homecoming 2026</span>
+            <span class="px-1.5 py-0.5 text-[9px] font-bold rounded bg-[#fbcb62]/20 text-secondary-fixed border border-[#fbcb62]/30">NEW</span>
+          </a>
+        </div>
+
+        <!-- Mobile Community Group (Section 7, 9, 10) -->
         <div class="border-t border-[#fbcb62]/10 pt-2 pb-1">
           <div class="text-[10px] font-bold uppercase tracking-widest text-secondary-fixed/80 mb-1 px-1">Community & Impact</div>
           <div class="flex flex-col gap-1 pl-2">
@@ -390,16 +412,8 @@
           </div>
         </div>
 
-        <!-- Mobile Direct Links -->
+        <!-- Mobile Direct Link: Contact (Section 11) -->
         <div class="border-t border-[#fbcb62]/10 pt-2 flex flex-col gap-1">
-          <a class="py-2 text-on-primary-container hover:text-on-primary text-sm uppercase tracking-wider flex items-center justify-between" href="#homecoming-2026">
-            <span class="font-bold text-secondary-fixed">Homecoming 2026</span>
-            <span class="px-1.5 py-0.5 text-[9px] font-bold rounded bg-[#fbcb62]/20 text-secondary-fixed border border-[#fbcb62]/30">NEW</span>
-          </a>
-          <a class="py-2 text-on-primary-container hover:text-on-primary text-sm uppercase tracking-wider flex items-center justify-between" href="#alumni-app">
-            <span>Alumni App</span>
-            <span class="material-symbols-outlined text-sm">phone_iphone</span>
-          </a>
           <a class="py-2 text-on-primary-container hover:text-on-primary text-sm uppercase tracking-wider flex items-center justify-between" href="#contact">
             <span>Contact</span>
             <span class="material-symbols-outlined text-sm">mail</span>
@@ -1553,7 +1567,7 @@
                       href="https://apps.apple.com"
                       target="_blank"
                       rel="noopener noreferrer"
-                      class="store-badge-btn store-badge-btn--light inline-flex items-center rounded-xl border border-[#011628]/30 hover:border-[#011628] overflow-hidden transform hover:scale-105 active:scale-95 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary shadow-sm hover:shadow-md"
+                      class="store-badge-btn store-badge-btn--light inline-flex items-center rounded-xl overflow-hidden transform hover:scale-105 active:scale-95 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary shadow-sm hover:shadow-md"
                       title="Download on the App Store"
                       aria-label="Download on the App Store"
                     >
@@ -1567,7 +1581,7 @@
                       href="https://play.google.com"
                       target="_blank"
                       rel="noopener noreferrer"
-                      class="store-badge-btn store-badge-btn--light inline-flex items-center rounded-xl border border-[#011628]/30 hover:border-[#011628] overflow-hidden transform hover:scale-105 active:scale-95 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary shadow-sm hover:shadow-md"
+                      class="store-badge-btn store-badge-btn--light inline-flex items-center rounded-xl overflow-hidden transform hover:scale-105 active:scale-95 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary shadow-sm hover:shadow-md"
                       title="Get it on Google Play"
                       aria-label="Get it on Google Play"
                     >
@@ -2720,6 +2734,7 @@
                   <!-- Scrollable Container -->
                   <div
                     id="journey-scroll-container"
+                    data-lenis-prevent
                     class="flex gap-4 sm:gap-5 overflow-x-auto py-4 px-1 scroll-smooth snap-x snap-mandatory cursor-grab active:cursor-grabbing no-scrollbar"
                     role="list"
                     aria-label="Social impact programme journey"
@@ -3312,6 +3327,8 @@
 
                       <!-- Floating Options Menu -->
                       <ul
+                        id="custom-select-options"
+                        data-lenis-prevent
                         class="custom-select-options absolute top-full left-0 right-0 mt-2 z-50 bg-white rounded-xl shadow-2xl border border-[#fbcb62]/30 py-1.5 overflow-hidden transition-all duration-200 opacity-0 invisible translate-y-1.5 pointer-events-none max-h-64 overflow-y-auto"
                         role="listbox"
                         aria-labelledby="contact-interest-label"
@@ -3462,7 +3479,10 @@
       id="app-modal"
       class="modal-overlay fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/75 backdrop-blur-md"
     >
-      <div class="modal-card w-full max-w-lg bg-primary-container text-on-primary rounded-3xl p-8 border border-[#fbcb62]/30 shadow-2xl relative">
+      <div
+        data-lenis-prevent
+        class="modal-card w-full max-w-lg bg-primary-container text-on-primary rounded-3xl p-8 border border-[#fbcb62]/30 shadow-2xl relative"
+      >
         <button
           type="button"
           class="close-modal-btn absolute top-5 right-5 w-8 h-8 rounded-full bg-primary/60 text-on-primary hover:bg-secondary-fixed hover:text-primary flex items-center justify-center transition-colors"
@@ -3703,11 +3723,12 @@
     <button
       id="back-to-top"
       aria-label="Back to Top"
-      class="fixed bottom-6 right-6 z-50 w-12 h-12 rounded-full bg-secondary-fixed text-primary shadow-2xl flex items-center justify-center hover:bg-secondary-fixed-dim transition-all duration-300 opacity-0 pointer-events-none transform scale-75 group border border-primary/20 cursor-pointer"
+      title="Back to Top"
+      class="fixed bottom-6 sm:bottom-7 right-6 sm:right-7 z-[90] w-12 sm:w-14 h-12 sm:h-14 rounded-full bg-secondary-fixed text-primary shadow-2xl flex items-center justify-center hover:bg-[#ffd77a] hover:scale-110 active:scale-95 transition-all duration-300 opacity-0 invisible pointer-events-none transform translate-y-4 group border-2 border-primary/20 cursor-pointer focus:outline-none focus:ring-4 focus:ring-[#fbcb62]/50 hover:shadow-[0_12px_28px_rgba(251,203,98,0.45)]"
       type="button"
     >
       <span
-        class="material-symbols-outlined text-2xl group-hover:-translate-y-0.5 transition-transform font-bold"
+        class="material-symbols-outlined text-2xl sm:text-3xl group-hover:-translate-y-1 transition-transform duration-200 font-bold"
         >arrow_upward</span
       >
     </button>

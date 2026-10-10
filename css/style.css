@@ -3,7 +3,6 @@
   body {
     margin: 0;
     padding: 0;
-    scroll-behavior: smooth;
   }
   body {
     overscroll-behavior: none;
@@ -20,6 +19,28 @@
   div[id] {
     scroll-margin-top: 88px;
   }
+}
+
+/* Lenis Smooth Scroll Core Styles */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
 }
 
 /* Hide scrollbar for ultra-clean aesthetic */
@@ -358,15 +379,15 @@ body {
 
 /* Light background variant (Alumni App section) */
 .store-badge-btn--light {
-  background-color: #000000;
-  border: 1px solid rgba(1, 22, 40, 0.35) !important;
-  box-shadow: 0 2px 6px rgba(1, 22, 40, 0.1);
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: 0 2px 6px rgba(1, 22, 40, 0.08);
 }
 
 .store-badge-btn--light:hover {
-  border-color: #011628 !important;
+  border: none !important;
   transform: scale(1.05);
-  box-shadow: 0 4px 14px rgba(1, 22, 40, 0.2);
+  box-shadow: 0 4px 14px rgba(1, 22, 40, 0.18);
 }
 
 .app-badge-btn {
@@ -648,4 +669,22 @@ body {
   .social-impact-photo {
     height: 200px;
   }
+}
+
+/* ==========================================
+   FLOATING BACK TO TOP BUTTON
+   ========================================== */
+#back-to-top {
+  transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              visibility 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.2s ease,
+              box-shadow 0.2s ease;
+}
+
+#back-to-top.visible {
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+  transform: translateY(0) scale(1) !important;
 }
