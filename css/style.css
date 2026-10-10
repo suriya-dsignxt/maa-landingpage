@@ -44,6 +44,28 @@ body {
   box-shadow: 0 0 30px -4px rgba(251, 203, 98, 0.45);
 }
 
+/* Navigation Dropdown Menus */
+.nav-dropdown-menu {
+  transform-origin: top left;
+  transition: opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              visibility 0.2s ease;
+}
+
+.nav-dropdown:hover .nav-dropdown-menu,
+.nav-dropdown:focus-within .nav-dropdown-menu,
+.nav-dropdown.active .nav-dropdown-menu {
+  visibility: visible !important;
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+  pointer-events: auto !important;
+}
+
+.nav-dropdown:hover .nav-dropdown-btn .material-symbols-outlined,
+.nav-dropdown.active .nav-dropdown-btn .material-symbols-outlined {
+  transform: rotate(180deg);
+}
+
 .card-hover-effect {
   transition:
     transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
@@ -150,4 +172,480 @@ body {
     rgba(251, 203, 98, 0.15),
     rgba(251, 203, 98, 0.45)
   );
+}
+
+
+/* ==========================================
+   HERO BANNER CAROUSEL & SLIDER INDICATIONS
+   ========================================== */
+.hero-slide {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: opacity;
+}
+
+.hero-slide.active {
+  opacity: 1;
+  pointer-events: auto;
+  z-index: 10;
+}
+
+.hero-slide .hero-slide-bg {
+  transform: scale(1);
+  transform-origin: center center;
+  transition: transform 6s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.hero-slide.active .hero-slide-bg {
+  transform: scale(1.05);
+}
+
+/* Slider Indication Dots */
+.hero-indicator-dot .dot-inner {
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-indicator-dot.active .dot-inner {
+  background-color: #fbcb62 !important;
+  box-shadow: 0 0 12px rgba(251, 203, 98, 0.7);
+  transform: scale(1.25);
+}
+
+.hero-indicator-dot:hover .dot-inner {
+  background-color: rgba(251, 203, 98, 0.9);
+}
+
+/* Top Live Notice Marquee */
+@keyframes noticeMarquee {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.notice-marquee-wrapper {
+  overflow: hidden;
+  width: 100%;
+}
+
+.notice-marquee-track {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  white-space: nowrap;
+  will-change: transform;
+  animation: noticeMarquee 36s linear infinite;
+}
+
+.notice-marquee-track:hover {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .notice-marquee-track {
+    animation-play-state: paused;
+  }
+}
+
+/* Hero Slide 1: Founder Mrs. Premalatha Panneerselvam Image Positioning */
+.hero-slide[data-slide-index="1"] .hero-slide-bg {
+  object-position: center top !important;
+  transform: translateY(85px) !important;
+}
+
+@media (max-width: 1023px) {
+  .hero-slide[data-slide-index="1"] .hero-slide-bg {
+    transform: translateY(60px) !important;
+  }
+}
+
+@media (max-width: 639px) {
+  .hero-slide[data-slide-index="1"] .hero-slide-bg {
+    transform: translateY(40px) !important;
+  }
+}
+
+/* App Store Companion: Scan QR Code Button */
+.qr-badge-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  height: 2.75rem;
+  padding: 0 0.875rem;
+  border-radius: 0.75rem;
+  background-color: #ffffff;
+  border: 1px solid rgba(1, 22, 40, 0.25);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  text-decoration: none;
+  user-select: none;
+}
+
+@media (min-width: 640px) {
+  .qr-badge-btn {
+    height: 3rem;
+    padding: 0 1rem;
+  }
+}
+
+.qr-badge-btn:hover {
+  border-color: #011628;
+  background-color: #ffffff;
+  box-shadow: 0 4px 12px rgba(1, 22, 40, 0.12);
+  transform: scale(1.05);
+}
+
+.qr-badge-btn:active {
+  transform: scale(0.95);
+}
+
+/* Modal Transitions */
+.modal-overlay {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+.modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+.modal-card {
+  transform: scale(0.95) translateY(10px);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.modal-overlay.active .modal-card {
+  transform: scale(1) translateY(0);
+}
+
+/* Visual Analytics Progress Bars */
+.chart-bar-fill {
+  width: 0%;
+  transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* App Store & Google Play Store Badges */
+.store-badge-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #000000;
+  border: 1px solid rgba(255, 255, 255, 0.5) !important;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  line-height: 0;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+.store-badge-btn img {
+  display: block;
+}
+
+.store-badge-btn:hover {
+  border-color: #fbcb62 !important;
+  transform: scale(1.05);
+  box-shadow: 0 4px 16px rgba(251, 203, 98, 0.35);
+}
+
+.store-badge-btn:active {
+  transform: scale(0.96);
+}
+
+/* Light background variant (Alumni App section) */
+.store-badge-btn--light {
+  background-color: #000000;
+  border: 1px solid rgba(1, 22, 40, 0.35) !important;
+  box-shadow: 0 2px 6px rgba(1, 22, 40, 0.1);
+}
+
+.store-badge-btn--light:hover {
+  border-color: #011628 !important;
+  transform: scale(1.05);
+  box-shadow: 0 4px 14px rgba(1, 22, 40, 0.2);
+}
+
+.app-badge-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.65rem 1.2rem;
+  border-radius: 0.75rem;
+  background: #02203c;
+  color: #ffffff;
+  border: 1px solid rgba(251, 203, 98, 0.28);
+  transition: all 0.25s ease;
+}
+.app-badge-btn:hover {
+  background: #06294a;
+  border-color: #fbcb62;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px -4px rgba(2, 32, 60, 0.3);
+}
+
+/* Social Responsibility */
+.social-impact-hero-wash {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(249, 247, 240, 0.98) 0%,
+      rgba(249, 247, 240, 0.96) 30%,
+      rgba(249, 247, 240, 0.78) 43%,
+      rgba(249, 247, 240, 0.08) 68%,
+      rgba(2, 32, 60, 0.1) 100%
+    ),
+    linear-gradient(0deg, rgba(2, 32, 60, 0.04), rgba(2, 32, 60, 0.04));
+}
+
+.social-impact-card {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  border: 1px solid rgba(105, 129, 153, 0.22);
+  border-radius: 0.75rem;
+  background: #fff;
+  box-shadow: 0 8px 28px -20px rgba(2, 32, 60, 0.35);
+}
+
+.social-impact-card__content {
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  grid-template-rows: auto auto;
+  column-gap: 0.75rem;
+  padding: 1.15rem 1.15rem 1rem;
+  min-height: 104px;
+}
+
+.social-impact-card__icon {
+  grid-row: 1 / span 2;
+  display: inline-flex;
+  width: 44px;
+  height: 44px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  background: #fde4a0;
+  color: #02203c;
+  font-size: 23px;
+}
+
+.social-impact-card h4 {
+  align-self: end;
+  color: #02203c;
+  font-family: "Noto Serif", serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.social-impact-card p {
+  margin-top: 0.2rem;
+  color: #405469;
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.78rem;
+  line-height: 1.35;
+  min-height: 2.2em;
+}
+
+.social-impact-photo {
+  height: 220px;
+  width: 100%;
+  flex: none;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  filter: saturate(0.95) contrast(1.02);
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), filter 0.5s ease;
+}
+
+.social-impact-card:hover .social-impact-photo {
+  transform: scale(1.035);
+  filter: saturate(1) contrast(1.03);
+}
+
+.social-impact-photo--1 {
+  background-image: url("../assets/images/impact-environment.png");
+}
+.social-impact-photo--2 {
+  background-image: url("../assets/images/impact-education.png");
+}
+.social-impact-photo--3 {
+  background-image: url("../assets/images/impact-healthcare.png");
+}
+.social-impact-photo--4 {
+  background-image: url("../assets/images/impact-community-welfare.png");
+}
+.social-impact-photo--5 {
+  background-image: url("../assets/images/impact-organ-donation.png");
+}
+.social-impact-photo--6 {
+  background-image: url("../assets/images/impact-alumni-volunteering.png");
+}
+
+/* Animated Journey Roadmap Track */
+.journey-card {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.3s ease;
+  will-change: transform;
+}
+
+.journey-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 32px -12px rgba(1, 22, 40, 0.15);
+  border-color: #fbcb62;
+}
+
+/* Hide scrollbar while preserving smooth scrolling */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Journey Interactive Scroll Progress Bar */
+.journey-progress-track {
+  position: relative;
+  width: 100%;
+  height: 6px;
+  background-color: rgba(1, 22, 40, 0.12);
+  border-radius: 9999px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: height 0.2s ease, background-color 0.2s ease;
+}
+
+.journey-progress-track:hover {
+  height: 8px;
+  background-color: rgba(1, 22, 40, 0.18);
+}
+
+.journey-progress-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0%;
+  min-width: 8px;
+  background: linear-gradient(90deg, #fbcb62, #ffe394);
+  border-radius: 9999px;
+  box-shadow: 0 0 10px rgba(251, 203, 98, 0.6);
+  transition: width 0.12s ease-out;
+  pointer-events: none;
+}
+
+/* Form Controls - Bright Yellow (#fbcb62) Focus and Hover states */
+#alumni-contact-form input,
+#alumni-contact-form textarea,
+#alumni-contact-form .custom-select-trigger {
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+#alumni-contact-form input:hover,
+#alumni-contact-form textarea:hover,
+#alumni-contact-form .custom-select-trigger:hover {
+  border-color: #fbcb62 !important;
+}
+
+#alumni-contact-form input:focus,
+#alumni-contact-form textarea:focus,
+#alumni-contact-form .custom-select-trigger:focus,
+#alumni-contact-form input:focus-visible,
+#alumni-contact-form textarea:focus-visible {
+  border-color: #fbcb62 !important;
+  outline: none !important;
+  box-shadow: 0 0 0 3px rgba(251, 203, 98, 0.42) !important;
+}
+
+/* Custom Select Dropdowns */
+.custom-select-wrapper {
+  position: relative;
+  user-select: none;
+}
+
+.custom-select-wrapper.open .custom-select-trigger {
+  border-color: #fbcb62 !important;
+  box-shadow: 0 0 0 3px rgba(251, 203, 98, 0.42) !important;
+}
+
+.custom-select-wrapper.open .custom-select-options {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: translateY(0) !important;
+  pointer-events: auto !important;
+}
+
+.custom-select-wrapper.open .chevron-arrow {
+  transform: rotate(180deg);
+  color: #011628 !important;
+}
+
+.custom-select-options {
+  scrollbar-width: thin;
+  scrollbar-color: #fbcb62 #f4efe6;
+}
+
+.custom-select-options::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-select-options::-webkit-scrollbar-track {
+  background: #f4efe6;
+  border-radius: 9999px;
+}
+
+.custom-select-options::-webkit-scrollbar-thumb {
+  background-color: #fbcb62;
+  border-radius: 9999px;
+}
+
+.custom-option {
+  transition: all 0.15s ease-in-out;
+}
+
+.custom-option:hover,
+.custom-option:focus-visible {
+  background-color: rgba(251, 203, 98, 0.18) !important;
+  outline: none;
+}
+
+.custom-option.selected {
+  background-color: rgba(251, 203, 98, 0.15);
+  color: #011628;
+  font-weight: 600;
+}
+
+@media (max-width: 1023px) {
+  .social-impact-hero-wash {
+    background: linear-gradient(
+      90deg,
+      rgba(249, 247, 240, 0.98) 0%,
+      rgba(249, 247, 240, 0.94) 56%,
+      rgba(249, 247, 240, 0.44) 100%
+    );
+  }
+}
+
+@media (max-width: 639px) {
+  .social-impact-hero-wash {
+    background:
+      linear-gradient(0deg, rgba(249, 247, 240, 0.95) 0%, rgba(249, 247, 240, 0.84) 62%, rgba(249, 247, 240, 0.48) 100%),
+      linear-gradient(90deg, rgba(249, 247, 240, 0.92), rgba(249, 247, 240, 0.38));
+  }
+
+  .social-impact-card {
+    min-height: 320px;
+  }
+
+  .social-impact-photo {
+    height: 200px;
+  }
 }
