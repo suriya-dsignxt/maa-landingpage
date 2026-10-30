@@ -34,6 +34,28 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  // Liquid glass navigation: full-width at the top, floating island on scroll.
+  const liquidHeader = document.getElementById("header-nav");
+  const updateLiquidHeader = (scrollValue) => {
+    if (!liquidHeader) return;
+    const currentScroll =
+      typeof scrollValue === "number" ? scrollValue : window.scrollY;
+    liquidHeader.classList.toggle("is-dynamic-island", currentScroll > 40);
+  };
+
+  if (liquidHeader) {
+    if (lenis) {
+      lenis.on("scroll", ({ scroll }) => updateLiquidHeader(scroll));
+    } else {
+      window.addEventListener(
+        "scroll",
+        () => updateLiquidHeader(window.scrollY),
+        { passive: true },
+      );
+    }
+    updateLiquidHeader(window.scrollY);
+  }
+
   // Register GSAP Plugins if available
   if (typeof gsap !== "undefined") {
     if (typeof ScrollTrigger !== "undefined") {
@@ -229,26 +251,128 @@ document.addEventListener("DOMContentLoaded", () => {
       );
     }
 
-    // 6. 5 Pillars of Engagement Cards
-    const pillarCards = document.querySelectorAll(".gsap-pillar-card");
-    if (pillarCards.length) {
-      gsap.fromTo(
-        pillarCards,
-        { y: 45, opacity: 0, scale: 0.95 },
+    // 6. Pillars of Engagement: pinned desktop sequence + mobile reveal
+    const pillarsSection = document.getElementById("pillars");
+    const pillarsIntro = pillarsSection?.querySelector(".pillars-intro");
+    const pillarGrid = pillarsSection?.querySelector(".pillars-card-grid");
+    const pillarMotionCards = pillarsSection
+      ? gsap.utils.toArray(".pillar-card-motion", pillarsSection)
+      : [];
+    const pillarCards = pillarsSection
+      ? gsap.utils.toArray(".gsap-pillar-card", pillarsSection)
+      : [];
+
+    if (
+      pillarsSection &&
+      pillarsIntro &&
+      pillarGrid &&
+      pillarMotionCards.length
+    ) {
+      const pillarMedia = gsap.matchMedia();
+
+      pillarMedia.add(
         {
-          scrollTrigger: {
-            trigger: pillarCards[0].parentElement,
-            start: "top 88%",
-            toggleActions: "play none none none",
-            once: true,
-          },
-          y: 0,
-          opacity: 1,
-          scale: 1,
-          stagger: 0.1,
-          duration: 0.75,
-          ease: "back.out(1.2)",
-          clearProps: "transform,opacity,scale",
+          desktop: "(min-width: 1024px)",
+          motionAllowed: "(prefers-reduced-motion: no-preference)",
+        },
+        (context) => {
+          const { desktop, motionAllowed } = context.conditions;
+
+          if (!motionAllowed) {
+            gsap.set([pillarsIntro, pillarMotionCards, pillarCards], {
+              clearProps: "all",
+            });
+            return;
+          }
+
+          if (desktop) {
+            const pillarIcons = pillarCards
+              .map((card) => card.querySelector(".material-symbols-outlined"))
+              .filter(Boolean);
+
+            const pillarTimeline = gsap.timeline({
+              scrollTrigger: {
+                id: "pillars-pin-sequence",
+                trigger: pillarsSection,
+                start: "top top",
+                end: () =>
+                  `+=${Math.max(
+                    window.innerHeight * 1.65,
+                    pillarMotionCards.length * 210,
+                  )}`,
+                pin: true,
+                pinSpacing: true,
+                scrub: 0.85,
+                anticipatePin: 1,
+                invalidateOnRefresh: true,
+              },
+            });
+
+            pillarTimeline
+              .fromTo(
+                pillarMotionCards,
+                {
+                  y: 110,
+                  autoAlpha: 0,
+                  scale: 0.9,
+                  rotationX: 8,
+                },
+                {
+                  y: 0,
+                  autoAlpha: 1,
+                  scale: 1,
+                  rotationX: 0,
+                  duration: 1.15,
+                  stagger: 0.42,
+                  ease: "power2.out",
+                },
+              )
+              .fromTo(
+                pillarIcons,
+                { scale: 0.55, rotation: -12 },
+                {
+                  scale: 1,
+                  rotation: 0,
+                  duration: 0.55,
+                  stagger: 0.42,
+                  ease: "back.out(1.7)",
+                },
+                0.28,
+              )
+              .to(
+                pillarsIntro,
+                {
+                  y: -14,
+                  scale: 0.985,
+                  duration: 1.2,
+                  ease: "none",
+                },
+                0,
+              )
+              .to({}, { duration: 0.55 });
+
+            return () => pillarTimeline.scrollTrigger?.kill();
+          }
+
+          gsap.fromTo(
+            pillarMotionCards,
+            { y: 42, autoAlpha: 0, scale: 0.96 },
+            {
+              scrollTrigger: {
+                trigger: pillarGrid,
+                start: "top 88%",
+                toggleActions: "play none none none",
+                once: true,
+              },
+              y: 0,
+              autoAlpha: 1,
+              scale: 1,
+              stagger: 0.1,
+              duration: 0.72,
+              ease: "power3.out",
+              clearProps: "transform,opacity,visibility",
+            },
+          );
         },
       );
     }
@@ -321,23 +445,23 @@ document.addEventListener("DOMContentLoaded", () => {
       );
     }
 
-    // 9. Global Chapters Cards & Batch Filtering
+    // 9. Global Chapters Carousel Reveal & Batch Filtering
     const chapterCards = document.querySelectorAll(".gsap-chapter-card");
-    if (chapterCards.length) {
+    const chapterCarouselShell = document.querySelector(".gsap-chapter-carousel");
+    if (chapterCarouselShell) {
       gsap.fromTo(
-        chapterCards,
+        chapterCarouselShell,
         { y: 35, opacity: 0 },
         {
           scrollTrigger: {
-            trigger: chapterCards[0].parentElement,
+            trigger: chapterCarouselShell,
             start: "top 88%",
             toggleActions: "play none none none",
             once: true,
           },
           y: 0,
           opacity: 1,
-          stagger: 0.08,
-          duration: 0.7,
+          duration: 0.8,
           ease: "power2.out",
           clearProps: "transform,opacity",
         },
@@ -355,38 +479,20 @@ document.addEventListener("DOMContentLoaded", () => {
         pill.classList.remove("bg-surface-container-lowest", "text-on-surface");
         pill.classList.add("bg-primary", "text-on-primary");
 
-        if (chapterCards.length) {
+        if (chapterCarouselShell) {
           gsap.fromTo(
-            chapterCards,
-            { opacity: 0.5, y: 10 },
+            chapterCarouselShell,
+            { opacity: 0.65 },
             {
               opacity: 1,
-              y: 0,
-              duration: 0.4,
-              stagger: 0.04,
+              duration: 0.35,
               ease: "power2.out",
-              clearProps: "transform,opacity",
+              clearProps: "opacity",
             },
           );
         }
       });
     });
-
-    // 10. Analytics Chart Progress Bars Animated Fill on Scroll
-    const chartBars = document.querySelectorAll(".chart-bar-fill");
-    if (chartBars.length) {
-      ScrollTrigger.create({
-        trigger: "#analytics",
-        start: "top 80%",
-        once: true,
-        onEnter: () => {
-          chartBars.forEach((bar) => {
-            const width = bar.getAttribute("data-width") || "50%";
-            bar.style.width = width;
-          });
-        },
-      });
-    }
 
     // 11. Social Responsibility section
     const socialHero = document.querySelector(".gsap-social-hero");
@@ -475,7 +581,184 @@ document.addEventListener("DOMContentLoaded", () => {
       );
     }
 
-    // 13. Floating Back to Top Button
+    // 13. Restrained editorial interactions across selected sections
+    const elegantMotion = gsap.matchMedia();
+    elegantMotion.add(
+      {
+        motionAllowed: "(prefers-reduced-motion: no-preference)",
+        finePointer: "(hover: hover) and (pointer: fine)",
+        wideScreen: "(min-width: 768px)",
+      },
+      (context) => {
+        const { motionAllowed, finePointer, wideScreen } = context.conditions;
+        if (!motionAllowed) return;
+
+        const interactionCleanups = [];
+
+        // Draw the existing gold rules instead of adding decorative clutter.
+        const headingAccentLines = gsap.utils
+          .toArray(".gsap-reveal-title, .gsap-social-hero")
+          .map((block) =>
+            Array.from(block.querySelectorAll("span")).find(
+              (span) =>
+                typeof span.className === "string" &&
+                span.className.includes("h-[1.5px]"),
+            ),
+          )
+          .filter(Boolean);
+
+        headingAccentLines.forEach((line) => {
+          gsap.fromTo(
+            line,
+            { scaleX: 0.08, opacity: 0.3, transformOrigin: "left center" },
+            {
+              scrollTrigger: {
+                trigger: line.parentElement,
+                start: "top 88%",
+                once: true,
+              },
+              scaleX: 1,
+              opacity: 1,
+              duration: 0.85,
+              ease: "power3.out",
+              clearProps: "transform,opacity",
+            },
+          );
+        });
+
+        // Slow image drift adds depth without moving the foreground copy.
+        const socialHeroImage = document.querySelector(
+          "#social-impact > div:first-child > img",
+        );
+        if (socialHeroImage && wideScreen) {
+          gsap.fromTo(
+            socialHeroImage,
+            { yPercent: -2, scale: 1.045 },
+            {
+              yPercent: 3,
+              scale: 1.085,
+              ease: "none",
+              scrollTrigger: {
+                trigger: socialHeroImage.parentElement,
+                start: "top bottom",
+                end: "bottom top",
+                scrub: 1.1,
+              },
+            },
+          );
+        }
+
+        // A masked reveal gives the final CTA a polished chapter-ending beat.
+        const finalCtaBanner = document.querySelector(
+          "#contact > div > div:first-child",
+        );
+        if (finalCtaBanner) {
+          gsap.fromTo(
+            finalCtaBanner,
+            {
+              y: 26,
+              autoAlpha: 0.55,
+              clipPath: "inset(0 7% 0 7% round 24px)",
+            },
+            {
+              scrollTrigger: {
+                trigger: finalCtaBanner,
+                start: "top 86%",
+                once: true,
+              },
+              y: 0,
+              autoAlpha: 1,
+              clipPath: "inset(0 0% 0 0% round 24px)",
+              duration: 1,
+              ease: "power3.out",
+              clearProps: "transform,opacity,visibility,clipPath",
+            },
+          );
+        }
+
+        if (finePointer) {
+          // Soft cursor-following light on a limited set of information cards.
+          const spotlightTargets = Array.from(
+            document.querySelectorAll(
+              "#alumni-app .gsap-app-feature, #council .gsap-tier-card",
+            ),
+          );
+          spotlightTargets.forEach((target) => {
+            target.classList.add("interactive-spotlight");
+
+            const moveSpotlight = (event) => {
+              const rect = target.getBoundingClientRect();
+              target.style.setProperty(
+                "--spotlight-x",
+                `${event.clientX - rect.left}px`,
+              );
+              target.style.setProperty(
+                "--spotlight-y",
+                `${event.clientY - rect.top}px`,
+              );
+            };
+            const showSpotlight = () =>
+              target.classList.add("is-spotlight-active");
+            const hideSpotlight = () =>
+              target.classList.remove("is-spotlight-active");
+
+            target.addEventListener("pointermove", moveSpotlight);
+            target.addEventListener("pointerenter", showSpotlight);
+            target.addEventListener("pointerleave", hideSpotlight);
+
+            interactionCleanups.push(() => {
+              target.removeEventListener("pointermove", moveSpotlight);
+              target.removeEventListener("pointerenter", showSpotlight);
+              target.removeEventListener("pointerleave", hideSpotlight);
+              target.classList.remove(
+                "interactive-spotlight",
+                "is-spotlight-active",
+              );
+              target.style.removeProperty("--spotlight-x");
+              target.style.removeProperty("--spotlight-y");
+            });
+          });
+
+          // Keep the magnetic pull deliberately small so CTAs still feel formal.
+          const magneticButtons = gsap.utils.toArray("main .btn-shimmer");
+          magneticButtons.forEach((button) => {
+            button.classList.add("magnetic-interaction");
+            const moveX = gsap.quickTo(button, "x", {
+              duration: 0.42,
+              ease: "power3.out",
+            });
+            const moveY = gsap.quickTo(button, "y", {
+              duration: 0.42,
+              ease: "power3.out",
+            });
+
+            const moveMagnet = (event) => {
+              const rect = button.getBoundingClientRect();
+              moveX(((event.clientX - rect.left) / rect.width - 0.5) * 10);
+              moveY(((event.clientY - rect.top) / rect.height - 0.5) * 8);
+            };
+            const resetMagnet = () => {
+              moveX(0);
+              moveY(0);
+            };
+
+            button.addEventListener("pointermove", moveMagnet);
+            button.addEventListener("pointerleave", resetMagnet);
+
+            interactionCleanups.push(() => {
+              button.removeEventListener("pointermove", moveMagnet);
+              button.removeEventListener("pointerleave", resetMagnet);
+              button.classList.remove("magnetic-interaction");
+              gsap.set(button, { clearProps: "transform" });
+            });
+          });
+        }
+
+        return () => interactionCleanups.forEach((cleanup) => cleanup());
+      },
+    );
+
+    // 14. Floating Back to Top Button
     const backToTopBtn = document.getElementById("back-to-top");
     if (backToTopBtn) {
       const updateBackToTop = (scrollYVal) => {
@@ -533,7 +816,6 @@ document.addEventListener("DOMContentLoaded", () => {
       "homecoming-2026",
       "council",
       "community",
-      "analytics",
       "social-impact",
       "get-involved",
       "contact",
@@ -780,6 +1062,170 @@ document.addEventListener("DOMContentLoaded", () => {
     startHeroTimer();
   }
 
+  // ==========================================
+  // GLOBAL CHAPTERS STACKED CARD CAROUSEL
+  // ==========================================
+  const chapterCarousel = document.getElementById("chapter-carousel");
+  const chapterCarouselItems = chapterCarousel
+    ? Array.from(chapterCarousel.querySelectorAll(".gsap-chapter-card"))
+    : [];
+  const chapterPrevButton = document.getElementById("chapter-carousel-prev");
+  const chapterNextButton = document.getElementById("chapter-carousel-next");
+  const chapterCounter = document.getElementById("chapter-carousel-counter");
+  const chapterDots = document.getElementById("chapter-carousel-dots");
+  const chapterStatus = document.getElementById("chapter-carousel-status");
+
+  if (chapterCarousel && chapterCarouselItems.length) {
+    // Match the supplied interaction's 50% starting progress with a centered deck.
+    let activeChapterIndex = Math.floor((chapterCarouselItems.length - 1) / 2);
+    let wheelProgress = 0;
+    let wheelResetTimer = null;
+
+    const chapterNames = chapterCarouselItems.map((item) => {
+      const title = item.querySelector(".font-headline-sm");
+      return title ? title.textContent.trim() : "Chapter";
+    });
+
+    const clampChapterIndex = (index) =>
+      Math.max(0, Math.min(index, chapterCarouselItems.length - 1));
+
+    const chapterDotButtons = chapterNames.map((name, index) => {
+      const dot = document.createElement("button");
+      dot.type = "button";
+      dot.className = "chapter-carousel-dot";
+      dot.setAttribute("aria-label", `Show ${name} chapter`);
+      dot.setAttribute("title", name);
+      dot.addEventListener("click", () => setActiveChapter(index));
+      if (chapterDots) chapterDots.appendChild(dot);
+      return dot;
+    });
+
+    const renderChapterCarousel = (announce = true) => {
+      const viewportWidth = chapterCarousel.clientWidth;
+      const isCompact = viewportWidth < 560;
+      const cardStep = Math.min(
+        isCompact ? 76 : 118,
+        Math.max(isCompact ? 54 : 72, viewportWidth * (isCompact ? 0.17 : 0.12)),
+      );
+      const visibleDistance = isCompact ? 2 : 4;
+
+      chapterCarouselItems.forEach((item, index) => {
+        const offset = index - activeChapterIndex;
+        const distance = Math.abs(offset);
+        const x = offset * cardStep;
+        const y = distance * (isCompact ? 9 : 13);
+        const rotation = offset * (isCompact ? 2.2 : 3.2);
+        const scale = Math.max(0.7, 1 - distance * 0.055);
+        const opacity = Math.max(0, 1 - distance * 0.17);
+        const isActive = index === activeChapterIndex;
+
+        item.style.setProperty("--chapter-x", `${x}px`);
+        item.style.setProperty("--chapter-y", `${y}px`);
+        item.style.setProperty("--chapter-rotation", `${rotation}deg`);
+        item.style.setProperty("--chapter-scale", scale.toFixed(3));
+        item.style.setProperty("--chapter-opacity", opacity.toFixed(3));
+        item.style.setProperty("--chapter-z", chapterCarouselItems.length - distance);
+        item.classList.toggle("is-active", isActive);
+        item.classList.toggle("is-outside", distance > visibleDistance);
+        item.setAttribute("role", "group");
+        item.setAttribute("aria-roledescription", "slide");
+        item.setAttribute(
+          "aria-label",
+          `${index + 1} of ${chapterCarouselItems.length}: ${chapterNames[index]}`,
+        );
+        item.setAttribute("aria-hidden", isActive ? "false" : "true");
+        item.tabIndex = isActive ? 0 : -1;
+      });
+
+      chapterDotButtons.forEach((dot, index) => {
+        const isActive = index === activeChapterIndex;
+        dot.classList.toggle("is-active", isActive);
+        dot.setAttribute("aria-current", isActive ? "true" : "false");
+      });
+
+      if (chapterPrevButton) chapterPrevButton.disabled = activeChapterIndex === 0;
+      if (chapterNextButton) {
+        chapterNextButton.disabled =
+          activeChapterIndex === chapterCarouselItems.length - 1;
+      }
+      if (chapterCounter) {
+        chapterCounter.textContent = `${String(activeChapterIndex + 1).padStart(2, "0")} / ${String(chapterCarouselItems.length).padStart(2, "0")}`;
+      }
+      if (announce && chapterStatus) {
+        chapterStatus.textContent = `${chapterNames[activeChapterIndex]}, chapter ${activeChapterIndex + 1} of ${chapterCarouselItems.length}`;
+      }
+    };
+
+    function setActiveChapter(index, announce = true) {
+      const nextIndex = clampChapterIndex(index);
+      if (nextIndex === activeChapterIndex) return;
+      activeChapterIndex = nextIndex;
+      renderChapterCarousel(announce);
+    }
+
+    chapterCarouselItems.forEach((item, index) => {
+      item.addEventListener("click", () => {
+        setActiveChapter(index);
+      });
+    });
+
+    chapterPrevButton?.addEventListener("click", () => {
+      setActiveChapter(activeChapterIndex - 1);
+    });
+    chapterNextButton?.addEventListener("click", () => {
+      setActiveChapter(activeChapterIndex + 1);
+    });
+
+    chapterCarousel.addEventListener("keydown", (event) => {
+      if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        setActiveChapter(activeChapterIndex - 1);
+      } else if (event.key === "ArrowRight") {
+        event.preventDefault();
+        setActiveChapter(activeChapterIndex + 1);
+      } else if (event.key === "Home") {
+        event.preventDefault();
+        setActiveChapter(0);
+      } else if (event.key === "End") {
+        event.preventDefault();
+        setActiveChapter(chapterCarouselItems.length - 1);
+      }
+    });
+
+    // Trackpad and mouse-wheel movement advances the cards without blocking page scroll.
+    chapterCarousel.addEventListener(
+      "wheel",
+      (event) => {
+        const delta =
+          Math.abs(event.deltaX) > Math.abs(event.deltaY)
+            ? event.deltaX
+            : event.deltaY;
+        wheelProgress += delta;
+        window.clearTimeout(wheelResetTimer);
+        wheelResetTimer = window.setTimeout(() => {
+          wheelProgress = 0;
+        }, 180);
+
+        if (Math.abs(wheelProgress) >= 70) {
+          setActiveChapter(activeChapterIndex + (wheelProgress > 0 ? 1 : -1));
+          wheelProgress = 0;
+        }
+      },
+      { passive: true },
+    );
+
+    if (typeof ResizeObserver !== "undefined") {
+      const chapterResizeObserver = new ResizeObserver(() => {
+        renderChapterCarousel(false);
+      });
+      chapterResizeObserver.observe(chapterCarousel);
+    } else {
+      window.addEventListener("resize", () => renderChapterCarousel(false));
+    }
+
+    renderChapterCarousel(false);
+  }
+
 
   // ==========================================
   // MODAL CONTROLLER (APP DOWNLOAD)
@@ -897,7 +1343,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (targetElement) {
         e.preventDefault();
         if (lenis) {
-          lenis.scrollTo(targetElement, { offset: -88, duration: 1.2 });
+          lenis.scrollTo(targetElement, { offset: -128, duration: 1.2 });
         } else {
           targetElement.scrollIntoView({ behavior: "smooth" });
         }
@@ -909,6 +1355,9 @@ document.addEventListener("DOMContentLoaded", () => {
         const mobileMenu = document.getElementById("mobile-menu");
         if (mobileMenu && !mobileMenu.classList.contains("hidden")) {
           mobileMenu.classList.add("hidden");
+          liquidHeader?.classList.remove("is-menu-open");
+          const mobileMenuButton = document.getElementById("mobile-menu-toggle");
+          mobileMenuButton?.setAttribute("aria-expanded", "false");
         }
       }
     });
@@ -921,8 +1370,11 @@ document.addEventListener("DOMContentLoaded", () => {
   if (mobileMenuBtn && mobileMenu) {
     mobileMenuBtn.addEventListener("click", () => {
       mobileMenu.classList.toggle("hidden");
+      const isOpen = !mobileMenu.classList.contains("hidden");
+      liquidHeader?.classList.toggle("is-menu-open", isOpen);
+      mobileMenuBtn.setAttribute("aria-expanded", isOpen ? "true" : "false");
       if (
-        !mobileMenu.classList.contains("hidden") &&
+        isOpen &&
         typeof gsap !== "undefined"
       ) {
         gsap.fromTo(

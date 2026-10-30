@@ -36,6 +36,8 @@
     <!-- Lenis Smooth Scroll CDN -->
     <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
     <script src="js/main.js" defer></script>
+    <!-- Circle Cursor Follower & Trail -->
+    <script src="js/pencil-follower.js" defer></script>
   </head>
   <body class="bg-surface font-body-md text-on-surface antialiased">
     <!-- Top Scroll Progress Indicator -->
@@ -71,9 +73,6 @@
           <div class="flex items-center shrink-0 gap-6 pr-6">
             <div class="flex items-center gap-2">
               <span class="material-symbols-outlined text-secondary-fixed text-sm">event</span>
-              <span class="font-medium">
-                <strong>Homecoming 2026:</strong> Dec 27, 2026 • IDA Scudder Auditorium, Madurai
-              </span>
               <a href="#homecoming-2026" class="text-secondary-fixed hover:underline font-bold inline-flex items-center gap-0.5 ml-1">
                 Register Now <span class="material-symbols-outlined text-xs">arrow_forward</span>
               </a>
@@ -122,9 +121,6 @@
           <div class="flex items-center shrink-0 gap-6 pr-6" aria-hidden="true">
             <div class="flex items-center gap-2">
               <span class="material-symbols-outlined text-secondary-fixed text-sm">event</span>
-              <span class="font-medium">
-                <strong>Homecoming 2026:</strong> Dec 27, 2026 • IDA Scudder Auditorium, Madurai
-              </span>
               <a href="#homecoming-2026" class="text-secondary-fixed hover:underline font-bold inline-flex items-center gap-0.5 ml-1">
                 Register Now <span class="material-symbols-outlined text-xs">arrow_forward</span>
               </a>
@@ -175,19 +171,19 @@
     <!-- Top Navigation Header (Offset for announcement bar) -->
     <header
       id="header-nav"
-      class="fixed top-9 left-0 w-full z-40 bg-primary-container border-b border-[#fbcb62]/20 shadow-[0_1px_8px_rgba(0,0,0,0.04)] transition-all"
+      class="liquid-nav fixed top-9 left-0 w-full z-40 bg-primary-container border-b border-[#fbcb62]/20 shadow-[0_1px_8px_rgba(0,0,0,0.04)] transition-all"
     >
       <div
-        class="h-20 w-full max-w-7xl mx-auto px-gutter-mobile lg:px-gutter flex items-center justify-between gap-space-md"
+        class="liquid-nav__inner h-20 w-full max-w-7xl mx-auto px-gutter-mobile lg:px-gutter flex items-center justify-between gap-space-md"
       >
-        <a href="#home" class="flex items-center gap-space-md shrink-0 hover:opacity-95 transition-opacity">
+        <a href="#home" class="nav-brand flex items-center gap-space-md shrink-0 hover:opacity-95 transition-opacity">
           <img
             alt="Mahatma Alumni Association Logo"
             class="h-10 w-auto object-contain shrink-0"
             src="assets/images/mahatma_alumni_logo.png"
           />
           <span
-            class="hidden xl:block font-headline-sm text-headline-sm text-on-primary tracking-normal border-l border-[#fbcb62]/20 pl-space-md"
+            class="nav-brand-title hidden xl:block font-headline-sm text-headline-sm text-on-primary tracking-normal border-l border-[#fbcb62]/20 pl-space-md"
             >Mahatma Alumni Association</span
           >
         </a>
@@ -235,16 +231,6 @@
                   <div>
                     <div class="text-sm font-semibold tracking-wide text-on-primary">Council</div>
                     <div class="text-[11px] text-on-primary-container/70">Executive Leadership</div>
-                  </div>
-                </a>
-                <a
-                  href="#analytics"
-                  class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-primary-container hover:text-on-primary hover:bg-[#fbcb62]/10 transition-colors group/item"
-                >
-                  <span class="material-symbols-outlined text-lg text-secondary-fixed group-hover/item:scale-110 transition-transform">query_stats</span>
-                  <div>
-                    <div class="text-sm font-semibold tracking-wide text-on-primary">Analytics</div>
-                    <div class="text-[11px] text-on-primary-container/70">Global Alumni Distribution</div>
                   </div>
                 </a>
               </div>
@@ -329,15 +315,16 @@
           <!-- Download App Primary Header CTA -->
           <button
             type="button"
-            class="open-app-modal-btn btn-shimmer inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-[10px] bg-secondary-fixed text-primary font-label-md text-label-md uppercase font-bold tracking-wider hover:bg-secondary-fixed-dim transition-colors shadow-sm"
+            class="nav-download-cta open-app-modal-btn btn-shimmer inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-[10px] bg-secondary-fixed text-primary font-label-md text-label-md uppercase font-bold tracking-wider hover:bg-secondary-fixed-dim transition-colors shadow-sm"
           >
             <span class="material-symbols-outlined text-base">download</span>
-            <span>Download App</span>
+            <span class="nav-download-label">Download App</span>
           </button>
           
           <button
             id="mobile-menu-toggle"
             aria-label="Toggle Navigation Menu"
+            aria-expanded="false"
             class="xl:hidden inline-flex items-center justify-center p-space-xs text-on-primary hover:text-secondary-fixed focus:outline-none"
             type="button"
           >
@@ -348,7 +335,7 @@
       <!-- Mobile Navigation Drawer -->
       <div
         id="mobile-menu"
-        class="hidden xl:hidden bg-primary-container border-t border-[#fbcb62]/20 px-gutter-mobile py-4 flex flex-col gap-2 shadow-lg"
+        class="liquid-mobile-menu hidden xl:hidden bg-primary-container border-t border-[#fbcb62]/20 px-gutter-mobile py-4 flex flex-col gap-2 shadow-lg"
       >
         <a
           class="py-2 text-secondary-fixed font-bold uppercase tracking-wider flex items-center justify-between text-sm"
@@ -369,10 +356,6 @@
             <a class="py-1.5 text-on-primary-container hover:text-on-primary text-sm tracking-wide flex items-center gap-2.5" href="#council">
               <span class="material-symbols-outlined text-base text-secondary-fixed">groups</span>
               <span>Council</span>
-            </a>
-            <a class="py-1.5 text-on-primary-container hover:text-on-primary text-sm tracking-wide flex items-center gap-2.5" href="#analytics">
-              <span class="material-symbols-outlined text-base text-secondary-fixed">query_stats</span>
-              <span>Analytics</span>
             </a>
           </div>
         </div>
@@ -1077,11 +1060,11 @@
              ========================================== -->
         <section
           id="pillars"
-          class="w-full bg-surface-container-lowest text-on-surface py-24"
+          class="pillars-scroll-section w-full bg-surface-container-lowest text-on-surface"
         >
-          <div class="max-w-7xl mx-auto px-gutter-mobile lg:px-gutter">
+          <div class="pillars-pin-panel max-w-7xl mx-auto px-gutter-mobile lg:px-gutter">
             <div
-              class="text-center max-w-2xl mx-auto flex flex-col items-center gap-3 mb-16 gsap-reveal-title"
+              class="pillars-intro text-center max-w-2xl mx-auto flex flex-col items-center gap-3 mb-16 gsap-reveal-title"
             >
               <span
                 class="font-label-md text-label-md uppercase tracking-[0.2em] text-secondary font-bold"
@@ -1095,11 +1078,12 @@
                 to connect, contribute, and celebrate together.
               </p>
             </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+            <div class="pillars-card-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
               <!-- Card 1: Alumni Network -->
-              <div
-                class="gsap-pillar-card card-hover-effect bg-surface p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between h-full group cursor-pointer border border-[#fbcb62]/20"
-              >
+              <div class="pillar-card-motion h-full">
+                <div
+                  class="gsap-pillar-card card-hover-effect bg-surface p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between h-full group cursor-pointer border border-[#fbcb62]/20"
+                >
                 <div>
                   <div
                     class="w-12 h-12 rounded-lg bg-surface-container-high flex items-center justify-center text-primary group-hover:bg-secondary-fixed transition-colors mb-5"
@@ -1125,11 +1109,13 @@
                 >
                   Global Network
                 </span>
+                </div>
               </div>
               <!-- Card 2: Mentorship & Guidance -->
-              <div
-                class="gsap-pillar-card card-hover-effect bg-surface p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between h-full group cursor-pointer border border-[#fbcb62]/20"
-              >
+              <div class="pillar-card-motion h-full">
+                <div
+                  class="gsap-pillar-card card-hover-effect bg-surface p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between h-full group cursor-pointer border border-[#fbcb62]/20"
+                >
                 <div>
                   <div
                     class="w-12 h-12 rounded-lg bg-surface-container-high flex items-center justify-center text-primary group-hover:bg-secondary-fixed transition-colors mb-5"
@@ -1155,11 +1141,13 @@
                 >
                   Career &amp; Growth
                 </span>
+                </div>
               </div>
               <!-- Card 3: Reunions & Events -->
-              <div
-                class="gsap-pillar-card card-hover-effect bg-surface p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between h-full group cursor-pointer border border-[#fbcb62]/20"
-              >
+              <div class="pillar-card-motion h-full">
+                <div
+                  class="gsap-pillar-card card-hover-effect bg-surface p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between h-full group cursor-pointer border border-[#fbcb62]/20"
+                >
                 <div>
                   <div
                     class="w-12 h-12 rounded-lg bg-surface-container-high flex items-center justify-center text-primary group-hover:bg-secondary-fixed transition-colors mb-5"
@@ -1185,11 +1173,13 @@
                 >
                   Reunions &amp; Meets
                 </span>
+                </div>
               </div>
               <!-- Card 4: Community Initiatives -->
-              <div
-                class="gsap-pillar-card card-hover-effect bg-surface p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between h-full group cursor-pointer border border-[#fbcb62]/20"
-              >
+              <div class="pillar-card-motion h-full">
+                <div
+                  class="gsap-pillar-card card-hover-effect bg-surface p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between h-full group cursor-pointer border border-[#fbcb62]/20"
+                >
                 <div>
                   <div
                     class="w-12 h-12 rounded-lg bg-surface-container-high flex items-center justify-center text-primary group-hover:bg-secondary-fixed transition-colors mb-5"
@@ -1215,11 +1205,13 @@
                 >
                   Social Impact
                 </span>
+                </div>
               </div>
               <!-- Card 5: Chapters & Communities -->
-              <div
-                class="gsap-pillar-card card-hover-effect bg-surface p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between h-full group cursor-pointer border border-[#fbcb62]/20"
-              >
+              <div class="pillar-card-motion h-full">
+                <div
+                  class="gsap-pillar-card card-hover-effect bg-surface p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between h-full group cursor-pointer border border-[#fbcb62]/20"
+                >
                 <div>
                   <div
                     class="w-12 h-12 rounded-lg bg-surface-container-high flex items-center justify-center text-primary group-hover:bg-secondary-fixed transition-colors mb-5"
@@ -1245,6 +1237,7 @@
                 >
                   Worldwide Hubs
                 </span>
+                </div>
               </div>
             </div>
           </div>
@@ -1360,7 +1353,7 @@
                       <p
                         class="font-body-sm text-[11px] text-on-surface-variant"
                       >
-                        IDA Scudder Auditorium • 1,420 registered
+                      1,420 registered
                       </p>
                     </div>
                     <!-- Bottom Tab bar -->
@@ -1702,8 +1695,6 @@
                     >
                   </div>
                   <div class="flex items-center gap-2 text-on-primary text-sm font-medium">
-                    <span class="material-symbols-outlined text-secondary-fixed text-lg">location_on</span>
-                    <span>IDA Scudder Auditorium, Madurai</span>
                   </div>
                   <p
                     class="font-caption text-caption text-on-primary-container"
@@ -2004,10 +1995,16 @@
               </div>
             </div>
 
-            <!-- City & Regional Chapters Grid (10 Chapters) -->
-            <div
-              class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-5 gap-4 mb-10"
-            >
+            <!-- City & Regional Chapters Carousel (10 Chapters) -->
+            <div class="chapter-carousel-shell gsap-chapter-carousel mb-10">
+              <div
+                id="chapter-carousel"
+                class="chapter-carousel"
+                role="region"
+                aria-roledescription="carousel"
+                aria-label="Global alumni chapters"
+                tabindex="0"
+              >
               <!-- 1. Madurai -->
               <div
                 class="gsap-chapter-card card-hover-effect cursor-pointer p-5 rounded-xl bg-surface shadow-sm hover:shadow-md transition-shadow flex flex-col gap-2 border border-[#fbcb62]/20"
@@ -2218,6 +2215,39 @@
                   >460+ Members</span
                 >
               </div>
+
+              </div>
+
+              <div class="chapter-carousel-controls" aria-label="Chapter carousel controls">
+                <button
+                  id="chapter-carousel-prev"
+                  class="chapter-carousel-arrow"
+                  type="button"
+                  aria-label="Show previous chapter"
+                >
+                  <span class="material-symbols-outlined" aria-hidden="true">arrow_back</span>
+                </button>
+
+                <div class="chapter-carousel-position">
+                  <span id="chapter-carousel-counter" class="chapter-carousel-counter">05 / 10</span>
+                  <div id="chapter-carousel-dots" class="chapter-carousel-dots" aria-label="Choose a chapter"></div>
+                  <span id="chapter-carousel-status" class="sr-only" aria-live="polite"></span>
+                </div>
+
+                <button
+                  id="chapter-carousel-next"
+                  class="chapter-carousel-arrow"
+                  type="button"
+                  aria-label="Show next chapter"
+                >
+                  <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
+                </button>
+              </div>
+
+              <p class="chapter-carousel-hint">
+                <span class="material-symbols-outlined" aria-hidden="true">mouse</span>
+                Scroll or use the arrow keys to explore every chapter
+              </p>
             </div>
 
             <!-- Cohort Batch Timeline Filter Bar -->
@@ -2266,310 +2296,7 @@
         </section>
 
         <!-- ==========================================
-             SECTION 8: VISUAL ANALYTICS & INFOGRAPHICS (PICTORIAL CHARTS & DATA)
-             ========================================== -->
-        <section
-          id="analytics"
-          class="w-full bg-surface-container-low text-on-surface py-24"
-        >
-          <div class="max-w-7xl mx-auto px-gutter-mobile lg:px-gutter">
-            <div
-              class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12"
-            >
-              <div class="flex flex-col gap-3 gsap-reveal-title max-w-2xl">
-                <div class="flex items-center gap-2">
-                  <span class="w-6 h-[1.5px] bg-secondary"></span>
-                  <span
-                    class="font-label-md text-label-md uppercase tracking-widest text-secondary font-bold"
-                    >Community Analytics &amp; Insights</span
-                  >
-                </div>
-                <h2 class="font-display-sm text-display-sm text-primary">
-                  A Legacy Measured in Impact
-                </h2>
-                <p class="font-body-md text-body-md text-on-surface-variant">
-                  Visualizing four decades of global alumni footprint, leadership distribution, and intergenerational fellowship.
-                </p>
-              </div>
-              <a
-                class="inline-flex items-center gap-2 font-label-md text-label-md uppercase tracking-wider text-primary hover:text-secondary font-bold group"
-                href="#contact"
-              >
-                <span>View Full Analytics Folio</span>
-                <span
-                  class="material-symbols-outlined text-base group-hover:translate-x-1 transition-transform"
-                  >arrow_forward</span
-                >
-              </a>
-            </div>
-
-            <!-- Pictorial Visual Analytics Dashboard -->
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-12">
-              <!-- Left Chart Card: Geographic Distribution (Bar Graphs) -->
-              <div class="lg:col-span-7 bg-surface-container-lowest p-8 rounded-2xl shadow-sm border border-[#fbcb62]/20 flex flex-col justify-between">
-                <div>
-                  <div class="flex items-center justify-between pb-4 border-b border-outline-variant/30">
-                    <div class="flex items-center gap-2">
-                      <span class="material-symbols-outlined text-secondary text-xl">bar_chart</span>
-                      <h3 class="font-headline-sm text-headline-sm text-primary">Global Alumni Distribution</h3>
-                    </div>
-                    <span class="font-caption text-caption text-secondary font-semibold uppercase">10,000+ Verified Members</span>
-                  </div>
-                  
-                  <div class="flex flex-col gap-5 pt-6">
-                    <!-- Region 1: Tamil Nadu / Home State -->
-                    <div class="flex flex-col gap-1.5">
-                      <div class="flex justify-between text-xs font-semibold">
-                        <span class="text-primary">Tamil Nadu &amp; Home Base (Madurai, Chennai, CBE)</span>
-                        <span class="text-secondary-fixed-variant font-bold">48% (4,800+)</span>
-                      </div>
-                      <div class="w-full h-3 bg-surface-container rounded-full overflow-hidden">
-                        <div class="chart-bar-fill h-full bg-gradient-to-r from-primary to-[#06294a] rounded-full" data-width="48%"></div>
-                      </div>
-                    </div>
-
-                    <!-- Region 2: Pan-India Metros -->
-                    <div class="flex flex-col gap-1.5">
-                      <div class="flex justify-between text-xs font-semibold">
-                        <span class="text-primary">Pan-India Tech &amp; Finance Metros (BLR, BOM, DEL)</span>
-                        <span class="text-secondary-fixed-variant font-bold">24% (2,400+)</span>
-                      </div>
-                      <div class="w-full h-3 bg-surface-container rounded-full overflow-hidden">
-                        <div class="chart-bar-fill h-full bg-gradient-to-r from-primary to-secondary-fixed rounded-full" data-width="24%"></div>
-                      </div>
-                    </div>
-
-                    <!-- Region 3: North America -->
-                    <div class="flex flex-col gap-1.5">
-                      <div class="flex justify-between text-xs font-semibold">
-                        <span class="text-primary">North America (Silicon Valley, East Coast, Toronto)</span>
-                        <span class="text-secondary-fixed-variant font-bold">14% (1,450+)</span>
-                      </div>
-                      <div class="w-full h-3 bg-surface-container rounded-full overflow-hidden">
-                        <div class="chart-bar-fill h-full bg-gradient-to-r from-secondary-fixed-dim to-secondary-fixed rounded-full" data-width="14%"></div>
-                      </div>
-                    </div>
-
-                    <!-- Region 4: Gulf & Middle East -->
-                    <div class="flex flex-col gap-1.5">
-                      <div class="flex justify-between text-xs font-semibold">
-                        <span class="text-primary">Middle East &amp; Gulf (Dubai, Abu Dhabi, Doha)</span>
-                        <span class="text-secondary-fixed-variant font-bold">10% (1,120+)</span>
-                      </div>
-                      <div class="w-full h-3 bg-surface-container rounded-full overflow-hidden">
-                        <div class="chart-bar-fill h-full bg-gradient-to-r from-[#06294a] to-secondary-fixed rounded-full" data-width="10%"></div>
-                      </div>
-                    </div>
-
-                    <!-- Region 5: UK, Europe & APAC -->
-                    <div class="flex flex-col gap-1.5">
-                      <div class="flex justify-between text-xs font-semibold">
-                        <span class="text-primary">UK, Europe, Singapore &amp; ANZ</span>
-                        <span class="text-secondary-fixed-variant font-bold">4% (450+)</span>
-                      </div>
-                      <div class="w-full h-3 bg-surface-container rounded-full overflow-hidden">
-                        <div class="chart-bar-fill h-full bg-gradient-to-r from-primary to-primary-container rounded-full" data-width="4%"></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="pt-6 mt-4 border-t border-outline-variant/30 flex items-center justify-between text-xs text-on-surface-variant">
-                  <span class="flex items-center gap-1.5">
-                    <span class="w-2.5 h-2.5 rounded-full bg-secondary-fixed"></span> Active chapters operating across 20+ countries
-                  </span>
-                  <a href="#community" class="text-secondary font-bold hover:underline">Explore Chapters →</a>
-                </div>
-              </div>
-
-              <!-- Right Chart Card: Professional Sector Breakdown (Visual Doughnut / Matrix) -->
-              <div class="lg:col-span-5 bg-surface-container-lowest p-8 rounded-2xl shadow-sm border border-[#fbcb62]/20 flex flex-col justify-between">
-                <div>
-                  <div class="flex items-center justify-between pb-4 border-b border-outline-variant/30">
-                    <div class="flex items-center gap-2">
-                      <span class="material-symbols-outlined text-secondary text-xl">pie_chart</span>
-                      <h3 class="font-headline-sm text-headline-sm text-primary">Sector Representation</h3>
-                    </div>
-                    <span class="font-caption text-caption text-secondary font-semibold uppercase">Industry Diversity</span>
-                  </div>
-
-                  <!-- Visual Sectors Grid with Pictorial Cards -->
-                  <div class="grid grid-cols-2 gap-3.5 pt-6">
-                    <!-- Sector Card 1: Tech & AI -->
-                    <div class="card-hover-effect p-4 sm:p-5 rounded-xl bg-surface-container/60 hover:bg-surface-container border border-outline-variant/25 hover:border-[#fbcb62]/50 shadow-xs hover:shadow-sm flex flex-col justify-between gap-2.5 transition-all">
-                      <div class="flex items-center justify-between">
-                        <span class="text-[11px] font-bold uppercase tracking-wider text-secondary">Tech &amp; AI</span>
-                        <span class="material-symbols-outlined text-secondary-fixed text-lg">memory</span>
-                      </div>
-                      <div>
-                        <span class="font-display-sm text-2xl sm:text-3xl text-primary font-bold">34%</span>
-                        <p class="text-[11px] text-on-surface-variant mt-0.5 leading-snug">Software, R&amp;D &amp; Founders</p>
-                      </div>
-                    </div>
-
-                    <!-- Sector Card 2: Medicine & Health -->
-                    <div class="card-hover-effect p-4 sm:p-5 rounded-xl bg-surface-container/60 hover:bg-surface-container border border-outline-variant/25 hover:border-[#fbcb62]/50 shadow-xs hover:shadow-sm flex flex-col justify-between gap-2.5 transition-all">
-                      <div class="flex items-center justify-between">
-                        <span class="text-[11px] font-bold uppercase tracking-wider text-secondary">Medicine &amp; Health</span>
-                        <span class="material-symbols-outlined text-secondary text-lg">medical_services</span>
-                      </div>
-                      <div>
-                        <span class="font-display-sm text-2xl sm:text-3xl text-primary font-bold">22%</span>
-                        <p class="text-[11px] text-on-surface-variant mt-0.5 leading-snug">Surgeons, Physicians, Pharma</p>
-                      </div>
-                    </div>
-
-                    <!-- Sector Card 3: Finance & Legal -->
-                    <div class="card-hover-effect p-4 sm:p-5 rounded-xl bg-surface-container/60 hover:bg-surface-container border border-outline-variant/25 hover:border-[#fbcb62]/50 shadow-xs hover:shadow-sm flex flex-col justify-between gap-2.5 transition-all">
-                      <div class="flex items-center justify-between">
-                        <span class="text-[11px] font-bold uppercase tracking-wider text-secondary">Finance &amp; Legal</span>
-                        <span class="material-symbols-outlined text-secondary text-lg">account_balance</span>
-                      </div>
-                      <div>
-                        <span class="font-display-sm text-2xl sm:text-3xl text-primary font-bold">18%</span>
-                        <p class="text-[11px] text-on-surface-variant mt-0.5 leading-snug">Banking, VC, Supreme Court</p>
-                      </div>
-                    </div>
-
-                    <!-- Sector Card 4: Civil Services & Arts -->
-                    <div class="card-hover-effect p-4 sm:p-5 rounded-xl bg-surface-container/60 hover:bg-surface-container border border-outline-variant/25 hover:border-[#fbcb62]/50 shadow-xs hover:shadow-sm flex flex-col justify-between gap-2.5 transition-all">
-                      <div class="flex items-center justify-between">
-                        <span class="text-[11px] font-bold uppercase tracking-wider text-secondary">Civil Services &amp; Arts</span>
-                        <span class="material-symbols-outlined text-primary text-lg">policy</span>
-                      </div>
-                      <div>
-                        <span class="font-display-sm text-2xl sm:text-3xl text-primary font-bold">16%</span>
-                        <p class="text-[11px] text-on-surface-variant mt-0.5 leading-snug">IAS/IPS, Public Office &amp; Media</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="p-4 rounded-xl bg-primary text-on-primary mt-6 flex items-center justify-between">
-                  <div class="flex items-center gap-3">
-                    <span class="material-symbols-outlined text-secondary-fixed text-2xl">workspace_premium</span>
-                    <div>
-                      <p class="font-bold text-xs text-secondary-fixed uppercase">Mentorship Guild Active</p>
-                      <p class="text-[11px] text-on-primary-container">650+ Active mentors available on the app</p>
-                    </div>
-                  </div>
-                  <button type="button" class="open-app-modal-btn px-3 py-1.5 rounded-lg bg-secondary-fixed text-primary text-xs font-bold uppercase hover:bg-secondary-fixed-dim">Join</button>
-                </div>
-              </div>
-            </div>
-
-            <!-- Single Wide 3-Image Photography Strip -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <!-- Photo 1: Annual Gala -->
-              <div
-                class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm flex flex-col group card-hover-effect cursor-pointer border border-[#fbcb62]/20"
-              >
-                <div class="relative overflow-hidden h-64 sm:h-72">
-                  <img
-                    alt="Mahatma evening alumni homecoming gathering"
-                    class="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCnnSv_siFBCYYQAXoJC0zjzI-_1vDjyX4OFNTqpc6z1q3YrvJyJAknCJHpcPFFOjZDp-fU_LQdNtknmIXsQgjggU0dhtVB4k5ZVB8JYcAFwOhRySxrFTBoTQ2pxUrXXjd5yZg9S-fwcis85anXFMq4-a6Yultql_4LAzqpk8nBRPTNCkykuFfoWgJDrzl0CH__MLttWo2fDXjvIYmN6TMEYF2iLZD8iocVhVu0U4FWB-Fqyy0swgs"
-                  />
-                  <span
-                    class="absolute top-4 left-4 px-3 py-1 rounded bg-primary text-secondary-fixed font-label-md text-[11px] font-bold tracking-wider uppercase"
-                    >Annual Gala</span
-                  >
-                </div>
-                <div class="p-6 flex flex-col gap-2 flex-grow justify-between">
-                  <div>
-                    <span
-                      class="font-caption text-caption text-secondary font-semibold uppercase"
-                      >December Retrospective</span
-                    >
-                    <h3 class="font-headline-sm text-headline-sm text-primary mt-1">
-                      The 45th Annual Reunion
-                    </h3>
-                    <p class="font-body-sm text-body-sm text-on-surface-variant mt-2">
-                      More than 850 alumni assembled across the illuminated central
-                      lawns to honor retiring faculty masters and launch scholarship funds.
-                    </p>
-                  </div>
-                  <span class="text-secondary font-semibold text-xs inline-flex items-center gap-1 pt-4">
-                    Explore Moments <span class="material-symbols-outlined text-sm">arrow_forward</span>
-                  </span>
-                </div>
-              </div>
-
-              <!-- Photo 2: Mentorship Series -->
-              <div
-                class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm flex flex-col group card-hover-effect cursor-pointer border border-[#fbcb62]/20"
-              >
-                <div class="relative overflow-hidden h-64 sm:h-72">
-                  <img
-                    alt="Colonnade fellowship talk"
-                    class="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDyaRbKxFW2M3u5g_0rErD32nkPeXbemQrL0PHV5L1JdvOF6tkrSKjtDv1m3pGtOrKoA9P1sCtrPV0Mdw2vQ0YtCeo6gvECdyVyQdze098aX6Fgd4r0a4tYzvfvRTHvyU3wYb-q1ARX6kUnakVyrVB3TiMoIOYJnlzH-9r9LjqLVio90GwFSVKhMsI89kZ4-27pcznxYlllTX8l7nKfryJTSVP4NhaOT0w_hcAuAhu-1hRTDEM4hcc"
-                  />
-                  <span
-                    class="absolute top-4 left-4 px-3 py-1 rounded bg-primary text-secondary-fixed font-label-md text-[11px] font-bold tracking-wider uppercase"
-                    >Mentorship</span
-                  >
-                </div>
-                <div class="p-6 flex flex-col gap-2 flex-grow justify-between">
-                  <div>
-                    <span
-                      class="font-caption text-caption text-secondary font-semibold uppercase"
-                      >Batch Mentorship Series</span
-                    >
-                    <h3 class="font-headline-sm text-headline-sm text-primary mt-1">
-                      Colonnade Talks: Career Guidance
-                    </h3>
-                    <p class="font-body-sm text-body-sm text-on-surface-variant mt-2">
-                      Alumni from civil services, technology, and surgical sciences
-                      returned to conduct interactive workshops for rising seniors.
-                    </p>
-                  </div>
-                  <span class="text-secondary font-semibold text-xs inline-flex items-center gap-1 pt-4">
-                    View Guidance Talks <span class="material-symbols-outlined text-sm">arrow_forward</span>
-                  </span>
-                </div>
-              </div>
-
-              <!-- Photo 3: Archival Spotlight -->
-              <div
-                class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm flex flex-col group card-hover-effect cursor-pointer border border-[#fbcb62]/20"
-              >
-                <div class="relative overflow-hidden h-64 sm:h-72">
-                  <img
-                    alt="Mahatma historic campus grounds"
-                    class="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDgLkXeTCWKwVwUpU3H-5yYGyJPZYkFf0Q07I6C8xCP0ixVeMXfRRO4UCdmymZ1YXwmzzNbnmXTWWjZUZJLdTL9i9oyc8BZtCYzmMNyJHBlfD8S_4Js3gtCssWEepJrjnu7Cm8xs3Ne0eRhYRdk99B5ccenzTEUATTKp-zM42jSBgWKl9abm7NxRSB8rN5mQubUBXsW6daNdWcPTL9JFSSPqGfKY_gkdqaYZJt-StYBdWcZ1yB2Bxs"
-                  />
-                  <span
-                    class="absolute top-4 left-4 px-3 py-1 rounded bg-primary text-secondary-fixed font-label-md text-[11px] font-bold tracking-wider uppercase"
-                    >Heritage Archive</span
-                  >
-                </div>
-                <div class="p-6 flex flex-col gap-2 flex-grow justify-between">
-                  <div>
-                    <span
-                      class="font-caption text-caption text-secondary font-semibold uppercase"
-                      >Archival Spotlight</span
-                    >
-                    <h3 class="font-headline-sm text-headline-sm text-primary mt-1">
-                      Class Silver Folio &amp; Chronicles
-                    </h3>
-                    <p class="font-body-sm text-body-sm text-on-surface-variant mt-2">
-                      Four decades of scanned yearbooks, commemorative articles, and
-                      historic sports rosters digitized on the member app.
-                    </p>
-                  </div>
-                  <span class="text-secondary font-semibold text-xs inline-flex items-center gap-1 pt-4">
-                    Read In App Archives <span class="material-symbols-outlined text-sm">arrow_forward</span>
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- ==========================================
-             SECTION 9: SOCIAL RESPONSIBILITY
+             SECTION 8: SOCIAL RESPONSIBILITY
              ========================================== -->
         <section
           class="w-full bg-surface-container-lowest text-on-surface overflow-hidden"
@@ -2740,7 +2467,7 @@
                     aria-label="Social impact programme journey"
                   >
                     <!-- Step 1 -->
-                    <article class="journey-card snap-start shrink-0 w-[240px] sm:w-[260px] bg-white rounded-2xl p-5 border border-[#fbcb62]/25 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 flex flex-col justify-between group cursor-pointer" role="listitem">
+                    <article class="journey-card snap-start shrink-0 w-[240px] sm:w-[260px] bg-white rounded-2xl p-5 border border-[#fbcb62]/25 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 flex flex-col justify-between group cursor-default" role="listitem">
                       <div>
                         <div class="flex items-center justify-between">
                           <div class="w-12 h-12 rounded-xl bg-primary text-secondary-fixed flex items-center justify-center shadow-md group-hover:scale-110 group-hover:bg-secondary-fixed group-hover:text-primary transition-all duration-300 ring-2 ring-[#fbcb62]/20 group-hover:ring-4 group-hover:ring-[#fbcb62]/40">
@@ -2751,14 +2478,13 @@
                         <h4 class="font-headline text-[15px] font-bold text-primary mt-4 group-hover:text-secondary transition-colors">Diwali Support</h4>
                         <p class="text-xs text-on-surface-variant mt-1.5 leading-relaxed">Supporting physically challenged individuals ahead of Diwali celebrations.</p>
                       </div>
-                      <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] text-secondary font-semibold">
+                      <div class="mt-4 pt-3 border-t border-slate-100 flex items-center text-[11px] text-secondary font-semibold">
                         <span>Festive Outreach</span>
-                        <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
                       </div>
                     </article>
 
                     <!-- Step 2 -->
-                    <article class="journey-card snap-start shrink-0 w-[240px] sm:w-[260px] bg-white rounded-2xl p-5 border border-[#fbcb62]/25 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 flex flex-col justify-between group cursor-pointer" role="listitem">
+                    <article class="journey-card snap-start shrink-0 w-[240px] sm:w-[260px] bg-white rounded-2xl p-5 border border-[#fbcb62]/25 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 flex flex-col justify-between group cursor-default" role="listitem">
                       <div>
                         <div class="flex items-center justify-between">
                           <div class="w-12 h-12 rounded-xl bg-primary text-secondary-fixed flex items-center justify-center shadow-md group-hover:scale-110 group-hover:bg-secondary-fixed group-hover:text-primary transition-all duration-300 ring-2 ring-[#fbcb62]/20 group-hover:ring-4 group-hover:ring-[#fbcb62]/40">
@@ -2769,14 +2495,13 @@
                         <h4 class="font-headline text-[15px] font-bold text-primary mt-4 group-hover:text-secondary transition-colors">Global Tree Plantation</h4>
                         <p class="text-xs text-on-surface-variant mt-1.5 leading-relaxed">Chapters across the world planting saplings together in coordinated green drives.</p>
                       </div>
-                      <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] text-secondary font-semibold">
+                      <div class="mt-4 pt-3 border-t border-slate-100 flex items-center text-[11px] text-secondary font-semibold">
                         <span>Ecological Action</span>
-                        <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
                       </div>
                     </article>
 
                     <!-- Step 3 -->
-                    <article class="journey-card snap-start shrink-0 w-[240px] sm:w-[260px] bg-white rounded-2xl p-5 border border-[#fbcb62]/25 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 flex flex-col justify-between group cursor-pointer" role="listitem">
+                    <article class="journey-card snap-start shrink-0 w-[240px] sm:w-[260px] bg-white rounded-2xl p-5 border border-[#fbcb62]/25 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 flex flex-col justify-between group cursor-default" role="listitem">
                       <div>
                         <div class="flex items-center justify-between">
                           <div class="w-12 h-12 rounded-xl bg-primary text-secondary-fixed flex items-center justify-center shadow-md group-hover:scale-110 group-hover:bg-secondary-fixed group-hover:text-primary transition-all duration-300 ring-2 ring-[#fbcb62]/20 group-hover:ring-4 group-hover:ring-[#fbcb62]/40">
@@ -2787,14 +2512,13 @@
                         <h4 class="font-headline text-[15px] font-bold text-primary mt-4 group-hover:text-secondary transition-colors">Clean Madurai</h4>
                         <p class="text-xs text-on-surface-variant mt-1.5 leading-relaxed">Plastic segregation and e-waste collection drives across schools &amp; civic areas.</p>
                       </div>
-                      <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] text-secondary font-semibold">
+                      <div class="mt-4 pt-3 border-t border-slate-100 flex items-center text-[11px] text-secondary font-semibold">
                         <span>Civic Cleanliness</span>
-                        <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
                       </div>
                     </article>
 
                     <!-- Step 4 -->
-                    <article class="journey-card snap-start shrink-0 w-[240px] sm:w-[260px] bg-white rounded-2xl p-5 border border-[#fbcb62]/25 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 flex flex-col justify-between group cursor-pointer" role="listitem">
+                    <article class="journey-card snap-start shrink-0 w-[240px] sm:w-[260px] bg-white rounded-2xl p-5 border border-[#fbcb62]/25 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 flex flex-col justify-between group cursor-default" role="listitem">
                       <div>
                         <div class="flex items-center justify-between">
                           <div class="w-12 h-12 rounded-xl bg-primary text-secondary-fixed flex items-center justify-center shadow-md group-hover:scale-110 group-hover:bg-secondary-fixed group-hover:text-primary transition-all duration-300 ring-2 ring-[#fbcb62]/20 group-hover:ring-4 group-hover:ring-[#fbcb62]/40">
@@ -2805,14 +2529,13 @@
                         <h4 class="font-headline text-[15px] font-bold text-primary mt-4 group-hover:text-secondary transition-colors">Quarterly Cleanups</h4>
                         <p class="text-xs text-on-surface-variant mt-1.5 leading-relaxed">Recurring alumni-led environmental action and neighbourhood restoration.</p>
                       </div>
-                      <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] text-secondary font-semibold">
+                      <div class="mt-4 pt-3 border-t border-slate-100 flex items-center text-[11px] text-secondary font-semibold">
                         <span>Recurring Drives</span>
-                        <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
                       </div>
                     </article>
 
                     <!-- Step 5 -->
-                    <article class="journey-card snap-start shrink-0 w-[240px] sm:w-[260px] bg-white rounded-2xl p-5 border border-[#fbcb62]/25 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 flex flex-col justify-between group cursor-pointer" role="listitem">
+                    <article class="journey-card snap-start shrink-0 w-[240px] sm:w-[260px] bg-white rounded-2xl p-5 border border-[#fbcb62]/25 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 flex flex-col justify-between group cursor-default" role="listitem">
                       <div>
                         <div class="flex items-center justify-between">
                           <div class="w-12 h-12 rounded-xl bg-primary text-secondary-fixed flex items-center justify-center shadow-md group-hover:scale-110 group-hover:bg-secondary-fixed group-hover:text-primary transition-all duration-300 ring-2 ring-[#fbcb62]/20 group-hover:ring-4 group-hover:ring-[#fbcb62]/40">
@@ -2823,14 +2546,13 @@
                         <h4 class="font-headline text-[15px] font-bold text-primary mt-4 group-hover:text-secondary transition-colors">Organ Donation</h4>
                         <p class="text-xs text-on-surface-variant mt-1.5 leading-relaxed">Target: 500+ pledge registrations during the Grand Homecoming 2026 assembly.</p>
                       </div>
-                      <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] text-secondary font-semibold">
+                      <div class="mt-4 pt-3 border-t border-slate-100 flex items-center text-[11px] text-secondary font-semibold">
                         <span>Life Stewardship</span>
-                        <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
                       </div>
                     </article>
 
                     <!-- Step 6 -->
-                    <article class="journey-card snap-start shrink-0 w-[240px] sm:w-[260px] bg-white rounded-2xl p-5 border border-[#fbcb62]/25 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 flex flex-col justify-between group cursor-pointer" role="listitem">
+                    <article class="journey-card snap-start shrink-0 w-[240px] sm:w-[260px] bg-white rounded-2xl p-5 border border-[#fbcb62]/25 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 flex flex-col justify-between group cursor-default" role="listitem">
                       <div>
                         <div class="flex items-center justify-between">
                           <div class="w-12 h-12 rounded-xl bg-primary text-secondary-fixed flex items-center justify-center shadow-md group-hover:scale-110 group-hover:bg-secondary-fixed group-hover:text-primary transition-all duration-300 ring-2 ring-[#fbcb62]/20 group-hover:ring-4 group-hover:ring-[#fbcb62]/40">
@@ -2841,14 +2563,13 @@
                         <h4 class="font-headline text-[15px] font-bold text-primary mt-4 group-hover:text-secondary transition-colors">Medical &amp; Eye Camps</h4>
                         <p class="text-xs text-on-surface-variant mt-1.5 leading-relaxed">Alumni physicians, surgeons, and optometrists serving rural health clinics.</p>
                       </div>
-                      <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] text-secondary font-semibold">
+                      <div class="mt-4 pt-3 border-t border-slate-100 flex items-center text-[11px] text-secondary font-semibold">
                         <span>Health Camps</span>
-                        <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
                       </div>
                     </article>
 
                     <!-- Step 7 -->
-                    <article class="journey-card snap-start shrink-0 w-[240px] sm:w-[260px] bg-white rounded-2xl p-5 border border-[#fbcb62]/25 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 flex flex-col justify-between group cursor-pointer" role="listitem">
+                    <article class="journey-card snap-start shrink-0 w-[240px] sm:w-[260px] bg-white rounded-2xl p-5 border border-[#fbcb62]/25 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 flex flex-col justify-between group cursor-default" role="listitem">
                       <div>
                         <div class="flex items-center justify-between">
                           <div class="w-12 h-12 rounded-xl bg-primary text-secondary-fixed flex items-center justify-center shadow-md group-hover:scale-110 group-hover:bg-secondary-fixed group-hover:text-primary transition-all duration-300 ring-2 ring-[#fbcb62]/20 group-hover:ring-4 group-hover:ring-[#fbcb62]/40">
@@ -2859,9 +2580,8 @@
                         <h4 class="font-headline text-[15px] font-bold text-primary mt-4 group-hover:text-secondary transition-colors">Education Outreach</h4>
                         <p class="text-xs text-on-surface-variant mt-1.5 leading-relaxed">Supporting rural school children through career guidance and practical life skills.</p>
                       </div>
-                      <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] text-secondary font-semibold">
+                      <div class="mt-4 pt-3 border-t border-slate-100 flex items-center text-[11px] text-secondary font-semibold">
                         <span>Youth Mentorship</span>
-                        <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
                       </div>
                     </article>
                   </div>
@@ -3185,20 +2905,6 @@
                       >
                     </div>
                   </a>
-                  <div
-                    class="card-hover-effect p-4 rounded-xl bg-surface-container-lowest shadow-sm flex flex-col gap-2 border border-[#fbcb62]/20"
-                  >
-                    <span
-                      class="font-caption text-caption text-secondary font-semibold uppercase"
-                      >Institutional Office</span
-                    >
-                    <p
-                      class="font-body-sm text-body-sm text-on-surface-variant"
-                    >
-                      Mahatma Alumni Secretariat, Heritage Quadrangle Building,
-                      Campus Gate 2, Madurai &amp; Chennai
-                    </p>
-                  </div>
                 </div>
               </div>
 
@@ -3627,12 +3333,6 @@
               >
               <a
                 class="font-label-md text-label-md text-on-primary-container hover:text-secondary-fixed transition-colors"
-                data-path="analytics"
-                href="#analytics"
-                >Analytics</a
-              >
-              <a
-                class="font-label-md text-label-md text-on-primary-container hover:text-secondary-fixed transition-colors"
                 data-path="social-impact"
                 href="#social-impact"
                 >Social Impact</a
@@ -3724,7 +3424,7 @@
       id="back-to-top"
       aria-label="Back to Top"
       title="Back to Top"
-      class="fixed bottom-6 sm:bottom-7 right-6 sm:right-7 z-[90] w-12 sm:w-14 h-12 sm:h-14 rounded-full bg-secondary-fixed text-primary shadow-2xl flex items-center justify-center hover:bg-[#ffd77a] hover:scale-110 active:scale-95 transition-all duration-300 opacity-0 invisible pointer-events-none transform translate-y-4 group border-2 border-primary/20 cursor-pointer focus:outline-none focus:ring-4 focus:ring-[#fbcb62]/50 hover:shadow-[0_12px_28px_rgba(251,203,98,0.45)]"
+      class="fixed bottom-24 sm:bottom-28 right-6 sm:right-7 z-[90] w-12 sm:w-14 h-12 sm:h-14 rounded-full bg-secondary-fixed text-primary shadow-2xl flex items-center justify-center hover:bg-[#ffd77a] hover:scale-110 active:scale-95 transition-all duration-300 opacity-0 invisible pointer-events-none transform translate-y-4 group border-2 border-primary/20 cursor-pointer focus:outline-none focus:ring-4 focus:ring-[#fbcb62]/50 hover:shadow-[0_12px_28px_rgba(251,203,98,0.45)]"
       type="button"
     >
       <span
