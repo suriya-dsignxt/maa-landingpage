@@ -53,6 +53,274 @@ body {
   scrollbar-width: none;
 }
 
+/* ==========================================
+   SCHOOL BUS PAGE PRELOADER
+   ========================================== */
+body.is-preloading {
+  overflow: hidden;
+}
+
+.page-preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 2147483647;
+  isolation: isolate;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  color: #ffffff;
+  background:
+    linear-gradient(180deg, rgba(6, 41, 74, 0.18), rgba(1, 22, 40, 0.52)),
+    #011628;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.65s ease;
+}
+
+.page-preloader.is-leaving {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.preloader-glow {
+  position: absolute;
+  width: min(38rem, 80vw);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  filter: blur(10px);
+  pointer-events: none;
+}
+
+.preloader-glow--one {
+  top: -24rem;
+  right: -10rem;
+  background: radial-gradient(circle, rgba(251, 203, 98, 0.16), transparent 68%);
+}
+
+.preloader-glow--two {
+  bottom: -27rem;
+  left: -12rem;
+  background: radial-gradient(circle, rgba(51, 91, 123, 0.36), transparent 68%);
+}
+
+.preloader-content {
+  position: relative;
+  z-index: 1;
+  width: min(45rem, 92vw);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.preloader-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  color: #fbcb62;
+  font-size: clamp(0.68rem, 1.6vw, 0.82rem);
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.preloader-brand img {
+  width: 2.6rem;
+  height: 2.6rem;
+  object-fit: contain;
+  filter: drop-shadow(0 5px 12px rgba(0, 0, 0, 0.28));
+}
+
+.preloader-scene {
+  position: relative;
+  width: 100%;
+  height: clamp(13.5rem, 36vw, 18rem);
+  margin-top: 0.9rem;
+  overflow: hidden;
+}
+
+.preloader-bus {
+  position: absolute;
+  left: 50%;
+  bottom: 2.4rem;
+  z-index: 2;
+  width: min(25rem, 72vw);
+  height: auto;
+  overflow: visible;
+  transform: translateX(-50%);
+  filter: drop-shadow(0 18px 14px rgba(0, 0, 0, 0.34));
+  animation: preloaderBusRide 0.7s ease-in-out infinite alternate;
+}
+
+.preloader-wheel {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: preloaderWheelSpin 0.65s linear infinite;
+}
+
+.preloader-road {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 2.15rem;
+  height: 2.75rem;
+  overflow: hidden;
+  border-top: 1px solid rgba(251, 203, 98, 0.3);
+  border-bottom: 1px solid rgba(147, 180, 214, 0.12);
+  background: linear-gradient(180deg, #0b243b, #061b2e);
+  transform: perspective(18rem) rotateX(42deg);
+  transform-origin: center top;
+}
+
+.preloader-road-line {
+  position: absolute;
+  top: 1.15rem;
+  left: -5rem;
+  width: calc(100% + 10rem);
+  height: 0.18rem;
+  background: repeating-linear-gradient(90deg, #fbcb62 0 2.2rem, transparent 2.2rem 4.4rem);
+  animation: preloaderRoadFlow 0.65s linear infinite;
+}
+
+.preloader-dust {
+  position: absolute;
+  bottom: 4.25rem;
+  left: 23%;
+  z-index: 1;
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 50%;
+  background: rgba(251, 203, 98, 0.38);
+  animation: preloaderDust 1.35s ease-out infinite;
+}
+
+.preloader-dust--two {
+  bottom: 4.7rem;
+  animation-delay: 0.38s;
+}
+
+.preloader-dust--three {
+  bottom: 3.95rem;
+  animation-delay: 0.76s;
+}
+
+.preloader-copy {
+  margin-top: -0.25rem;
+}
+
+.preloader-copy p {
+  margin: 0;
+  font-family: "Noto Serif", serif;
+  font-size: clamp(1.35rem, 4vw, 2rem);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.preloader-copy > span {
+  margin-top: 0.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.26rem;
+  color: #93b4d6;
+  font-size: clamp(0.68rem, 1.8vw, 0.8rem);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.preloader-copy i {
+  width: 0.26rem;
+  height: 0.26rem;
+  display: inline-block;
+  border-radius: 50%;
+  background: #fbcb62;
+  animation: preloaderDot 1.15s ease-in-out infinite;
+}
+
+.preloader-copy i:first-of-type {
+  margin-left: 0.25rem;
+}
+
+.preloader-copy i:nth-of-type(2) { animation-delay: 0.14s; }
+.preloader-copy i:nth-of-type(3) { animation-delay: 0.28s; }
+
+.preloader-progress {
+  width: min(16rem, 68vw);
+  height: 0.18rem;
+  margin-top: 1.3rem;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(147, 180, 214, 0.15);
+}
+
+.preloader-progress span {
+  display: block;
+  width: 42%;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, transparent, #fbcb62, #ffe394, transparent);
+  animation: preloaderProgress 1.25s ease-in-out infinite;
+}
+
+@keyframes preloaderBusRide {
+  from { transform: translateX(-50%) translateY(0) rotate(-0.25deg); }
+  to { transform: translateX(-50%) translateY(-0.32rem) rotate(0.25deg); }
+}
+
+@keyframes preloaderWheelSpin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes preloaderRoadFlow {
+  to { transform: translateX(-4.4rem); }
+}
+
+@keyframes preloaderDust {
+  0% { opacity: 0; transform: translate(0, 0) scale(0.5); }
+  25% { opacity: 0.7; }
+  100% { opacity: 0; transform: translate(-4.5rem, -1.6rem) scale(1.8); }
+}
+
+@keyframes preloaderDot {
+  0%, 65%, 100% { opacity: 0.28; transform: translateY(0); }
+  32% { opacity: 1; transform: translateY(-0.18rem); }
+}
+
+@keyframes preloaderProgress {
+  from { transform: translateX(-120%); }
+  to { transform: translateX(340%); }
+}
+
+@media (max-width: 639px) {
+  .preloader-scene {
+    height: 13.5rem;
+  }
+
+  .preloader-bus {
+    width: min(22rem, 88vw);
+  }
+
+  .preloader-copy > span {
+    letter-spacing: 0.055em;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .preloader-bus,
+  .preloader-wheel,
+  .preloader-road-line,
+  .preloader-dust,
+  .preloader-copy i,
+  .preloader-progress span {
+    animation: none !important;
+  }
+
+  .preloader-progress span {
+    width: 100%;
+  }
+}
+
 /* Glassmorphism & Visual Glows */
 .glass-panel {
   background: rgba(2, 32, 60, 0.85);

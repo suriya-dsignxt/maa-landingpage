@@ -39,7 +39,123 @@
     <!-- Circle Cursor Follower & Trail -->
     <script src="js/pencil-follower.js" defer></script>
   </head>
-  <body class="bg-surface font-body-md text-on-surface antialiased">
+  <body class="bg-surface font-body-md text-on-surface antialiased is-preloading">
+    <!-- ==========================================
+         PAGE PRELOADER: THE MAHATMA SCHOOL BUS
+         ========================================== -->
+    <div
+      id="page-preloader"
+      class="page-preloader"
+      role="status"
+      aria-live="polite"
+      aria-label="Loading the Mahatma Alumni Association website"
+    >
+      <div class="preloader-glow preloader-glow--one"></div>
+      <div class="preloader-glow preloader-glow--two"></div>
+
+      <div class="preloader-content">
+        <div class="preloader-brand">
+          <img
+            src="assets/images/mahatma_alumni_logo.png"
+            alt=""
+            aria-hidden="true"
+          />
+          <span>Mahatma Alumni Association</span>
+        </div>
+
+        <div class="preloader-scene" aria-hidden="true">
+          <svg
+            class="preloader-bus"
+            viewBox="0 0 420 210"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g class="preloader-bus-body">
+              <path
+                d="M55 45h264c28 0 50 17 58 43l14 46v23H42V65c0-11 6-20 13-20Z"
+                fill="#fbcb62"
+                stroke="#dba634"
+                stroke-width="4"
+              />
+              <path
+                d="M319 47c27 2 48 18 56 43l5 17h-61V47Z"
+                fill="#f6c257"
+              />
+              <path
+                d="M44 126h347v31H44z"
+                fill="#e9b84b"
+              />
+              <path
+                d="M61 58h247v53H61z"
+                fill="#06294a"
+                stroke="#02203c"
+                stroke-width="3"
+              />
+              <path d="M107 58v53M156 58v53M205 58v53M254 58v53" stroke="#93b4d6" stroke-width="3" />
+              <path
+                d="M321 60c18 4 31 16 39 34l6 17h-45V60Z"
+                fill="#0b3559"
+                stroke="#02203c"
+                stroke-width="3"
+              />
+              <path d="M321 60v67" stroke="#856209" stroke-width="3" />
+              <path d="M334 127v29M363 127v29" stroke="#856209" stroke-width="3" />
+              <rect x="64" y="119" width="181" height="23" rx="5" fill="#fff3ce" opacity="0.92" />
+              <text
+                x="154"
+                y="135"
+                text-anchor="middle"
+                fill="#02203c"
+                font-family="DM Sans, Arial, sans-serif"
+                font-size="12"
+                font-weight="800"
+                letter-spacing="2"
+              >MAHATMA SCHOOL</text>
+              <path d="M42 148h349v17H42z" fill="#02203c" />
+              <rect x="382" y="116" width="14" height="20" rx="5" fill="#fff5c9" />
+              <rect x="36" y="111" width="12" height="22" rx="5" fill="#e64c3c" />
+              <path d="M393 151h12v8h-12zM29 151h13v8H29z" fill="#fbcb62" stroke="#dba634" stroke-width="2" />
+              <path d="M45 165h346" stroke="#fbcb62" stroke-width="4" />
+            </g>
+            <g class="preloader-wheel preloader-wheel--rear">
+              <circle cx="112" cy="165" r="29" fill="#011628" />
+              <circle cx="112" cy="165" r="15" fill="#405469" stroke="#fbcb62" stroke-width="4" />
+              <path d="M112 151v28M98 165h28M102 155l20 20M122 155l-20 20" stroke="#c2d1e0" stroke-width="2" />
+            </g>
+            <g class="preloader-wheel preloader-wheel--front">
+              <circle cx="331" cy="165" r="29" fill="#011628" />
+              <circle cx="331" cy="165" r="15" fill="#405469" stroke="#fbcb62" stroke-width="4" />
+              <path d="M331 151v28M317 165h28M321 155l20 20M341 155l-20 20" stroke="#c2d1e0" stroke-width="2" />
+            </g>
+          </svg>
+
+          <div class="preloader-road">
+            <span class="preloader-road-line"></span>
+          </div>
+          <span class="preloader-dust preloader-dust--one"></span>
+          <span class="preloader-dust preloader-dust--two"></span>
+          <span class="preloader-dust preloader-dust--three"></span>
+        </div>
+
+        <div class="preloader-copy">
+          <p>Every journey brings us home.</p>
+          <span>
+            Reconnecting generations
+            <i></i><i></i><i></i>
+          </span>
+        </div>
+
+        <div class="preloader-progress" aria-hidden="true">
+          <span></span>
+        </div>
+      </div>
+    </div>
+    <noscript>
+      <style>
+        body.is-preloading { overflow: auto !important; }
+        #page-preloader { display: none !important; }
+      </style>
+    </noscript>
+
     <!-- Top Scroll Progress Indicator -->
     <div
       id="scroll-progress"

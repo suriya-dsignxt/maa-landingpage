@@ -1,4 +1,36 @@
 document.addEventListener("DOMContentLoaded", () => {
+  // School bus preloader: keep the entrance smooth without delaying slow pages forever.
+  const pagePreloader = document.getElementById("page-preloader");
+  const preloaderStartedAt = performance.now();
+  let preloaderDismissed = false;
+
+  const dismissPagePreloader = () => {
+    if (!pagePreloader || preloaderDismissed) return;
+    preloaderDismissed = true;
+    const minimumDisplayTime = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      ? 150
+      : 900;
+    const remainingTime = Math.max(0, minimumDisplayTime - (performance.now() - preloaderStartedAt));
+
+    window.setTimeout(() => {
+      pagePreloader.classList.add("is-leaving");
+      document.body.classList.remove("is-preloading");
+
+      const removePreloader = () => {
+        if (pagePreloader.isConnected) pagePreloader.remove();
+      };
+      pagePreloader.addEventListener("transitionend", removePreloader, { once: true });
+      window.setTimeout(removePreloader, 900);
+    }, remainingTime);
+  };
+
+  if (document.readyState === "complete") {
+    dismissPagePreloader();
+  } else {
+    window.addEventListener("load", dismissPagePreloader, { once: true });
+  }
+  window.setTimeout(dismissPagePreloader, 4500);
+
   // Initialize Lenis Smooth Scroll
   let lenis = null;
   if (typeof Lenis !== "undefined") {
