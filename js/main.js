@@ -1078,8 +1078,17 @@ document.addEventListener("DOMContentLoaded", () => {
   if (chapterCarousel && chapterCarouselItems.length) {
     // Match the supplied interaction's 50% starting progress with a centered deck.
     let activeChapterIndex = Math.floor((chapterCarouselItems.length - 1) / 2);
-    let wheelProgress = 0;
-    let wheelResetTimer = null;
+    const chapterShell = document.querySelector(".chapter-carousel-shell");
+    let isCarouselHovered = false;
+
+    if (chapterShell) {
+      chapterShell.addEventListener("mouseenter", () => {
+        isCarouselHovered = true;
+      });
+      chapterShell.addEventListener("mouseleave", () => {
+        isCarouselHovered = false;
+      });
+    }
 
     const chapterNames = chapterCarouselItems.map((item) => {
       const title = item.querySelector(".font-headline-sm");
@@ -1176,43 +1185,31 @@ document.addEventListener("DOMContentLoaded", () => {
       setActiveChapter(activeChapterIndex + 1);
     });
 
-    chapterCarousel.addEventListener("keydown", (event) => {
-      if (event.key === "ArrowLeft") {
-        event.preventDefault();
-        setActiveChapter(activeChapterIndex - 1);
-      } else if (event.key === "ArrowRight") {
-        event.preventDefault();
-        setActiveChapter(activeChapterIndex + 1);
-      } else if (event.key === "Home") {
-        event.preventDefault();
-        setActiveChapter(0);
-      } else if (event.key === "End") {
-        event.preventDefault();
-        setActiveChapter(chapterCarouselItems.length - 1);
+    // Keyboard arrow keys navigation (when focused or hovered, without blocking forms)
+    document.addEventListener("keydown", (event) => {
+      if (event.target.closest("input, textarea, select")) {
+        return;
+      }
+
+      const isFocusInCarousel =
+        chapterShell && chapterShell.contains(document.activeElement);
+
+      if (isFocusInCarousel || isCarouselHovered) {
+        if (event.key === "ArrowLeft") {
+          event.preventDefault();
+          setActiveChapter(activeChapterIndex - 1);
+        } else if (event.key === "ArrowRight") {
+          event.preventDefault();
+          setActiveChapter(activeChapterIndex + 1);
+        } else if (event.key === "Home") {
+          event.preventDefault();
+          setActiveChapter(0);
+        } else if (event.key === "End") {
+          event.preventDefault();
+          setActiveChapter(chapterCarouselItems.length - 1);
+        }
       }
     });
-
-    // Trackpad and mouse-wheel movement advances the cards without blocking page scroll.
-    chapterCarousel.addEventListener(
-      "wheel",
-      (event) => {
-        const delta =
-          Math.abs(event.deltaX) > Math.abs(event.deltaY)
-            ? event.deltaX
-            : event.deltaY;
-        wheelProgress += delta;
-        window.clearTimeout(wheelResetTimer);
-        wheelResetTimer = window.setTimeout(() => {
-          wheelProgress = 0;
-        }, 180);
-
-        if (Math.abs(wheelProgress) >= 70) {
-          setActiveChapter(activeChapterIndex + (wheelProgress > 0 ? 1 : -1));
-          wheelProgress = 0;
-        }
-      },
-      { passive: true },
-    );
 
     if (typeof ResizeObserver !== "undefined") {
       const chapterResizeObserver = new ResizeObserver(() => {
@@ -1684,5 +1681,366 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   });
+
+  // Elegant gamification: collect Legacy Journey seals while exploring sections.
+  const legacyJourney = document.getElementById("legacy-journey");
+  const legacyToggle = document.getElementById("legacy-journey-toggle");
+  const legacyPanel = document.getElementById("legacy-journey-panel");
+  const legacyClose = document.getElementById("legacy-journey-close");
+  const legacyCount = document.getElementById("legacy-journey-count");
+  const legacyLabel = document.getElementById("legacy-journey-label");
+  const legacyHeading = document.getElementById("legacy-journey-heading");
+  const legacyProgressBar = document.getElementById("legacy-journey-progress-bar");
+  const legacyComplete = document.getElementById("legacy-journey-complete");
+  const legacyStatus = document.getElementById("legacy-journey-status");
+  const legacyClaimReward = document.getElementById("legacy-claim-reward");
+  const legacyRewardModal = document.getElementById("legacy-reward-modal");
+  const legacyRewardClose = document.getElementById("legacy-reward-close");
+  const legacyRewardDownload = document.getElementById("legacy-reward-download");
+  const legacyRewardContinue = document.getElementById("legacy-reward-continue");
+  const legacyRewardDate = document.getElementById("legacy-reward-date");
+  const legacyRewardId = document.getElementById("legacy-reward-id");
+  const legacyMilestones = Array.from(document.querySelectorAll(".legacy-milestone"));
+  const legacyStorageKey = "mahatmaLegacyJourneyV1";
+  const legacyRewardSeenKey = "mahatmaLegacyRewardSeenV1";
+  const legacyExplorerIdKey = "mahatmaLegacyExplorerIdV1";
+  const legacyExplorerDateKey = "mahatmaLegacyExplorerDateV1";
+
+  if (legacyJourney && legacyToggle && legacyPanel && legacyMilestones.length) {
+    let collectedSeals = new Set();
+
+    try {
+      const savedSeals = JSON.parse(localStorage.getItem(legacyStorageKey) || "[]");
+      if (Array.isArray(savedSeals)) {
+        collectedSeals = new Set(
+          savedSeals.filter((id) => legacyMilestones.some((item) => item.dataset.target === id)),
+        );
+      }
+    } catch (_error) {
+      collectedSeals = new Set();
+    }
+
+    let legacyRewardSeen = false;
+    let explorerId = "";
+    let explorerDate = "";
+
+    try {
+      legacyRewardSeen = localStorage.getItem(legacyRewardSeenKey) === "1";
+      explorerId = localStorage.getItem(legacyExplorerIdKey) || "";
+      explorerDate = localStorage.getItem(legacyExplorerDateKey) || "";
+    } catch (_error) {
+      legacyRewardSeen = false;
+    }
+
+    const createExplorerId = () => {
+      const year = new Date().getFullYear();
+      const token = Math.random().toString(36).slice(2, 8).toUpperCase().padEnd(6, "X");
+      return `MAA-${year}-${token}`;
+    };
+
+    const ensureExplorerDetails = () => {
+      if (!explorerId) explorerId = createExplorerId();
+      if (!explorerDate) {
+        explorerDate = new Intl.DateTimeFormat("en-IN", {
+          day: "numeric",
+          month: "long",
+          year: "numeric",
+        }).format(new Date());
+      }
+
+      try {
+        localStorage.setItem(legacyExplorerIdKey, explorerId);
+        localStorage.setItem(legacyExplorerDateKey, explorerDate);
+      } catch (_error) {
+        // The keepsake remains available for this visit when storage is unavailable.
+      }
+
+      if (legacyRewardId) legacyRewardId.textContent = explorerId;
+      if (legacyRewardDate) legacyRewardDate.textContent = explorerDate;
+    };
+
+    const setLegacyPanelOpen = (isOpen) => {
+      legacyJourney.classList.toggle("is-open", isOpen);
+      legacyToggle.setAttribute("aria-expanded", String(isOpen));
+      legacyPanel.setAttribute("aria-hidden", String(!isOpen));
+      if (isOpen) {
+        const firstUncollected = legacyMilestones.find(
+          (item) => !collectedSeals.has(item.dataset.target),
+        );
+        (firstUncollected || legacyClose || legacyMilestones[0]).focus();
+      }
+    };
+
+    const setLegacyRewardOpen = (isOpen) => {
+      if (!legacyRewardModal) return;
+      if (isOpen) {
+        ensureExplorerDetails();
+        setLegacyPanelOpen(false);
+      }
+      legacyRewardModal.classList.toggle("is-active", isOpen);
+      legacyRewardModal.setAttribute("aria-hidden", String(!isOpen));
+      document.body.classList.toggle("legacy-reward-open", isOpen);
+
+      if (window.lenis) {
+        if (isOpen && typeof window.lenis.stop === "function") window.lenis.stop();
+        if (!isOpen && typeof window.lenis.start === "function") window.lenis.start();
+      }
+
+      if (isOpen && legacyRewardClose) {
+        window.requestAnimationFrame(() => legacyRewardClose.focus());
+      }
+    };
+
+    const escapeSvgText = (value) =>
+      String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;");
+
+    const loadCrestDataUrl = async () => {
+      try {
+        const response = await fetch("assets/images/mahatma_alumni_logo.png");
+        if (!response.ok) throw new Error("Unable to load association crest");
+        const blob = await response.blob();
+        return await new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = () => resolve(reader.result);
+          reader.onerror = reject;
+          reader.readAsDataURL(blob);
+        });
+      } catch (_error) {
+        return "";
+      }
+    };
+
+    const downloadLegacyKeepsake = async () => {
+      ensureExplorerDetails();
+      const crestDataUrl = await loadCrestDataUrl();
+      const safeId = escapeSvgText(explorerId);
+      const safeDate = escapeSvgText(explorerDate);
+      const crestMarkup = crestDataUrl
+        ? `<image href="${crestDataUrl}" x="720" y="92" width="160" height="160" preserveAspectRatio="xMidYMid meet" />`
+        : `<circle cx="800" cy="172" r="70" fill="#02203c" stroke="#fbcb62" stroke-width="8"/><text x="800" y="191" text-anchor="middle" font-family="Georgia,serif" font-size="54" font-weight="700" fill="#fbcb62">M</text>`;
+
+      const svg = `
+        <svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000">
+          <defs>
+            <linearGradient id="paper" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#fffdf7"/>
+              <stop offset="0.52" stop-color="#f4ead5"/>
+              <stop offset="1" stop-color="#fffaf0"/>
+            </linearGradient>
+            <radialGradient id="glow">
+              <stop offset="0" stop-color="#fbcb62" stop-opacity="0.22"/>
+              <stop offset="1" stop-color="#fbcb62" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+          <rect width="1600" height="1000" rx="28" fill="url(#paper)"/>
+          <circle cx="800" cy="430" r="390" fill="url(#glow)"/>
+          <rect x="30" y="30" width="1540" height="940" rx="20" fill="none" stroke="#856209" stroke-width="3"/>
+          <rect x="48" y="48" width="1504" height="904" rx="14" fill="none" stroke="#856209" stroke-opacity="0.35" stroke-width="2"/>
+          ${crestMarkup}
+          <text x="800" y="285" text-anchor="middle" font-family="Arial,sans-serif" font-size="22" font-weight="700" letter-spacing="5" fill="#856209">MAHATMA ALUMNI ASSOCIATION</text>
+          <text x="800" y="350" text-anchor="middle" font-family="Arial,sans-serif" font-size="18" font-weight="700" letter-spacing="6" fill="#856209">DIGITAL COMMEMORATIVE KEEPSAKE</text>
+          <text x="800" y="475" text-anchor="middle" font-family="Georgia,serif" font-size="92" fill="#02203c">Legacy Explorer</text>
+          <line x1="490" y1="510" x2="1110" y2="510" stroke="#856209" stroke-opacity="0.35" stroke-width="2"/>
+          <text x="800" y="570" text-anchor="middle" font-family="Arial,sans-serif" font-size="25" fill="#405469">Awarded for completing the five-seal journey through our shared</text>
+          <text x="800" y="608" text-anchor="middle" font-family="Arial,sans-serif" font-size="25" fill="#405469">heritage, community, digital network, and social impact.</text>
+          <g transform="translate(590 670)" fill="#fbcb62" stroke="#856209" stroke-width="2">
+            <circle cx="0" cy="0" r="30"/><circle cx="105" cy="0" r="30"/><circle cx="210" cy="0" r="30"/><circle cx="315" cy="0" r="30"/><circle cx="420" cy="0" r="30"/>
+          </g>
+          <g font-family="Arial,sans-serif" font-size="22" font-weight="700" fill="#02203c" text-anchor="middle">
+            <text x="590" y="678">1</text><text x="695" y="678">2</text><text x="800" y="678">3</text><text x="905" y="678">4</text><text x="1010" y="678">5</text>
+          </g>
+          <line x1="180" y1="810" x2="1420" y2="810" stroke="#856209" stroke-opacity="0.3" stroke-width="2"/>
+          <text x="180" y="855" font-family="Arial,sans-serif" font-size="15" font-weight="700" letter-spacing="3" fill="#856209">COMPLETED</text>
+          <text x="180" y="890" font-family="Arial,sans-serif" font-size="23" font-weight="700" fill="#02203c">${safeDate}</text>
+          <text x="800" y="880" text-anchor="middle" font-family="Georgia,serif" font-size="21" font-style="italic" fill="#856209">Connect • Contribute • Celebrate</text>
+          <text x="1420" y="855" text-anchor="end" font-family="Arial,sans-serif" font-size="15" font-weight="700" letter-spacing="3" fill="#856209">EXPLORER ID</text>
+          <text x="1420" y="890" text-anchor="end" font-family="Arial,sans-serif" font-size="23" font-weight="700" fill="#02203c">${safeId}</text>
+        </svg>`;
+
+      const blob = new Blob([svg], { type: "image/svg+xml;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const downloadLink = document.createElement("a");
+      downloadLink.href = url;
+      downloadLink.download = "Mahatma-Legacy-Explorer-Keepsake.svg";
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+      downloadLink.remove();
+      window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+    };
+
+    const updateLegacyJourney = () => {
+      const total = legacyMilestones.length;
+      const collected = collectedSeals.size;
+      const percent = Math.round((collected / total) * 100);
+      const isComplete = collected === total;
+
+      legacyJourney.style.setProperty("--journey-progress", `${percent * 3.6}deg`);
+      if (legacyProgressBar) legacyProgressBar.style.width = `${percent}%`;
+      if (legacyCount) legacyCount.textContent = `${collected} of ${total} seals`;
+      if (legacyLabel) legacyLabel.textContent = isComplete ? "Legacy Explorer" : "Legacy Journey";
+      if (legacyHeading) legacyHeading.textContent = isComplete ? "Journey Complete" : "Legacy Journey";
+      if (legacyComplete) legacyComplete.hidden = !isComplete;
+
+      if (isComplete) {
+        ensureExplorerDetails();
+        if (!legacyRewardSeen && legacyRewardModal) {
+          legacyRewardSeen = true;
+          try {
+            localStorage.setItem(legacyRewardSeenKey, "1");
+          } catch (_error) {
+            // The automatic unlock still works for this visit.
+          }
+          window.setTimeout(() => setLegacyRewardOpen(true), 700);
+        }
+      }
+
+      legacyMilestones.forEach((milestone) => {
+        const isUnlocked = collectedSeals.has(milestone.dataset.target);
+        milestone.classList.toggle("is-unlocked", isUnlocked);
+        const status = milestone.querySelector(".legacy-milestone__status");
+        if (status) status.textContent = isUnlocked ? "Collected" : "Not visited";
+        milestone.setAttribute(
+          "aria-label",
+          `${milestone.querySelector("strong")?.textContent || "Milestone"}: ${isUnlocked ? "seal collected" : "not yet visited"}`,
+        );
+      });
+    };
+
+    const collectLegacySeal = (targetId, announce = true) => {
+      if (!targetId || collectedSeals.has(targetId)) return;
+      const milestone = legacyMilestones.find((item) => item.dataset.target === targetId);
+      if (!milestone) return;
+
+      collectedSeals.add(targetId);
+      try {
+        localStorage.setItem(legacyStorageKey, JSON.stringify(Array.from(collectedSeals)));
+      } catch (_error) {
+        // Progress still works for this visit when storage is unavailable.
+      }
+
+      updateLegacyJourney();
+      milestone.classList.add("is-unlocking");
+      legacyJourney.classList.add("has-new-seal");
+      window.setTimeout(() => {
+        milestone.classList.remove("is-unlocking");
+        legacyJourney.classList.remove("has-new-seal");
+      }, 750);
+
+      if (announce && legacyStatus) {
+        const title = milestone.querySelector("strong")?.textContent || "Legacy milestone";
+        const rewardMessage = collectedSeals.size === legacyMilestones.length
+          ? " Your Legacy Explorer keepsake is now unlocked."
+          : "";
+        legacyStatus.textContent = `Seal collected: ${title}. ${collectedSeals.size} of ${legacyMilestones.length} complete.${rewardMessage}`;
+      }
+    };
+
+    legacyToggle.addEventListener("click", () => {
+      setLegacyPanelOpen(!legacyJourney.classList.contains("is-open"));
+    });
+
+    if (legacyClose) {
+      legacyClose.addEventListener("click", () => {
+        setLegacyPanelOpen(false);
+        legacyToggle.focus();
+      });
+    }
+
+    if (legacyClaimReward) {
+      legacyClaimReward.addEventListener("click", () => setLegacyRewardOpen(true));
+    }
+
+    if (legacyRewardClose) {
+      legacyRewardClose.addEventListener("click", () => setLegacyRewardOpen(false));
+    }
+
+    if (legacyRewardModal) {
+      legacyRewardModal.addEventListener("click", (event) => {
+        if (event.target === legacyRewardModal) setLegacyRewardOpen(false);
+      });
+    }
+
+    if (legacyRewardDownload) {
+      legacyRewardDownload.addEventListener("click", async () => {
+        const label = legacyRewardDownload.querySelector("span:last-child");
+        const originalLabel = label?.textContent || "Download keepsake";
+        if (label) label.textContent = "Preparing keepsake…";
+        legacyRewardDownload.disabled = true;
+        await downloadLegacyKeepsake();
+        legacyRewardDownload.disabled = false;
+        if (label) label.textContent = originalLabel;
+      });
+    }
+
+    if (legacyRewardContinue) {
+      legacyRewardContinue.addEventListener("click", () => {
+        const getInvolvedSection = document.getElementById("get-involved");
+        setLegacyRewardOpen(false);
+        if (!getInvolvedSection) return;
+        if (window.lenis && typeof window.lenis.scrollTo === "function") {
+          window.lenis.scrollTo(getInvolvedSection, { offset: -100, duration: 1.15 });
+        } else {
+          getInvolvedSection.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      });
+    }
+
+    legacyMilestones.forEach((milestone) => {
+      milestone.addEventListener("click", () => {
+        const targetId = milestone.dataset.target;
+        const target = document.getElementById(targetId);
+        if (!target) return;
+
+        setLegacyPanelOpen(false);
+        if (window.lenis && typeof window.lenis.scrollTo === "function") {
+          window.lenis.scrollTo(target, { offset: -100, duration: 1.15 });
+        } else {
+          target.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      });
+    });
+
+    document.addEventListener("click", (event) => {
+      if (legacyJourney.classList.contains("is-open") && !legacyJourney.contains(event.target)) {
+        setLegacyPanelOpen(false);
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && legacyRewardModal?.classList.contains("is-active")) {
+        setLegacyRewardOpen(false);
+        legacyClaimReward?.focus();
+        return;
+      }
+      if (event.key === "Escape" && legacyJourney.classList.contains("is-open")) {
+        setLegacyPanelOpen(false);
+        legacyToggle.focus();
+      }
+    });
+
+    if ("IntersectionObserver" in window) {
+      const milestoneObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) collectLegacySeal(entry.target.id);
+          });
+        },
+        { rootMargin: "-28% 0px -42% 0px", threshold: 0.05 },
+      );
+
+      legacyMilestones.forEach((milestone) => {
+        const section = document.getElementById(milestone.dataset.target);
+        if (section) milestoneObserver.observe(section);
+      });
+    } else {
+      collectLegacySeal("home", false);
+    }
+
+    updateLegacyJourney();
+  }
 });
 
